@@ -1,0 +1,16 @@
+---
+title: "Hello World"
+author: "Amelia"
+date: 2019-07-20
+image: img/hello-world.jpeg
+tags: ["misc"]
+showtoc: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+```
+
+# Hello world (wide web)!
+
+Welcome to my personal website created in R using the [`blogdown`](https://bookdown.org/yihui/blogdown/) package by Yihui Xie, Amber Thomas, and Alison Presmanes Hill. Additional thanks to [Huabing Zhao](https://github.com/zhaohuabing) for the ["Clean White" theme](https://github.com/zhaohuabing/hugo-theme-cleanwhite) and [Cedric Scherer](https://cedricscherer.netlify.com) for the inspiration and helpful github repo :)

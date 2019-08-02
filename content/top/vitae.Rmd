@@ -1,0 +1,117 @@
+---
+title: "Vitae"
+author: "Amelia"
+date: 2019-07-20
+tags: ["cv"]
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Curriculum Vitae
+
+last updated: July 20, 2019
+
+[Details](#Details)<br>
+[Education](#Education)<br>
+[Positions](#Positions)<br>
+[Research Support and Awards](#Awards)<br>
+[Publications](#Publications)<br>
+[Postdoctoral Coursework](#Courses)<br>
+[Academic Teaching Experience](#Teaching)<br>
+[Scientific Outreach](#Outreach)<br>
+[Spoken Languages](#Languages)
+
+
+### Details {#Details}
+Amelia E. Barber<br>
+Email: amelia.barber[at]gmail.com<br>
+Citizenship: USA<br>
+Permenant Residency: Germany<br>
+
+### Education {#Education}
+PhD, **University of Utah** (2016)<br>
+Microbiology and Immunology<br>
++ "Zebrafish reveal variable effects of Escherichia coli during sepsis"<br>
++ Advisor: Matthew Mulvey
+
+BS, **University of Wisconin-Madison** (2006)<br>
+Medical Microbiology and Immunology, Women's Studies
+
+### Positions
+**Postdoctoral Fellow** (2016-present)<br>
+Leibniz Institute for Natural Product Research and Infection Biology -  Hans Knöll Institute. Jena, Germany.<br>
+Institute of Hygiene and Microbiology, University of Würzburg. Würzburg, Germany.<br>
++ Research group of Oliver Kurzai
+
+**PhD Candidate** (2009-2016)<br>
+University of Utah, Department of Pathology. Salt Lake City, UT.<br>
++ Research group of Matthew Mulvey
+
+**Research Specialist** (2007-2009)<br>
+University of Wisconsin-Madison, Department of Neurology. Madison, WI.<br>
++ Research group of Clive Svendsen
+
+**Undergraduate Laboratory Assistant** (2005-2007)<br>
+University of Wisconsin-Madison, Department of Entomology. Madison, WI.<br>
++ Research group of Ken Raffa
+
+**Undergraduate Research Assistant** (2004-2005)<br>
+University of Wisconsin-Madison, School of Nursing. Madison, WI.<br>
++ Research group of Barbara St. Pierre Schneider
+
+
+### Reseach Support and Awards {#Awards}
+**2018**. International Society for Human and Animal Mycology Attendance Grant <br>
+**2017**. European Confederation of Medical Mycology Young Investigators Travel Award <br>
+**2015**. University of Utah Microbial Pathogenesis Poster Competition, 1st place <br>
+**2015**. ASM Richard and Mary Finkelstein Travel Award <br>
+**2012-2014**. NIAID T-32 Microbial Pathogenesis Training Grant <br>
+**2015**. University of Utah Graduate School Travel Award <br>
+**2012**. University of Utah Alma Mater Travel Award <br>
+**2011**. University of Utah Bioscience Symposium Poster Competition Winner
+
+### Publications {#Publications}
+Hamprecht A, **Barber AE**, Mellinghoff SC, Thelen P, Walther G, Yu Y, Neurgaonkar P, Dandekar T, Cornely OA, Martin R, Kurzai O. Occurence of Candida auris in Germany is linked to prior exposure to foreign healthcare. 2019. *Emerging Infectious Diseases*. Sept;25(9).
+
+**Barber AE**, Weber M, Kaerger K, Goelz H, Walther G, Linde J, Duerschmidt D, Markert A, Guthke R, Kurzai O. Comparative genomics of serial Candida glabrata isolates and the rapid acquisition of echinocandin resistance during therapy. 2019. *Antimicrobial Agents & Chemotherapy*. Jan;63(2).
+
+Kjelstrüp CK, **Barber AE**, Norton JP, Mulvey MA, L’Abee-Lund TM. Escherichia coli O78 isolated from septicemic lambs shows high pathogenicity in a zebrafish model. 2017. *Veterinary Research*. Jan;48(1):3.
+
+**Barber AE**, Fleming BA, Mulvey MA. Similarly Lethal Strains of Extraintestinal Pathogenic Escherichia coli Trigger Markedly Diverse Host Responses in a Zebrafish Model of Sepsis. 2016. *mSphere*. Apr;1(2). **Featured on Episode 126 of the ASM Podcast “This Week in Microbiology”**
+
+**Barber AE**, Norton JP, Wiles TJ, Mulvey MA. Strengths and Limitations of Model Systems for the Study of Urinary Tract Infections. Microbiology and Molecular Biology Reviews. 2016. *Microbiology and Molecular Biology Reviews*. Mar;80(2):351-67.
+
+**Barber AE**, Norton JP, Spivak AM, Mulvey MA. Urinary Tract Infections: Current and Emerging Management Strategies. 2013. *Clinical Infectious Diseases*. Sept;57(5):719-24. **>160 citations**
+
+Debnath I., Norton JP, **Barber AE**, Ott EM, Dhakal BK, Kulesus RR, Mulvey MA. The Cpx Stress Response System Potentiates the Fitness and Virulence of Uropathogenic Escherichia coli. 2013. *Infection & Immunity*. May;81(5):1450-9
+
+Ebert AD, **Barber AE**, Heins BM, Svendsen CN. Ex vivo Delivery of GDNF Maintains Motor Function and Prevents Neuronal Loss in a Transgenic Mouse Model of Huntington’s disease. 2010. *Experimental Neurology*. Jul;224(1):155-62. 
+
+Ebert AD, Beres AJ, **Barber AE**, Svendsen CN. Human Neural Progenitor Cells Over-expressing IGF-1 Protect Dopamine Neurons and Restore Function in a Rat Model of Parkinson's Disease. 2008. *Experimental Neurology*. Jan;209(1):213-223. **>140 citations**
+
+
+### Postdoctoral Coursework {#Courses}
+
+**2019**. Microbial Genomics and Comparative Genomics. University of Gießen. Gießen, Germany. <br>
+**2018**. Fungal Pathogen Genomics. Wellcome Genome Campus. Cambridge, UK.
+
+### Academic Teaching Experience {#Teaching}
+
+**2014**. Lecturer. University of Utah. Mechanisms of Bacterial Pathogenesis.<br>
+**2013**. Teaching assistant. University of Utah. Mechanisms of Bacterial Pathogenesis.<br>
+**2012**. Teaching assistant. University of Utah. Introduction to Medical Microbiology.
+
+### Scientific Outreach {#Outreach}
+
+**2019**. Skype a Scientist <br>
+**2014-15**. Initiative to Bring Science Programs to the Incarcerated (INSPIRE). <br>
+**2014**. University of Utah Educational Outreach Program <br>
+**2013**. Explore Utah Science
+
+## Spoken Languages {#Languages}
+
+**English** (Native proficiency)<br>
+**German** (telc Zertificate B1/limited working proficiency)
