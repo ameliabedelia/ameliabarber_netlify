@@ -2,30 +2,66 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Amelia E. Barber, PhD</title>
-    <link>/tags/</link>
+    <link>https://ameliabarber.netlify.com/tags/</link>
     <description>Recent content in Tags on Amelia E. Barber, PhD</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 20 Jul 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 04 Aug 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://ameliabarber.netlify.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Rstats</title>
+      <link>https://ameliabarber.netlify.com/tags/rstats/</link>
+      <pubDate>Sun, 04 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://ameliabarber.netlify.com/tags/rstats/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cycling</title>
+      <link>https://ameliabarber.netlify.com/tags/cycling/</link>
+      <pubDate>Sun, 04 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://ameliabarber.netlify.com/tags/cycling/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>data science</title>
+      <link>https://ameliabarber.netlify.com/tags/data-science/</link>
+      <pubDate>Sun, 04 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://ameliabarber.netlify.com/tags/data-science/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>women&#39;s cycling</title>
+      <link>https://ameliabarber.netlify.com/tags/womens-cycling/</link>
+      <pubDate>Sun, 04 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://ameliabarber.netlify.com/tags/womens-cycling/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>cv</title>
-      <link>/tags/cv/</link>
+      <link>https://ameliabarber.netlify.com/tags/cv/</link>
       <pubDate>Sat, 20 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/cv/</guid>
+      <guid>https://ameliabarber.netlify.com/tags/cv/</guid>
       <description></description>
     </item>
     
     <item>
       <title>misc</title>
-      <link>/tags/misc/</link>
+      <link>https://ameliabarber.netlify.com/tags/misc/</link>
       <pubDate>Sat, 20 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/misc/</guid>
+      <guid>https://ameliabarber.netlify.com/tags/misc/</guid>
       <description></description>
     </item>
     

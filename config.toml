@@ -10,6 +10,7 @@ paginate = 5 #frontpage pagination
 hasCJKLanguage = false
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 toc = false
+customCSS = ["css/tables.css"]
 
 [outputs]
 home = ["HTML", "RSS", "Algolia"]

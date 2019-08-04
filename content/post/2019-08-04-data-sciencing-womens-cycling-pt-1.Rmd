@@ -1,0 +1,362 @@
+---
+title: Data sciencing women's cycling, pt 1
+author: Amelia Barber
+date: '2019-08-04'
+slug: data-sciencing-womens-cycling-pt-1
+categories: []
+tags:
+  - data science
+  - Rstats
+  - cycling
+  - women's cycling
+subtitle: "Highlighting the women of the professional peloton"
+description: ''
+image: img/giro-rosa.jpg
+showtoc: false
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(fig.width=7, fig.height=4, echo=FALSE, 
+                      warning=FALSE, message=FALSE)
+```
+
+(Title image featuring the one and only Marianne Vos from the 2019 Giro Rosa. ® Getty Images)
+
+![ ](/post/2019-08-04-data-sciencing-womens-cycling-pt-1_files/wwt_logo.png){width=400px}
+
+I am passionate about women's cycling, so I thought what better way to christen this blog with a post combining my love of women's cycling and data science. Women's cycling is every bit as competitive and entertaining as men's cycling, yet these athletes continue to struggle for equality and recognition in a male-dominated sport. There is still no minimum wage for professional female cyclists, and many of the elite women struggle to make a living through cycling. Half of the women in the sport earn less than 10,000 EUR a year, and 17% received no salary at all in 2017.[^1] For comparison, men on UCI professional teams are guaranteed a minimum wage of 26,000 - 39,000 EUR depending on division, pro continental vs. world tour
+
+[^1]: [https://cyclistsalliance.org/2017/12/the-cyclists-alliance-rider-survey/](https://cyclistsalliance.org/2017/12/the-cyclists-alliance-rider-survey/)
+
+This is post is part one, focusing on the rider demographics of the elite women's peloton[^2]. Stay tuned for a follow up post looking at the race results and rankings of the world's top female cyclists.
+
+[^2]: Peloton is a fancy french word for the main group of riders in a bike race.
+
+Raw rider data was scraped from the website of the Union Cycliste Internationale (UCI), the world governing body for professional cycling in August 2019. If you are data science-inclined and want to explore the code used to generate this post, it can be found [here](https://github.com/ameliabedelia). Analysis and plots were done in [**`R`**](https://www.r-project.org/) and interactive plots were made using [`Plotly`](https://plot.ly/r/) .
+
+```{r}
+library(tidyverse)
+library(readxl)
+library(cowplot)
+library(plotly)
+
+theme_set(theme_cowplot())
+```
+
+```{r get rider data and cleanup}
+
+#Start by reading all our raw datafiles, combining them into a single dataframe, and doing a bit of cleanup
+
+file_list <- list.files(path = "/Users/Amelia/Documents/R/nerd_projects/uci_data/rider/", 
+                        pattern = ".xlsx", full.names = TRUE)
+
+all_riders <- file_list %>%
+        set_names(2005:2019) %>%
+        map_dfr(~read_excel(path = ., skip = 1), .id = "Year") %>%
+        rename("category" = `Function`) %>% #dataset has a variable called function
+        janitor::clean_names() %>% #which is not ideal when janitor corrects it to 'function'
+        mutate(
+            birth_date = lubridate::dmy(birth_date),
+            year = parse_integer(year),
+            age = year - lubridate::year(birth_date)
+            ) %>%
+        filter(category == "Rider")
+
+female_riders <- all_riders %>%
+        filter(gender == "Female")
+
+```
+
+
+# Exploring the riders of women's professional cycling
+
+For this entire analysis, I am focusing solely on cyclists competing in the road discipline, but there are additonal athletes competing in other disciplines. So, just how many female professional cyclists are there?
+
+As of 2019, there are 567 riders competing on professional women's road teams, up from 234 in the first year data was available from the UCI (2005). 
+
+```{r include=FALSE}
+#teams per year
+female_riders %>% 
+     group_by(year) %>% 
+     summarise(n = length(unique(team_name))) 
+```
+
+```{r}
+#colors for graphing
+blue <- "#0078C8"
+red <- "#C8143C"
+yellow <- "#FAE100"
+green <- "#32B432"
+lblue <- "#4295D0"
+orange <- "#F28C00"
+raspberry <- "#C7017F"
+uci_colors <- c(blue, red, "black", yellow, green)
+wwt_colors <- c(blue, red, "black", yellow, green, lblue, orange, raspberry)
+
+#female riders per year
+p1 <- female_riders %>%
+        count(year) %>%
+        ggplot(aes(year, n)) +
+        geom_line(color = red) +
+        geom_point(size = 3, color = red) +
+        #geom_text(aes(label = n), nudge_y = 25) +
+        labs(x = "Year",
+             y = "Number of Riders",
+             title = "Number of UCI Professional Female Cyclists") +
+        scale_x_continuous(breaks = seq(2005, 2019, 2)) +
+        scale_y_continuous(limits = c(150, 600))
+
+ggplotly(p1)
+```
+
+We also see an increase in the number of teams over time tracking the increase in riders from 22 in 2005 to 46 UCI-registered women's teams in 2019 (data not visualized). 
+
+However, the number of female riders pales in comparison to the total number of men listed as part of UCI professional teams (all tiers: continental, pro continental, and world tour), where there were over 3000 male rider in 2019 compared to 567 for women.
+
+
+```{r}
+#all riders per year
+p2 <- all_riders%>%
+        count(year, gender) %>%
+        ggplot(aes(year, n)) +
+        geom_line(aes(color = gender)) +
+        geom_point(aes(color = gender), size = 3) +
+        geom_text(data = . %>% filter(year == 2019),
+               aes(label = gender, x = 2020)) +
+        labs(x = "Year",
+             y = "Number of Riders") +
+        scale_x_continuous(breaks = seq(2005, 2019, 2)) +
+        scale_y_continuous(limits = c(150, 3400),
+                           breaks = c(250, 1000, 2000, 3000)) +
+        scale_color_manual(values = c(red, "black")) +
+        theme(legend.position = "none")
+
+ggplotly(p2)
+```
+
+<br>
+
+## Where are the riders from?
+
+```{r fig.width=8.5}
+countries <- female_riders %>%
+    add_count(year, name = "n_year") %>% 
+    count(year, country, n_year) %>%
+    mutate(percent = n / n_year * 100,
+           percent = round(percent, 1)
+           ) %>%
+    filter(percent > 1)
+
+countries_filtered <- countries %>% 
+    group_by(country) %>% 
+    filter(max(percent) > 7, !country %in% c("SUI", "GER")) %>%
+    ungroup() %>% 
+    mutate(country = fct_rev(fct_reorder(country, percent))) %>% 
+    rename("Country" = "country")
+
+ggcountries <- ggplot() +
+    geom_line(aes(year, percent, group = country), color = "gray", data = countries) +
+    geom_line(aes(year, percent, color = Country), size = 0.75, data = countries_filtered) +
+    # geom_text(aes(label = Country, x = 2020, y = perc), nudge_y = 1,
+    #           data = countries_filtered %>% filter(year == 2019)) +
+    scale_color_manual(values = wwt_colors) +
+    scale_x_continuous(breaks = seq(2005, 2019, 2)) +
+    labs(x = "Year",
+         y = "Percent of Riders") 
+
+ggplotly(ggcountries)
+
+```
+
+Italy represents the largest proportion of the peloton and has stayed consistently so at around 15% of riders for the entire duration of the dataset. The cycling powerhouse that is the Netherlands also represents a sizable portion of the women's field at around 10% (though in 2005, Dutch riders made up 22% of the women's peloton!)
+
+Some countries, such as the US, have seen large growth in women's cycling over the past 15 years. US riders made up only 1% of the professional peloton in 2009 and increased up to 13% in 2016. Other countries, such as Germany and Switzerland (not highlighted on the graph), have seen reductions in the relative proportion of riders.
+
+#### Another way to visualize this is with an interactive map indicating the number of professional riders from each country[^3]
+
+Data shown for 2018. Map is interactive so zoom in, move it around, and explore. Draw a box to zoom in, double click to zoom back out. You can also select 'pan' from the top bar to drag it around.
+
+[^3]: I tried to make sure all the country codes in the UCI dataset matched up with the map, but if you find an error, let me know and I'll correct it.
+
+```{r map, fig.width=9}
+country_codes <- as_tibble(maps::iso3166) %>% 
+    mutate(mapname = str_replace_all(mapname,
+                                     c("Norway.*" = "Norway",
+                                       "Finland.*" = "Finland",
+                                       "UK.*" = "UK",
+                                       "China.*" = "China")))
+        
+map_data <- map_data("world") %>%
+    left_join(country_codes, by = c("region" = "mapname")) %>%
+    mutate(ioc = countrycode::countrycode(.$a3, "iso3c", "ioc"),
+           ioc = case_when(
+               region == "Norway" ~ "NOR",
+               region == "Finland" ~ "FIN",
+               TRUE ~ ioc)
+           ) %>% 
+    as_tibble()
+
+rider_countries <- female_riders %>%
+    select(last_name, first_name, country, uciid) %>%
+    distinct() %>% 
+    group_by(country) %>% 
+    count()
+    
+rider_countries_2018 <- female_riders %>%
+    filter(year == 2018) %>% 
+    select(last_name, first_name, country, uciid) %>%
+    group_by(country) %>% 
+    count()
+
+map <- rider_countries_2018 %>% 
+    full_join(map_data, by = c("country" = "ioc")) %>%
+    filter(between(lat, -55, 80)) %>% 
+    #mutate(n = replace_na(n, 0)) %>% 
+    ggplot(aes(long, lat, label = country)) +
+    geom_polygon(aes(group = group, fill = n), color = "white", size = 0.1) +
+    # geom_text(aes(long, lat, label = country), data = country_names,
+    #           color = "transparent") +
+    #coord_quickmap() +
+    coord_map(projection = "mercator", xlim = c(-180,180), ylim = c(-55, 80)) +
+    scale_fill_viridis_c(option = "D") +
+    theme_void() +
+    labs(x = "", y = "")
+
+ggplotly(map, tooltip = c("n", "country")) %>% layout(xaxis = list(showline = FALSE, zeroline = FALSE), yaxis = list(showline = FALSE, zeroline = FALSE))
+# %>% layout(xaxis = list(range = c(-55, 80)))
+```
+
+
+### Ages of female cyclists. 
+
+```{r include=FALSE}
+#calculate min, median, and max age of both genders
+all_riders %>%
+    filter(between(year, 2015, 2019)) %>%
+    group_by(gender) %>% 
+    summarise(
+        min = min(age),
+        median = median(age),
+        max = max(age)
+        ) %>% 
+    ungroup()
+# there are some errors in the mens birthdates, where some were clearly filled in as 0001-01-01, or some riders, questionably, turned pro when they were 7
+
+# is there a change in female rider age over time?
+aov(year ~ age, data = female_riders) %>% 
+    summary()
+```
+
+Social convention dictates that you don't ask a woman her age, but anyone with a professional cycling license is not afforded that luxary because your birthday is publicly available. So...what is the age distribution of elite cyclists?
+
+```{r}
+p3 <- female_riders %>% 
+        filter(between(year, 2015, 2019)) %>% 
+        ggplot(aes(age)) +
+        geom_histogram(binwidth = 1, color = "black", alpha = 0.9,
+                       fill = rep_len(wwt_colors, 34)) +
+        geom_vline(xintercept = 25, size = 1, linetype = "dashed") +
+        # annotate("text", x = 26, y = 240, hjust = 0,
+        #          label = "Dashed line represents\nmedian age of 25") +
+        annotate("segment", x = 29, y = 125, xend = 32, yend = 140) +
+        labs(x = "Age",
+             y = "Number of Riders",
+             title = "Age Distribution (2015-19)"
+             )
+
+ggplotly(p3) %>% layout(annotations = list(x = "33", y = "225",showarrow = FALSE,
+                                           text = "Dashed line represents\nmedian age of 25")) %>%
+        layout(annotations = list(x = 40, y = 136, showarrow = FALSE,
+                                  text = "Current world champion \nAnna van der Breggan is 29"))
+```
+
+The median age for a female professional cyclist is 25. However, some of the most dominant women in the sport are older than that. Current world road race champion, Anna van der Breggan, is 29 while current time trial world champion and 2019 Giro Rosa winner Annemiek van Vleuten is 37. Former multi-time French national champion Edwige Pitel is the oldest women currently in the women's professional peloton at an impressive 52. You go girl! Edwige Pitel has also said that (paraphrased from French) "there is no money in the women's bike racing" and works as a computer scientist in Grenoble".[^4] In fact, 70% of female cyclists are working towards or have a baccalaureate or graduate degree because they know that a career in professional cycling is unlikely to provide them with financial stability [^1]
+
+[^4]: [Interview with Edwige Pitel](http://www.interviewsport.fr/pitel.php#.XUb9JpMzbOQ)
+
+I also looked at whether the median age or age distribution has shifted over time and found no significant variation in the age of female riders over the 15 years contained in the dataset by one-way ANOVA.
+
+### How many years do women stay in the peloton?
+
+```{r include=FALSE}
+female_riders %>% 
+    distinct(uciid) %>% 
+    nrow()
+#2254 unique riders in dataset
+
+female_riders %>% 
+        add_count(uciid, name = "n_seasons") %>%
+        distinct(uciid, n_seasons) %>% 
+        summarise(median = median(n_seasons),
+                  mean = mean(n_seasons))
+```
+
+The average lenght of time a rider stays in the professional peloton is 2.85 years with a range of 1 to 15 seasons (the length of the dataset).
+
+```{r fig.width=4, fig.height=3}
+p4 <- female_riders %>% 
+  add_count(uciid, name = "n_seasons") %>%
+  distinct(uciid, n_seasons) %>% 
+  ggplot(aes(n_seasons)) +
+  geom_histogram(binwidth = 1, color = "black", alpha = 0.9,
+                 fill = rev(rep_len(wwt_colors, 15))) +
+  geom_vline(xintercept = 2.65, size = 1, linetype = "dashed") +
+  labs(x = "Number of Seasons",
+       y = "Number of Riders")
+
+ggplotly(p4)
+```
+
+
+Incredibly, 4 riders have been in the professional peloton for the entire 15 year period the UCI website provides data for: <br>
+
+```{r}
+vet_rides <- female_riders %>% 
+        add_count(uciid, name = "n_seasons") %>% 
+        filter(n_seasons == 15) %>%
+        select(last_name, first_name, birth_date, country, n_seasons) %>% 
+        distinct()
+
+vet_rides %>%
+    rename(
+        "Last name" = "last_name", "First name" = "first_name",
+        "Date of birth" = "birth_date", "Country" = "country",
+        "Number of seasons" = "n_seasons"
+    ) %>% 
+        knitr::kable("html") %>% 
+        kableExtra::kable_styling(bootstrap_options = c("striped", "responsive", "hover"),
+                                  full_width = FALSE, position = "left")
+```
+
+
+### Bonus: which month has the most birthdays??
+
+Looking at unique riders (removing the bias from riders appearing in the dataset multiple times), we find that January is the most common birthday month, followed closely by May. June had the lowest number of birthdays. (Dashed line represents the baseline if all birthdays were distributed equally)
+
+```{r, fig.width=6, fig.height=3}
+months <- female_riders %>%
+    mutate(month = lubridate::month(birth_date, label = TRUE)) %>%
+    distinct(uciid, month) %>% 
+    ggplot(aes(month)) +
+    geom_histogram(stat = "count", color = "black", alpha = 0.9,
+                   fill = rep_len(wwt_colors, 12)) +
+    geom_hline(yintercept = 188, linetype = "dashed") +
+    coord_cartesian(ylim = c(50, 225)) +
+    labs(x = "",
+         y = "Number of Riders")
+
+ggplotly(months)
+```
+
+I hope you enjoyed this post and if you are interested in following additional content related to women's professional cycling, you can check out the following resources:
+
+* **[UCI YouTube Channel](https://www.youtube.com/channel/UCloqTh1nPpW13LCntQglS-Q)** Video coverage of women's races are often hard to find so it's nice that the UCI often has race recap videos on it's YouTube channel
+
+* **[Voxwomen](http://www.voxwomen.com/)** Videos, rider blogs, and a podcast to take you behind the scenes of women's bike racing
+
+* **[Velo Focus](https://www.instagram.com/velofocus/)** Great race and candid photographs of womens cycling. Also on [Twitter](https://twitter.com/velofocus)
+
+* Follow **[Sarah Connoll on Twitter](https://twitter.com/pwcycling)** Former host of the podcast "Pro Womens Cycling" who still tweets about women's racing
+
+* **[Half the Road](https://halftheroad.com/)** Documentary on the passion and struggles of the women of professional road cycling.
+
+* Got more resources to add? Send me an email or a tweet!
