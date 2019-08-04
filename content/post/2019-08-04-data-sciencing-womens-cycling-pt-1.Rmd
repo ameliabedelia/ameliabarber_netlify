@@ -31,7 +31,7 @@ This is post is part one, focusing on the rider demographics of the elite women'
 
 [^2]: Peloton is a fancy french word for the main group of riders in a bike race.
 
-Raw rider data was scraped from the website of the Union Cycliste Internationale (UCI), the world governing body for professional cycling in August 2019. If you are data science-inclined and want to explore the code used to generate this post, it can be found [here](https://github.com/ameliabedelia). Analysis and plots were done in [**`R`**](https://www.r-project.org/) and interactive plots were made using [`Plotly`](https://plot.ly/r/) .
+Raw rider data was scraped from the website of the Union Cycliste Internationale (UCI), the world governing body for professional cycling in August 2019. If you are data science-inclined and want to explore the code used to generate this post, it can be found [here](https://github.com/ameliabedelia/ameliabarber_netlify/blob/master/content/post/2019-08-04-data-sciencing-womens-cycling-pt-1.Rmd). Analysis and plots were done in [**`R`**](https://www.r-project.org/) and interactive plots were made using [`Plotly`](https://plot.ly/r/) .
 
 ```{r}
 library(tidyverse)
