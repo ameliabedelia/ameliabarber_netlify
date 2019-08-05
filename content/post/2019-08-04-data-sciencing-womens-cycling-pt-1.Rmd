@@ -138,6 +138,7 @@ ggplotly(p2)
 ## Where are the riders from?
 
 ```{r fig.width=8.5}
+# all countries df for base graph in gray
 countries <- female_riders %>%
     add_count(year, name = "n_year") %>% 
     count(year, country, n_year) %>%
@@ -146,6 +147,7 @@ countries <- female_riders %>%
            ) %>%
     filter(percent > 1)
 
+# colored countries to highlight
 countries_filtered <- countries %>% 
     group_by(country) %>% 
     filter(max(percent) > 7, !country %in% c("SUI", "GER")) %>%
@@ -153,6 +155,7 @@ countries_filtered <- countries %>%
     mutate(country = fct_rev(fct_reorder(country, percent))) %>% 
     rename("Country" = "country")
 
+# relative proportion countries plot
 ggcountries <- ggplot() +
     geom_line(aes(year, percent, group = country), color = "gray", data = countries) +
     geom_line(aes(year, percent, color = Country), size = 0.75, data = countries_filtered) +
@@ -178,13 +181,15 @@ Data shown for 2018. Map is interactive so zoom in, move it around, and explore.
 [^3]: I tried to make sure all the country codes in the UCI dataset matched up with the map, but if you find an error, let me know and I'll correct it.
 
 ```{r map, fig.width=9}
+#fix mismatches in country names between datasets
 country_codes <- as_tibble(maps::iso3166) %>% 
     mutate(mapname = str_replace_all(mapname,
                                      c("Norway.*" = "Norway",
                                        "Finland.*" = "Finland",
                                        "UK.*" = "UK",
                                        "China.*" = "China")))
-        
+
+# generate map data dataframe, add ioc country codes to match UCI dataset        
 map_data <- map_data("world") %>%
     left_join(country_codes, by = c("region" = "mapname")) %>%
     mutate(ioc = countrycode::countrycode(.$a3, "iso3c", "ioc"),
@@ -195,12 +200,7 @@ map_data <- map_data("world") %>%
            ) %>% 
     as_tibble()
 
-rider_countries <- female_riders %>%
-    select(last_name, first_name, country, uciid) %>%
-    distinct() %>% 
-    group_by(country) %>% 
-    count()
-    
+# df to graph
 rider_countries_2018 <- female_riders %>%
     filter(year == 2018) %>% 
     select(last_name, first_name, country, uciid) %>%
@@ -213,16 +213,12 @@ map <- rider_countries_2018 %>%
     #mutate(n = replace_na(n, 0)) %>% 
     ggplot(aes(long, lat, label = country)) +
     geom_polygon(aes(group = group, fill = n), color = "white", size = 0.1) +
-    # geom_text(aes(long, lat, label = country), data = country_names,
-    #           color = "transparent") +
-    #coord_quickmap() +
     coord_map(projection = "mercator", xlim = c(-180,180), ylim = c(-55, 80)) +
     scale_fill_viridis_c(option = "D") +
     theme_void() +
     labs(x = "", y = "")
 
 ggplotly(map, tooltip = c("n", "country")) %>% layout(xaxis = list(showline = FALSE, zeroline = FALSE), yaxis = list(showline = FALSE, zeroline = FALSE))
-# %>% layout(xaxis = list(range = c(-55, 80)))
 ```
 
 
@@ -249,6 +245,7 @@ aov(year ~ age, data = female_riders) %>%
 Social convention dictates that you don't ask a woman her age, but anyone with a professional cycling license is not afforded that luxury because your birthday is publicly available. So...what is the age distribution of elite cyclists?
 
 ```{r}
+# age distribution of female riders
 p3 <- female_riders %>% 
         filter(between(year, 2015, 2019)) %>% 
         ggplot(aes(age)) +
@@ -283,6 +280,7 @@ female_riders %>%
     nrow()
 #2254 unique riders in dataset
 
+# calculate duration stats
 female_riders %>% 
         add_count(uciid, name = "n_seasons") %>%
         distinct(uciid, n_seasons) %>% 
@@ -293,6 +291,7 @@ female_riders %>%
 The average length of time a rider stays in the professional peloton is 2.85 years with a range of 1 to 15 seasons (the length of the dataset).
 
 ```{r fig.width=4, fig.height=3}
+#rider duration plot
 p4 <- female_riders %>% 
   add_count(uciid, name = "n_seasons") %>%
   distinct(uciid, n_seasons) %>% 
@@ -316,6 +315,7 @@ vet_rides <- female_riders %>%
         select(last_name, first_name, birth_date, country, n_seasons) %>% 
         distinct()
 
+# table with peloton vets
 vet_rides %>%
     rename(
         "Last name" = "last_name", "First name" = "first_name",
@@ -333,6 +333,7 @@ vet_rides %>%
 Looking at unique riders (removing the bias from riders appearing in the dataset multiple times), we find that January is the most common birthday month, followed closely by May. June had the lowest number of birthdays. (Dashed line represents the baseline if all birthdays were distributed equally)
 
 ```{r, fig.width=6, fig.height=3}
+# birthday months plot
 months <- female_riders %>%
     mutate(month = lubridate::month(birth_date, label = TRUE)) %>%
     distinct(uciid, month) %>% 
