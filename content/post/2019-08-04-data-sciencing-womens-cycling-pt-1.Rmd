@@ -263,10 +263,10 @@ p3 <- female_riders %>%
 ggplotly(p3) %>% layout(annotations = list(x = "33", y = "225",showarrow = FALSE,
                                            text = "Dashed line represents\nmedian age of 25")) %>%
         layout(annotations = list(x = 40, y = 136, showarrow = FALSE,
-                                  text = "Current world champion \nAnna van der Breggan is 29"))
+                                  text = "Current world champion \nAnna van der Breggen is 29"))
 ```
 
-The median age for a female professional cyclist is 25. However, some of the most dominant women in the sport are older than that. Current world road race champion, Anna van der Breggan, is 29 while current time trial world champion and 2019 Giro Rosa winner Annemiek van Vleuten is 37. Former multi-time French national champion Edwige Pitel is the oldest woman currently in the women's professional peloton at an impressive 52. You go girl! Edwige Pitel has also said that (paraphrased from French) "there is no money in the women's bike racing" and works as a computer scientist in Grenoble".[^4] In fact, 70% of female cyclists are working towards or have a baccalaureate or graduate degree because they know that a career in professional cycling is unlikely to provide them with financial stability [^1]
+The median age for a female professional cyclist is 25. However, some of the most dominant women in the sport are older than that. Current world road race champion, Anna van der Breggen, is 29 while current time trial world champion and 2019 Giro Rosa winner Annemiek van Vleuten is 37. Former multi-time French national champion Edwige Pitel is the oldest woman currently in the women's professional peloton at an impressive 52. You go girl! Edwige Pitel has also said that (paraphrased from French) "there is no money in the women's bike racing" and works as a computer scientist in Grenoble".[^4] In fact, 70% of female cyclists are working towards or have a baccalaureate or graduate degree because they know that a career in professional cycling is unlikely to provide them with financial stability [^1]
 
 [^4]: [Interview with Edwige Pitel](http://www.interviewsport.fr/pitel.php#.XUb9JpMzbOQ)
 
