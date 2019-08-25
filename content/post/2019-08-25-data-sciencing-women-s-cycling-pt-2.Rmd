@@ -1,0 +1,344 @@
+---
+title: Data sciencing women's cycling, pt 2
+author: Amelia
+date: '2019-08-25'
+slug: data-sciencing-womens-cycling-pt-2
+categories: []
+tags:
+  - cycling
+  - women's cycling
+  - data science
+  - Rstats
+subtitle: ''
+description: "Exploring the relationship between ranking and age and number of seasons in women's professional cycling"
+image: img/LTON2019_Undrumsdal.jpg
+showtoc: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(fig.width=7, fig.height=4.5, fig.align = "left",
+                      echo=FALSE,  warning=FALSE, message=FALSE)
+```
+
+```{r load packages}
+library(tidyverse)
+library(readxl)
+library(cowplot)
+library(ggbeeswarm)
+library(glue)
+library(rlang)
+library(paletteer)
+#library(plotly)
+#library(ggiraph)
+
+theme_set(theme_cowplot(font_family = "Roboto Condensed"))
+#theme_set(theme_minimal_grid())
+```
+
+```{r get data and cleanup}
+rider_files <- list.files(path = "/Users/Amelia/Documents/R/nerd_projects/uci_data/rider/", 
+                        pattern = ".xlsx", full.names = TRUE)
+
+# create female pro database from individual year files
+female_riders <- rider_files %>%
+        set_names(2005:2019) %>%
+        map_dfr(~read_excel(path = ., skip = 1), .id = "Year") %>%
+        rename("category" = `Function`) %>% #dataset has a variable called function
+        janitor::clean_names() %>% #which is not ideal when janitor corrects it to 'function'
+        mutate(
+            birth_date = lubridate::dmy(birth_date),
+            year = parse_integer(year),
+            age = year - lubridate::year(birth_date)
+            ) %>%
+        filter(category == "Rider", gender == "Female")
+
+# calculate n seasons for riders prior to 2009 when results start
+n_prior_seasons <- female_riders %>%
+    filter(year %in% 2005:2008) %>% 
+    arrange(year) %>%
+    group_by(uciid) %>% 
+    mutate(no_prior_seasons = seq(n())) %>%
+    ungroup() %>%
+    mutate(uciid = parse_number(uciid)) %>%
+    filter(year == 2008) %>%
+    mutate(year = replace(year, year == 2008, 2009)) %>% 
+    select(year, uciid, no_prior_seasons)
+
+# individual rankings (women)
+indrank_filelist <- list.files(path = "/Users/Amelia/Documents/R/nerd_projects/uci_data/individual_rankings/road_women", 
+                        pattern = ".xlsx", full.names = TRUE)
+
+rider_rankings <- indrank_filelist %>%
+    set_names(2009:2018) %>%
+    map_dfr(~read_excel(path = .), .id = "Year") %>% 
+    janitor::clean_names() %>% 
+    mutate(year = parse_integer(year))
+
+# add n_prior_seasons to dataset
+rider_rankings <- rider_rankings %>% 
+    left_join(n_prior_seasons, by = c("year", "uci_id" = "uciid")) %>% 
+    mutate(no_seasons = if_else(is.na(no_prior_seasons), 1, (1 + no_prior_seasons))) %>%
+    arrange(year) %>% 
+    group_by(uci_id) %>%
+    mutate(no_seasons = cumsum(no_seasons)) %>%
+    ungroup() %>%
+    select(-no_prior_seasons)
+ 
+# add age_group, career lenth variable and calculate rider percentiles by year
+rider_rankings <- rider_rankings %>% 
+    group_by(uci_id) %>% 
+    mutate(age_group = case_when(
+               age %in% 18:22 ~ "U23",
+               age %in% 23:25 ~ "23-25",
+               age %in% 26:28 ~ "26-28",
+               age %in% 29:31 ~ "29-31",
+               age %in% 32:35 ~ "32-35",
+               age %in% 36:40 ~ "36-40",
+               age %in% 40:99 ~ "Over 40"
+           ),
+           career_length = case_when(
+             max(no_seasons) %in% 1:3 ~ "1-3 years",
+             max(no_seasons) %in% 4:6 ~ "4-6 years", 
+             max(no_seasons) %in% 7:9 ~ "7-9 years",
+             max(no_seasons) > 9 ~ "10+ years"
+           )) %>% 
+    ungroup() 
+
+# convert rider ranking to percent rank to correct for difference in rider counts and the 2x fold growth that occurred in womens pro cycling  
+rider_rankings <-  rider_rankings %>% 
+    group_by(year) %>% 
+    mutate(percentile = 1 - percent_rank(rank)) %>% 
+    ungroup() %>% 
+    filter(!is.na(age), !is.na(age_group))
+
+```
+
+```{r ggplot functions and colors for graphing}
+rank_smooth <- function(df, x, y = percentile) {
+  df %>% 
+    ggplot(aes( {{ x }}, {{ y }} )) +
+    geom_smooth(color = "black", span = 0.3) +
+    scale_y_continuous(breaks = NULL) +
+    theme(axis.title.x = element_text(vjust = -0.35),
+          axis.title.y = element_text(vjust = 0.35))
+}
+
+agegroup_beeswarm <- function(df, x, y = percentile) {
+  df %>% 
+    ggplot(aes( {{ x }}, {{ y }} )) +
+    geom_quasirandom(alpha = 0.20, color = red, show.legend = FALSE) +
+    stat_summary(fun.y = median, fun.ymax = median, fun.ymin = median,
+                 geom = "crossbar") +
+    scale_y_continuous(labels = scales::percent) +
+    theme(axis.title.x = element_text(vjust = -0.35),
+          axis.title.y = element_text(vjust = 0.35))
+}
+
+#colors for graphing
+blue <- "#0078C8"
+red <- "#C8143C"
+yellow <- "#FAE100"
+green <- "#32B432"
+lblue <- "#4295D0"
+orange <- "#F28C00"
+raspberry <- "#C7017F"
+uci_colors <- c(blue, red, "black", yellow, green)
+uci_colors_2 <- c(blue, red, yellow, green, lblue, "black", raspberry)
+wwt_colors <- c(blue, red, "black", yellow, green, lblue, orange, raspberry)
+```
+
+**tl;dr The number of seasons a rider has been professional is a much better predictor of UCI ranking than age in female professional cycling and the 6th season as a professional is when the most riders have their best ranking.**
+
+In [part 1](https://ameliabarber.netlify.com/2019/08/04/data-sciencing-womens-cycling-pt-1/) of my data sciencing of women's professional cycling, I focused on the demographics of the women's peloton (how the number of riders has changed over time, where the riders are from, how many seasons they stay). In this post, I've focused on rider rankings and their relationship to age and the number of seasons a rider has been professional for. 
+
+Raw data covering women's road rankings from 2009-2018 was obtained from the website of the UCI (Union Cycliste Internationale; the world governing body for professional cycling) in August of 2019. The rider database available on the site actually goes back a bit further than the ranking datasets, so it was possible to infer how many seasons riders had been professional prior to the ranking starting as well. If you are interested in the code used to generate this post, it can be found [here](https://github.com/ameliabedelia/ameliabarber_netlify/blob/master/content/post/2019-08-25-data-sciencing-womens-cycling-pt-2.Rmd).
+
+**Caveats:** there is a large amount of variability in the dataset due to the athletes themselves and the stochastic nature of the sport, but I have focused my analyses on identifying overall trends from the data. I also acknowledge that focusing on UCI ranking is not without its problems due to the team nature of the sport and the presence of domestiques (riders who work solely for the team or lead rider, rather than their own placing).
+
+*Data processing note: the UCI reports numeric rankings (1 to XXX) for each rider, but to normalize for the two-fold increase in the number of riders that occurred in the last 10 years, I transformed the data into percent rank across each year, where the top ranked rider becomes the 100% percentile and the bottom rider is at the 0% percentile.*
+
+## Riders in their late 20s are the highest ranked on average, but riders of all age groups can be found across the rankings. 
+
+As covered in my [previous post](https://ameliabarber.netlify.com/2019/08/04/data-sciencing-womens-cycling-pt-1/), the median age for professional cyclist according to the UCI dataset is 25, but the distribution is skewed towards young riders in the U23 range with a long tail of older riders. However, cycling is somewhat unique among professional sports in that it is not uncommon for people to [pick it up later in life](https://www.bicycling.com/racing/a20031637/pro-cycling-evie-stevens/) or transition to it from other sports (whereas I cannot imagine someone "picking up" the sport of soccer with no prior experience and turning professional at the age of 30). 
+
+If we do a smoothing of the dataset we find that, on average, riders in their mid to late 20s are the highest ranked. 
+
+```{r age vs rank curve, fig.width=6.5, fig.height=5}
+rank_smooth(rider_rankings, age) +
+    scale_x_continuous(breaks = seq(18, 42, 4), limits = c(18, 42)) +
+    labs(x = "Age", y = "Relative Rank",
+         title = glue("Female Professional Cyclists in their Late 20s 
+                      are the Highest Ranked (on Average)"),
+         subtitle = glue("Dark line represents a generalized additive model.
+                         Gray represents 95% confidence interval."))
+```
+
+Young riders (18-19 years old) are the lowest ranked on average, even lower than the 40+ riders, but the uncertainty among older riders is higher because there just aren't that many of them. I also examined whether this curve has changed over the past 10 years and found it has been largely consistent, though there have been some fluctuations in the tail end of the curve due to dominant older riders in particular seasons.
+
+However, **this is a bit of an oversimplification**, as there are riders of all rankings across the age spectrum as we can see in the graph below where each dot corresponds to an individual rider.
+
+```{r age group vs rank beeswarm}
+agegroup_beeswarm(rider_rankings, fct_infreq(age_group)) +
+    labs(x = "Age Group", y = "Reletive Rank",
+         title = glue("Riders of All Rankings Are Distributed Across Age Groups"),
+         subtitle = "Bars indicate median values")
+```
+
+From this, **we can conclude that age alone is not sufficient as a predictor of ranking.**
+
+***
+
+**Data visualization detour:** I also made a raster map showing the density of different ages and rankings that gets around some of the overplotting issues from such a large, overlapping dataset. While it's message might not be as intuitive as a simple smoothed curve or a dotplot, I think it really highlights the concentration of the U23 rider population in the bottom 50% of the peloton and how the top 20th percentiles are really dominated by riders from in their mid to late 20s.
+
+```{r age percentile raster map, fig.height=5}
+rider_rankings %>%
+    ggplot(aes(age, percentile)) +
+    stat_density_2d(geom = "raster", aes(fill = stat(density)), 
+                  contour = FALSE, interpolate = TRUE, show.legend = FALSE) +
+    scale_fill_viridis_c(option = "A") +
+    scale_x_continuous(limits = c(18, 45), breaks = seq(18, 42, 4),
+                       expand = c(0.01, 0)) +
+    scale_y_continuous(labels = scales::percent,
+                       expand = c(0.02, 0)) +
+    labs(x = "Age", y = "Relative Rank",
+         title = glue("Riders of All Rankings Are Distributed Across The Age Spectrum"),
+         subtitle = glue("Lighter colors = higher density (more riders)"))
+```
+
+***
+
+## Rider rank is highly correlated with the number of seasons as a professional
+
+So, if age itself is not strongly predictive of rider ranking, what might do a better job? Perhaps not surprisingly, we find a stronger correlation with the number of seasons a rider has been professional. 
+
+```{r, include=FALSE}
+# calculate mean and median percentile for nth season as pro
+rider_rankings %>% 
+    group_by(no_seasons) %>% 
+    summarise(median(percentile),
+              mean(percentile))
+```
+
+
+```{r no. seasons with rank}
+rider_rankings %>% 
+    ggplot(aes(no_seasons, percentile)) +
+    geom_quasirandom(method = "pseudorandom", alpha = 0.15, size = 1) +
+    stat_summary(aes(group = no_seasons), fun.y = median, fun.ymax = median,
+                 fun.ymin = median, geom = "crossbar", color = "white",
+                 size = 0.9) +
+    stat_summary(aes(group = no_seasons), fun.y = median, fun.ymax = median,
+                 fun.ymin = median, geom = "crossbar") +
+    #geom_smooth() +
+    labs(x = "Number of Seasons as a Professional",
+         y = "Relative Rank",
+         title = glue("Rider Rank is Highly Correlated with 
+                      Number of Seasons as a Professional"),
+         subtitle = "Bars denote median values") +
+    scale_x_continuous(breaks = seq(1, 14, 2), limits = c(0.5, 13.5)) +
+    scale_y_continuous(labels = scales::percent, limits = c(0, 1.0)) +
+    theme_cowplot(font_family = "Roboto Condensed")
+```
+
+It makes sense that rider skill, and consequently ranking, increases with the number of seasons as a professional. Additionally, riders who are not improving or getting good results are likely falling out of the dataset because they can't get a contract. Lastly, I think the exponential increase during the first few seasons can be partially explained by the hierarchical nature of the sport, where new riders often serve as domestiques or workers for the team's lead rider(s).
+
+However, it is a little surprising that ranking doesn't seem to decrease after a certain point. Is it truly the case that riders are quitting at their peak? Or, are rider's ranks dropping off, but not dramatically enough to be visible at this scale? 
+
+If we look at the individual career trajectories for the 73 riders in the data with at least 8 seasons, we see that they actually stratify into two populations: riders who eventually go onto have a placing in the top 10% of riders peak in their 5th-7th season and then decline a little bit in later seasons, and riders who never crack the top 10% who steadily increase until the end of the dataset, with the sharpest increase around season 5. 
+
+```{r rider trajectory individual riders}
+grey_palette <- paletteer_dynamic(cartography, grey.pal, 18)[3:12]
+
+#n = 73 riders
+rider_rankings %>%
+    group_by(uci_id) %>%
+    filter(min(no_seasons) <= 2, max(no_seasons) >= 8) %>% 
+    mutate(top_rider = if_else(max(percentile) >= 0.91, 
+                               "Best Placing above 90th Percentile",
+                               "Best Placing below 90th Percentile")) %>% 
+    ungroup() %>%
+    ggplot(aes(no_seasons, percentile)) +
+    geom_line(aes(group = name, color = name), show.legend = F) +
+    geom_smooth(size = 2, color = red, se = FALSE) +
+    facet_wrap(vars(top_rider)) +
+    scale_color_manual(values = rep_len(grey_palette, 150)) +
+    scale_x_continuous(limits = c(1, 9), breaks = seq(1, 9, 2)) +
+    scale_y_continuous(labels = scales::percent) +
+    labs(x = "Number of Seasons as a Professional",
+         y = "Relative Rank",
+         title = glue("Career Curves Vary Depending on Rider's Higest Ranking"),
+         subtitle = glue("Calculated from riders with 8 or more professional seasons
+                         Red line represents the average curve, grey lines represent indivdual riders")) +
+    theme(panel.spacing = unit(1, "lines"))
+```
+
+The underlying cause of this difference remains unknown, but one potential explanation for top riders decline is that the competition at the top of the sport is simply too hard to maintain as riders age. Alternately, these top riders transition from being the protected rider towards a road captain working for other instead of their own placing, whereas the riders who never rank as highly.
+
+(This graph also highlights the noise in the dataset. There are trends, but there is by no means a "standard" career trajectory among riders.)
+
+The other interesting observation from this data is that the median first season ranking for riders who go onto have long professional careers (54th percentile) is much higher than the overall ranking for first season riders (32nd percentile), indicating that the riders who go onto have long professional careers start even their first season well above average.
+
+## Riders have their highest ranked season during their 6th year as a professional
+
+Looking at the overall trend of when riders peak during their careers, the 6th season was the best ranked for cyclists who were professional for at least eight seasons. Not surprisingly, no rider had their best season during their first year as a pro, but some riders had their best ranked year after 10 years in the professional peloton.
+
+```{r best season histogram}
+rider_rankings %>% 
+    group_by(uci_id) %>%
+    filter(min(no_seasons) <= 2, max(no_seasons) >= 8) %>%
+    slice(which.max(percentile)) %>%
+    ungroup() %>% 
+    ggplot(aes(no_seasons)) + 
+    geom_histogram(fill = red, color = "white", alpha = 0.85, binwidth = 1) +
+    scale_x_continuous(limits = c(1, 11), breaks = c(1:10),
+                       labels = c("1st", "2nd", "3rd", "4th", "5th", 
+                                  "6th", "7th", "8th", "9th", "10th")) +
+    scale_y_continuous(breaks = NULL) +
+    labs(x = "Best Season as a Professional",
+         y = "Number of Riders",
+         title = glue("The 6th Season as a Professional is often
+                      their Highest Ranked"),
+         subtitle = "Calculated from riders with 8 or more seasons as a professional")
+
+```
+
+## Career length stratifies the interaction between age and ranking
+
+Finally, circling back to age and its relationship to ranking, we can see that rider ranking by age stratifies quite nicely by the length of a rider's career. In the figure below, the colored line represents a generalized additive model for each group, while grey indicates a 95% confidence interval.
+
+```{r career length age rank curve}
+#generate list of riders who did their first season between 2009-2016
+#removing confounding riders who turned pro in last 2 years
+rider_ids <- rider_rankings %>% 
+  filter(no_seasons >= 1, year %in% 2009:2016) %>% 
+  pull(unique(uci_id))
+
+rider_rankings %>%
+    filter(uci_id %in% rider_ids) %>% 
+    ggplot(aes(age, percentile)) +
+    geom_smooth(aes(color = career_length), alpha = 0.5, fill = "lightgray",
+                show.legend = FALSE) +
+    annotate("text", x = c(26, 41, 41, 41), y = c(0.95, 0.56, 0.39, 0.28),
+             hjust = 0, label = unique(rider_rankings$career_length),
+             family = "Roboto Condensed", size = rel(5)) +
+    scale_x_continuous(limits = c(19, 44), breaks = seq(18, 42, 4)) +
+    scale_y_continuous(labels = scales::percent, breaks = NULL) +
+    scale_color_manual(values = uci_colors_2) +
+    labs(x = "Age",
+         y = "Relative Ranking",
+         title = glue("Career Length Stratifies Rankings by Age")) 
+```
+
+Riders with long, 10+ year careers are the highest ranked in their 20s, followed by those who are professional for 7-9 years, and then 4-6 years. For riders who are only professional for 1-3 years, age does not  signifiantly effect their rankings, which stay largely constant across the age spectrum.
+
+***
+
+If you are interested in following additional content related to women's professional cycling, you can check out the following resources: 
+
+* **[UCI YouTube Channel](https://www.youtube.com/channel/UCloqTh1nPpW13LCntQglS-Q)** Video coverage of women's races are often hard to find so it's nice that the UCI often has race recap videos on it's YouTube channel
+
+* **[Voxwomen](http://www.voxwomen.com/)** Videos, rider blogs, and a podcast to take you behind the scenes of women's bike racing
+
+* **[Velo Focus](https://www.instagram.com/velofocus/)** Great race and candid photographs of womens cycling. Also on [Twitter](https://twitter.com/velofocus)
+
+* Follow **[Sarah Connoll on Twitter](https://twitter.com/pwcycling)** Former host of the podcast "Pro Women's Cycling" who still tweets about women's racing

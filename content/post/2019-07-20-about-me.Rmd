@@ -20,7 +20,7 @@ Prior to that, I was a PhD student at the University of Utah in the group of [Ma
 
 You can find my full CV [here](https://ameliabarber.netlify.com/top/vitae/)<br>
 
-When not in the lab, you can most likely find me out riding a bike, hiking, hanging out with my husband and furchild in charge, or participating in the weekly R4DS [#tidytuesday](https://github.com/rfordatascience/tidytuesday) data science and visualization challenges.
+When not in the lab, you can most likely find me out riding a bike, hiking, hanging out with my husband and furchild in charge, geeking out on data science and visualization.
 <br><br><br>
 
 ***
