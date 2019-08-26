@@ -25,21 +25,18 @@ library(tidyverse)
 library(readxl)
 library(cowplot)
 library(ggbeeswarm)
-library(glue)
 library(rlang)
+library(glue)
 library(paletteer)
-#library(plotly)
-#library(ggiraph)
 
 theme_set(theme_cowplot(font_family = "Roboto Condensed"))
-#theme_set(theme_minimal_grid())
 ```
 
 ```{r get data and cleanup}
 rider_files <- list.files(path = "/Users/Amelia/Documents/R/nerd_projects/uci_data/rider/", 
                         pattern = ".xlsx", full.names = TRUE)
 
-# create female pro database from individual year files
+# create female pro rider database from individual year rosters (2005-2019)
 female_riders <- rider_files %>%
         set_names(2005:2019) %>%
         map_dfr(~read_excel(path = ., skip = 1), .id = "Year") %>%
@@ -113,7 +110,7 @@ rider_rankings <-  rider_rankings %>%
 
 ```
 
-```{r ggplot functions and colors for graphing}
+```{r ggplot functions and for graphing}
 rank_smooth <- function(df, x, y = percentile) {
   df %>% 
     ggplot(aes( {{ x }}, {{ y }} )) +
@@ -236,8 +233,7 @@ rider_rankings %>%
                       Number of Seasons as a Professional"),
          subtitle = "Bars denote median values") +
     scale_x_continuous(breaks = seq(1, 14, 2), limits = c(0.5, 13.5)) +
-    scale_y_continuous(labels = scales::percent, limits = c(0, 1.0)) +
-    theme_cowplot(font_family = "Roboto Condensed")
+    scale_y_continuous(labels = scales::percent, limits = c(0, 1.0))
 ```
 
 It makes sense that rider skill, and consequently ranking, increases with the number of seasons as a professional. Additionally, riders who are not improving or getting good results are likely falling out of the dataset because they can't get a contract. Lastly, I think the exponential increase during the first few seasons can be partially explained by the hierarchical nature of the sport, where new riders often serve as domestiques or workers for the team's lead rider(s).
@@ -272,15 +268,15 @@ rider_rankings %>%
     theme(panel.spacing = unit(1, "lines"))
 ```
 
-The underlying cause of this difference remains unknown, but one potential explanation for top riders decline is that the competition at the top of the sport is simply too hard to maintain as riders age. Alternately, these top riders transition from being the protected rider towards a road captain working for other instead of their own placing, whereas the riders who never rank as highly.
+The underlying cause of this difference remains unknown, but one potential explanation for top riders decline is that the competition at the top of the sport is simply too hard to maintain as riders age. Alternately, these top riders transition from being the protected rider towards a road captain working for other instead of their own placing, whereas the riders who never rank as highly were always working as domestiques instead of riders going for their own placing.
 
 (This graph also highlights the noise in the dataset. There are trends, but there is by no means a "standard" career trajectory among riders.)
 
-The other interesting observation from this data is that the median first season ranking for riders who go onto have long professional careers (54th percentile) is much higher than the overall ranking for first season riders (32nd percentile), indicating that the riders who go onto have long professional careers start even their first season well above average.
+The other interesting observation from this data is that the median first season ranking for riders who go onto have long professional careers (54th percentile) is much higher than the overall ranking for first season riders (32nd percentile), indicating that the riders who go onto have long professional careers start even their first season well above average. 
 
 ## Riders have their highest ranked season during their 6th year as a professional
 
-Looking at the overall trend of when riders peak during their careers, the 6th season was the best ranked for cyclists who were professional for at least eight seasons. Not surprisingly, no rider had their best season during their first year as a pro, but some riders had their best ranked year after 10 years in the professional peloton.
+Looking at the overall trend of when riders peak during their career, the 6th season was the best ranked for cyclists who were professional for at least eight seasons. Not surprisingly, no rider had their best season during their first year as a pro, but some riders had their best ranked year after 10 years in the professional peloton!!
 
 ```{r best season histogram}
 rider_rankings %>% 
@@ -329,7 +325,7 @@ rider_rankings %>%
          title = glue("Career Length Stratifies Rankings by Age")) 
 ```
 
-Riders with long, 10+ year careers are the highest ranked in their 20s, followed by those who are professional for 7-9 years, and then 4-6 years. For riders who are only professional for 1-3 years, age does not  signifiantly effect their rankings, which stay largely constant across the age spectrum.
+For riders who are only professional for 1-3 years, age does not  signifiantly effect their rankings, which stay largely constant across the age spectrum whether they start at age 18 or age 40. Looking at rankings during when riders are in their 20s, riders with long, 10+ year careers are the highest ranked during this age period, followed by those who are professional for 7-9 years, and then 4-6 years. 
 
 ***
 
