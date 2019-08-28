@@ -1,22 +1,32 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Rstats on Amelia E. Barber, PhD</title>
-    <link>https://ameliabarber.netlify.com/tags/rstats/</link>
-    <description>Recent content in Rstats on Amelia E. Barber, PhD</description>
+    <title>Rstats on Amelia E. Barber</title>
+    <link>/tags/rstats/</link>
+    <description>Recent content in Rstats on Amelia E. Barber</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 04 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 25 Aug 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://ameliabarber.netlify.com/tags/rstats/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/rstats/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Data sciencing women&#39;s cycling, pt 2</title>
+      <link>/2019/08/25/data-sciencing-womens-cycling-pt-2/</link>
+      <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/08/25/data-sciencing-womens-cycling-pt-2/</guid>
+      <description>tl;dr The number of seasons a rider has been professional is a much better predictor of UCI ranking than age in female professional cycling and the 6th season as a professional is when the most riders have their best ranking.
+In part 1 of my data sciencing of women’s professional cycling, I focused on the demographics of the women’s peloton (how the number of riders has changed over time, where the riders are from, how many seasons they stay).</description>
+    </item>
+    
+    <item>
       <title>Data sciencing women&#39;s cycling, pt 1</title>
-      <link>https://ameliabarber.netlify.com/2019/08/04/data-sciencing-womens-cycling-pt-1/</link>
+      <link>/2019/08/04/data-sciencing-womens-cycling-pt-1/</link>
       <pubDate>Sun, 04 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://ameliabarber.netlify.com/2019/08/04/data-sciencing-womens-cycling-pt-1/</guid>
+      <guid>/2019/08/04/data-sciencing-womens-cycling-pt-1/</guid>
       <description>(Title image featuring the one and only Marianne Vos from the 2019 Giro Rosa. ® Getty Images)
 I am passionate about women’s cycling, so I thought what better way to christen this blog with a post combining my love of women’s cycling and data science. Women’s cycling is every bit as competitive and entertaining as men’s cycling, yet these athletes continue to struggle for equality and recognition in a male-dominated sport.</description>
     </item>

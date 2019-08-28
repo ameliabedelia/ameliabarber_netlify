@@ -7,7 +7,7 @@ categories: []
 tags:
   - cv
 subtitle: ''
-description: ''
+description: '..click to read more..'
 image: ''
 showtoc: false
 ---

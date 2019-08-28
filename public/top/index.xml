@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tops on Amelia E. Barber, PhD</title>
-    <link>https://ameliabarber.netlify.com/top/</link>
-    <description>Recent content in Tops on Amelia E. Barber, PhD</description>
+    <title>Tops on Amelia E. Barber</title>
+    <link>/top/</link>
+    <description>Recent content in Tops on Amelia E. Barber</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 20 Jul 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://ameliabarber.netlify.com/top/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/top/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>About</title>
-      <link>https://ameliabarber.netlify.com/top/about/</link>
+      <link>/top/about/</link>
       <pubDate>Sat, 20 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://ameliabarber.netlify.com/top/about/</guid>
+      <guid>/top/about/</guid>
       <description>About Me I am currently a postdoc at the Leibniz Institute of Natural Product Research and Infection Biology - Hans Knöll Institute in Jena, Germany and the Institute for Hygiene and Microbiology at the University of Würzburg studying fungal biology and comparitive genomics of Aspergillus and Candida spp, with a special focus on antifungal resistance.
 Prior to that, I was a PhD student at the University of Utah in the group of Matthew Mulvey studying how the vast genetic diversity seen in Escherichia coli strains translates to differences in disease progression and host response during sepsis using a novel zebrafish model of disease we developed.</description>
     </item>
     
     <item>
       <title>Vitae</title>
-      <link>https://ameliabarber.netlify.com/top/vitae/</link>
+      <link>/top/vitae/</link>
       <pubDate>Sat, 20 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://ameliabarber.netlify.com/top/vitae/</guid>
+      <guid>/top/vitae/</guid>
       <description>Curriculum Vitae last updated: July 20, 2019
 Details
 Education

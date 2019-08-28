@@ -1,67 +1,67 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on Amelia E. Barber, PhD</title>
-    <link>https://ameliabarber.netlify.com/tags/</link>
-    <description>Recent content in Tags on Amelia E. Barber, PhD</description>
+    <title>Tags on Amelia E. Barber</title>
+    <link>/tags/</link>
+    <description>Recent content in Tags on Amelia E. Barber</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 04 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 25 Aug 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://ameliabarber.netlify.com/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Rstats</title>
-      <link>https://ameliabarber.netlify.com/tags/rstats/</link>
-      <pubDate>Sun, 04 Aug 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://ameliabarber.netlify.com/tags/rstats/</guid>
-      <description></description>
-    </item>
     
     <item>
       <title>cycling</title>
-      <link>https://ameliabarber.netlify.com/tags/cycling/</link>
-      <pubDate>Sun, 04 Aug 2019 00:00:00 +0000</pubDate>
+      <link>/tags/cycling/</link>
+      <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://ameliabarber.netlify.com/tags/cycling/</guid>
+      <guid>/tags/cycling/</guid>
       <description></description>
     </item>
     
     <item>
       <title>data science</title>
-      <link>https://ameliabarber.netlify.com/tags/data-science/</link>
-      <pubDate>Sun, 04 Aug 2019 00:00:00 +0000</pubDate>
+      <link>/tags/data-science/</link>
+      <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://ameliabarber.netlify.com/tags/data-science/</guid>
+      <guid>/tags/data-science/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Rstats</title>
+      <link>/tags/rstats/</link>
+      <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/rstats/</guid>
       <description></description>
     </item>
     
     <item>
       <title>women&#39;s cycling</title>
-      <link>https://ameliabarber.netlify.com/tags/womens-cycling/</link>
-      <pubDate>Sun, 04 Aug 2019 00:00:00 +0000</pubDate>
+      <link>/tags/womens-cycling/</link>
+      <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://ameliabarber.netlify.com/tags/womens-cycling/</guid>
+      <guid>/tags/womens-cycling/</guid>
       <description></description>
     </item>
     
     <item>
       <title>cv</title>
-      <link>https://ameliabarber.netlify.com/tags/cv/</link>
+      <link>/tags/cv/</link>
       <pubDate>Sat, 20 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://ameliabarber.netlify.com/tags/cv/</guid>
+      <guid>/tags/cv/</guid>
       <description></description>
     </item>
     
     <item>
       <title>misc</title>
-      <link>https://ameliabarber.netlify.com/tags/misc/</link>
+      <link>/tags/misc/</link>
       <pubDate>Sat, 20 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://ameliabarber.netlify.com/tags/misc/</guid>
+      <guid>/tags/misc/</guid>
       <description></description>
     </item>
     

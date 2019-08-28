@@ -3,6 +3,7 @@ title: "Hello World"
 author: "Amelia"
 date: 2019-07-20
 image: img/hello-world.jpeg
+description: "Hello world (wide web)!"
 tags: ["misc"]
 showtoc: false
 ---

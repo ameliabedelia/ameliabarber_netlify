@@ -9,8 +9,8 @@ tags:
   - Rstats
   - cycling
   - women's cycling
-subtitle: "Highlighting the women of the professional peloton"
-description: ''
+subtitle: ""
+description: 'Highlighting the women of the professional peloton'
 image: img/giro-rosa.jpg
 showtoc: false
 ---

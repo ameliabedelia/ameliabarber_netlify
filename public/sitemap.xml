@@ -3,102 +3,95 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://ameliabarber.netlify.com/</loc>
-    <lastmod>2019-08-04T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <loc>/</loc>
+    <lastmod>2019-08-25T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ameliabarber.netlify.com/2019/08/04/data-sciencing-womens-cycling-pt-1/</loc>
+    <loc>/tags/cycling/</loc>
+    <lastmod>2019-08-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/data-science/</loc>
+    <lastmod>2019-08-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2019/08/25/data-sciencing-womens-cycling-pt-2/</loc>
+    <lastmod>2019-08-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2019-08-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/rstats/</loc>
+    <lastmod>2019-08-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2019-08-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/womens-cycling/</loc>
+    <lastmod>2019-08-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2019/08/04/data-sciencing-womens-cycling-pt-1/</loc>
     <lastmod>2019-08-04T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ameliabarber.netlify.com/post/</loc>
-    <lastmod>2019-08-04T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://ameliabarber.netlify.com/tags/rstats/</loc>
-    <lastmod>2019-08-04T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://ameliabarber.netlify.com/tags/</loc>
-    <lastmod>2019-08-04T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://ameliabarber.netlify.com/tags/cycling/</loc>
-    <lastmod>2019-08-04T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://ameliabarber.netlify.com/tags/data-science/</loc>
-    <lastmod>2019-08-04T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://ameliabarber.netlify.com/tags/womens-cycling/</loc>
-    <lastmod>2019-08-04T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://ameliabarber.netlify.com/top/about/</loc>
+    <loc>/top/about/</loc>
     <lastmod>2019-07-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ameliabarber.netlify.com/2019/07/20/about-me/</loc>
+    <loc>/2019/07/20/about-me/</loc>
     <lastmod>2019-07-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ameliabarber.netlify.com/2019/07/20/hello-world/</loc>
+    <loc>/tags/cv/</loc>
     <lastmod>2019-07-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ameliabarber.netlify.com/top/</loc>
-    <lastmod>2019-07-20T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://ameliabarber.netlify.com/top/vitae/</loc>
+    <loc>/2019/07/20/hello-world/</loc>
     <lastmod>2019-07-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ameliabarber.netlify.com/tags/cv/</loc>
+    <loc>/tags/misc/</loc>
     <lastmod>2019-07-20T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://ameliabarber.netlify.com/tags/misc/</loc>
+    <loc>/top/</loc>
     <lastmod>2019-07-20T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://ameliabarber.netlify.com/search/placeholder/</loc>
+    <loc>/top/vitae/</loc>
+    <lastmod>2019-07-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ameliabarber.netlify.com/categories/</loc>
-    <priority>0</priority>
+    <loc>/search/placeholder/</loc>
   </url>
   
   <url>
-    <loc>https://ameliabarber.netlify.com/search/</loc>
-    <priority>0</priority>
+    <loc>/categories/</loc>
+  </url>
+  
+  <url>
+    <loc>/search/</loc>
   </url>
   
 </urlset>

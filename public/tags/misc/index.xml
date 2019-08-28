@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>misc on Amelia E. Barber, PhD</title>
-    <link>https://ameliabarber.netlify.com/tags/misc/</link>
-    <description>Recent content in misc on Amelia E. Barber, PhD</description>
+    <title>misc on Amelia E. Barber</title>
+    <link>/tags/misc/</link>
+    <description>Recent content in misc on Amelia E. Barber</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 20 Jul 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://ameliabarber.netlify.com/tags/misc/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/misc/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Hello World</title>
-      <link>https://ameliabarber.netlify.com/2019/07/20/hello-world/</link>
+      <link>/2019/07/20/hello-world/</link>
       <pubDate>Sat, 20 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://ameliabarber.netlify.com/2019/07/20/hello-world/</guid>
+      <guid>/2019/07/20/hello-world/</guid>
       <description> Hello world (wide web)! Welcome to my personal website created in R using the blogdown package by Yihui Xie, Amber Thomas, and Alison Presmanes Hill. Additional thanks to Huabing Zhao for the “Clean White” theme and Cedric Scherer for the inspiration and helpful github repo :)
  </description>
     </item>
