@@ -1,0 +1,167 @@
+---
+title: 'Tidy Tuesday: Simpsons Guest Stars'
+author: ''
+date: '2019-08-30'
+slug: tidy-tuesday-simpsons-guest-stars
+categories: []
+tags:
+  - Rstats
+  - Tidy Tuesday
+  - data science
+subtitle: ''
+description: 'Weekly data challenge using data on Simpsons guest stars'
+image: 'img/simpsons.jpg'
+showtoc: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+### Tidy Tuesday time, y'all
+
+It's been months since I did a [Tidy Tuesday](https://github.com/rfordatascience/tidytuesday), so I set aside an hour and said I had to post SOMETHING at the end of it. This week's [dataset](https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-08-27) was on Simpsons guest stars over the 30 (!!!) years the show has been on the air. Though I was initially tempted to do something looking at the most "famous" guest stars that have been on the show or the connectivity of the cast and guest stars in other projects outside of the show, both of those require additional data and more time than I had, so I went with the next thing that popped into my head, which was simply mapping the most common guest stars and their number of apperances in each season. 
+
+***
+
+Step one, load the packages we'll be using and grab the data.
+
+```{r load packages, get data}
+library(tidyverse)
+library(cowplot)
+
+simpsons <- readr::read_delim("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-08-27/simpsons-guests.csv", delim = "|", quote = "")
+```
+
+Looking at the most commonly-appearing guest stars, we see that Marcia Wallace (the voice of Edna Krabappel) is by far the most frequent guest star on the show with 175 apperances. The list drops off pretty quickly with Glenn Close rounding out the top 10 with nine apperances over the 30 seasons.
+
+```{r most frequent guest stars}
+simpsons %>% 
+    count(guest_star, name = "total_n", sort = TRUE)
+```
+
+For the purpose of making a cleaner visualization, I'll focus on the 8 most frequently appearing guest stars, so let's make a dataset with just these stars and their total number of apperances. 
+
+```{r names to graph}
+top_stars <- simpsons %>% 
+    count(guest_star, name = "total_n", sort = TRUE) %>% 
+    head(8) 
+```
+
+We'll use this as our filtering dataset for plotting, simultaneously adding the total number of apperances per guest star which we'll use to order our data for plotting (and incorporate as text labels into our final plot). 
+
+Ok, let's get to plotting! 
+
+```{r bare plot, fig.width=9, fig.height=4}
+simpsons %>%
+    count(season, guest_star) %>%
+    inner_join(top_stars, by = "guest_star") %>% 
+    filter(season != "Movie") %>% # editorial choice; its not a season
+    mutate(guest_star = fct_reorder(guest_star, total_n),
+           season = fct_inseq(season)) %>% 
+    ggplot(aes(season, guest_star)) +
+    geom_point(aes(size = n)) +
+    scale_size("# appearances")
+```
+
+Not a bad start using the default aesthetics, but it leaves some room for improvement in the prettiness department and we can make it cleaner, so its easier to understand.
+
+***
+
+Looking at the raw data, some guest starts always reprise the same role - for example Marcia Wallace always plays Mrs. Krabappel and Joe Montegna always voices Fat Tony. Other guest stars rarely voice the same character twice, as we can see for Maurice LaMarche below:
+
+```{r, echo=FALSE}
+simpsons %>%
+    filter(guest_star == "Maurice LaMarche") %>% 
+    select(episode_title, role) %>% 
+    print(n = 15)
+```
+
+Let's incorporate the names of the main characters each actor voiced into our plot. It would also be nice if our plot listed the total number of guest apperances by each actor or actress. Once we make these changes and add more neutral theme we get this:
+
+```{r plot extras, echo=FALSE}
+simpsons_palette <- c(
+    "#FC0209", # bart red
+    "#fed90f", # simpsons yellow
+    "#46732EFF", # Flanders green 
+    "#0363C3", # marge blue
+    "#d1b271", # lightbrownbeige
+    "#7A491E", # beige 
+    "#000000",  # black
+    "#424f46"  # greyish-blue
+)
+
+x_labels <- c("", "S1", "", "", "", "S5", "", "", "", "",
+              "S10", "", "", "", "", "S15", "", "", "", "",
+              "S20", "", "", "", "", "S25", "", "", "", "", "S30",
+              "", "", "", "")
+
+y_labels <- c("Marcia Wallace\n(Edna Krabappel)", 
+              "Phil Hartman\n(Troy McClure & Others)",
+              "Joe Mantegna\n(Fat Tony)",
+              "Maurice LaMache\n(Various Roles)",
+              "Kelsey Grammer\n(Sideshow Bob)", 
+              "Frank Welker\n(Various Roles)",
+              "Jon Lovitz\n(Various Roles)",
+              "Kevin Michael Richardson\n(Various Roles)")
+```
+
+```{r intermediate plot, echo=FALSE, fig.width=8, fig.height=5}
+simpsons %>%
+    filter(guest_star %in% top_stars$guest_star, season != "Movie") %>%
+    count(season, guest_star) %>%
+    left_join(top_stars, by = "guest_star") %>% 
+    mutate(guest_star = fct_reorder(guest_star, total_n),
+           season = fct_inseq(season)) %>% 
+    ggplot(aes(season, guest_star, label = total_n)) +
+    geom_point(aes(size = n), shape = 18) +
+    geom_text(data = . %>% distinct(guest_star, total_n) %>% arrange(desc(total_n)),
+              aes(x = 33.5, y = 8:1, label = total_n),
+              size = 4, hjust = 0.5) +
+    annotate("text", x = 33.5, y = 8.5, label = "# epi", 
+             hjust = 0.5, size = 4) +
+    scale_size("# appearances:", range = c(3, 8), breaks = c(2, 8, 15)) +
+    scale_x_discrete(position = "top", limits = 0:34, labels = x_labels) +
+    scale_y_discrete(labels = rev(y_labels)) +
+    labs(x = NULL, y = NULL,
+         title = "The Most Frequent Simpsons Guest Stars by Season") +
+    theme_minimal_grid() +
+    theme(plot.title.position = "plot", 
+          legend.position = "bottom") 
+```
+
+Now we're getting somewhere! The last thing we'll do is add some Simpsons-themed colors and font, both of which are easily accessible through the [tvthemes](https://github.com/Ryo-N7/tvthemes) package by [Ryo](https://twitter.com/@R_by_Ryo)
+
+And...huzzah!
+
+```{r final plot, echo=FALSE, fig.width=8, fig.height=5}
+simpsons %>%
+    filter(guest_star %in% top_stars$guest_star, season != "Movie") %>%
+    count(season, guest_star) %>%
+    left_join(top_stars, by = "guest_star") %>% 
+    mutate(guest_star = fct_reorder(guest_star, total_n),
+           season = fct_inseq(season)) %>% 
+    ggplot(aes(season, guest_star, label = total_n)) +
+    geom_point(aes(fill = guest_star, size = n), shape = 23, show.legend = FALSE) +
+    geom_text(data = . %>% distinct(guest_star, total_n) %>% arrange(desc(total_n)),
+              aes(x = 33.5, y = 8:1, label = total_n), family = "Akbar",
+              size = 4, hjust = 0.5) +
+    annotate("text", x = 33.5, y = 8.5, label = "# epi", family = "Akbar", 
+             hjust = 0.5, size = 4) +
+    scale_size(range = c(3, 8)) +
+    scale_x_discrete(position = "top", limits = 0:34, labels = x_labels) +
+    scale_y_discrete(labels = rev(y_labels)) +
+    labs(x = NULL, y = NULL,
+         title = "The Most Frequent Simpsons Guest Stars by Season",
+         # subtitle = "Marcia Wallace (aka Edna Krabappel) is/was the most frequent guest star",
+         caption = "source: Wikipedia
+         Visualization @Frau_Dr_Barber"
+         ) +
+    scale_fill_manual(values = rev(simpsons_palette)) +
+    theme_minimal_grid(font_family = "Akbar") +
+    theme(plot.title.position = "plot") #low this new feature of ggplot
+```
+
+(Ok, the whole thing took me a bit more than an hour by the time I went back and added the blog text to the markdown, but this was still a useful exercise for me who typically spends too much time messing around with tiny details)
+
+Complete Rmd document can be found [here](https://github.com/ameliabedelia/ameliabarber_netlify/blob/master/content/post/2019-08-23-tidy-tuesday-simpsons-guest-stars.Rmd).

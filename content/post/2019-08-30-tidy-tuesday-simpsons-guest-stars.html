@@ -1,0 +1,90 @@
+---
+title: 'Tidy Tuesday: Simpsons Guest Stars'
+author: ''
+date: '2019-08-30'
+slug: tidy-tuesday-simpsons-guest-stars
+categories: []
+tags:
+  - Rstats
+  - Tidy Tuesday
+  - data science
+subtitle: ''
+description: 'Weekly data challenge using data on Simpsons guest stars'
+image: 'img/simpsons.jpg'
+showtoc: false
+---
+
+
+
+<div id="tidy-tuesday-time-yall" class="section level3">
+<h3>Tidy Tuesday time, y’all</h3>
+<p>It’s been months since I did a <a href="https://github.com/rfordatascience/tidytuesday">Tidy Tuesday</a>, so I set aside an hour and said I had to post SOMETHING at the end of it. This week’s <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-08-27">dataset</a> was on Simpsons guest stars over the 30 (!!!) years the show has been on the air. Though I was initially tempted to do something looking at the most “famous” guest stars that have been on the show or the connectivity of the cast and guest stars in other projects outside of the show, both of those require additional data and more time than I had, so I went with the next thing that popped into my head, which was simply mapping the most common guest stars and their number of apperances in each season.</p>
+<hr />
+<p>Step one, load the packages we’ll be using and grab the data.</p>
+<pre class="r"><code>library(tidyverse)
+library(cowplot)
+
+simpsons &lt;- readr::read_delim(&quot;https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-08-27/simpsons-guests.csv&quot;, delim = &quot;|&quot;, quote = &quot;&quot;)</code></pre>
+<p>Looking at the most commonly-appearing guest stars, we see that Marcia Wallace (the voice of Edna Krabappel) is by far the most frequent guest star on the show with 175 apperances. The list drops off pretty quickly with Glenn Close rounding out the top 10 with nine apperances over the 30 seasons.</p>
+<pre class="r"><code>simpsons %&gt;% 
+    count(guest_star, name = &quot;total_n&quot;, sort = TRUE)</code></pre>
+<pre><code>## # A tibble: 795 x 2
+##    guest_star               total_n
+##    &lt;chr&gt;                      &lt;int&gt;
+##  1 Marcia Wallace               175
+##  2 Phil Hartman                  52
+##  3 Joe Mantegna                  29
+##  4 Maurice LaMarche              25
+##  5 Frank Welker                  21
+##  6 Kelsey Grammer                21
+##  7 Jon Lovitz                    19
+##  8 Kevin Michael Richardson      18
+##  9 Jackie Mason                  11
+## 10 Glenn Close                    9
+## # … with 785 more rows</code></pre>
+<p>For the purpose of making a cleaner visualization, I’ll focus on the 8 most frequently appearing guest stars, so let’s make a dataset with just these stars and their total number of apperances.</p>
+<pre class="r"><code>top_stars &lt;- simpsons %&gt;% 
+    count(guest_star, name = &quot;total_n&quot;, sort = TRUE) %&gt;% 
+    head(8) </code></pre>
+<p>We’ll use this as our filtering dataset for plotting, simultaneously adding the total number of apperances per guest star which we’ll use to order our data for plotting (and incorporate as text labels into our final plot).</p>
+<p>Ok, let’s get to plotting!</p>
+<pre class="r"><code>simpsons %&gt;%
+    count(season, guest_star) %&gt;%
+    inner_join(top_stars, by = &quot;guest_star&quot;) %&gt;% 
+    filter(season != &quot;Movie&quot;) %&gt;% # editorial choice; its not a season
+    mutate(guest_star = fct_reorder(guest_star, total_n),
+           season = fct_inseq(season)) %&gt;% 
+    ggplot(aes(season, guest_star)) +
+    geom_point(aes(size = n)) +
+    scale_size(&quot;# appearances&quot;)</code></pre>
+<p><img src="/post/2019-08-30-tidy-tuesday-simpsons-guest-stars_files/figure-html/bare%20plot-1.png" width="864" /></p>
+<p>Not a bad start using the default aesthetics, but it leaves some room for improvement in the prettiness department and we can make it cleaner, so its easier to understand.</p>
+<hr />
+<p>Looking at the raw data, some guest starts always reprise the same role - for example Marcia Wallace always plays Mrs. Krabappel and Joe Montegna always voices Fat Tony. Other guest stars rarely voice the same character twice, as we can see for Maurice LaMarche below:</p>
+<pre><code>## # A tibble: 25 x 2
+##    episode_title              role                                         
+##    &lt;chr&gt;                      &lt;chr&gt;                                        
+##  1 A Star Is Burns            George C. Scott; Hannibal Lecter; Captain Ja…
+##  2 The Seemingly Never-Endin… Commander McBragg                            
+##  3 Treehouse of Horror XVII   Orson Welles                                 
+##  4 G.I. (Annoyed Grunt)       Recruiter #2; Cap&#39;n Crunch                   
+##  5 The Wife Aquatic           First Mate Billy; Oceanographer              
+##  6 Stop or My Dog Will Shoot  Farmer; Horn Stuffer                         
+##  7 You Kent Always Say What … Fox announcer                                
+##  8 Treehouse of Horror XVIII  Government Official                          
+##  9 Husbands and Knives        Jock                                         
+## 10 Dangerous Curves           Toucan Sam; Cap&#39;n Crunch; Trix Rabbit        
+## 11 No Loan Again, Naturally   Dwight D. Eisenhower                         
+## 12 Waverly Hills 9-0-2-1-D&#39;oh City Inspector                               
+## 13 Once Upon a Time in Sprin… Nuclear Power Plant Guard                    
+## 14 Chief of Hearts            David Starsky                                
+## 15 Angry Dad: The Movie       Anthony Hopkins                              
+## # … with 10 more rows</code></pre>
+<p>Let’s incorporate the names of the main characters each actor voiced into our plot. It would also be nice if our plot listed the total number of guest apperances by each actor or actress. Once we make these changes and add more neutral theme we get this:</p>
+<p><img src="/post/2019-08-30-tidy-tuesday-simpsons-guest-stars_files/figure-html/intermediate%20plot-1.png" width="768" /></p>
+<p>Now we’re getting somewhere! The last thing we’ll do is add some Simpsons-themed colors and font, both of which are easily accessible through the <a href="https://github.com/Ryo-N7/tvthemes">tvthemes</a> package by <a href="https://twitter.com/@R_by_Ryo">Ryo</a></p>
+<p>And…huzzah!</p>
+<p><img src="/post/2019-08-30-tidy-tuesday-simpsons-guest-stars_files/figure-html/final%20plot-1.png" width="768" /></p>
+<p>(Ok, the whole thing took me a bit more than an hour by the time I went back and added the blog text to the markdown, but this was still a useful exercise for me who typically spends too much time messing around with tiny details)</p>
+<p>Complete Rmd document can be found <a href="https://github.com/ameliabedelia/ameliabarber_netlify/blob/master/content/post/2019-08-23-tidy-tuesday-simpsons-guest-stars.Rmd">here</a>.</p>
+</div>
