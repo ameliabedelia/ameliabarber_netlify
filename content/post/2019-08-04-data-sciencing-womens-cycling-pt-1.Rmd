@@ -27,7 +27,7 @@ I am passionate about women's cycling, so I thought what better way to christen 
 
 [^1]: [https://cyclistsalliance.org/2017/12/the-cyclists-alliance-rider-survey/](https://cyclistsalliance.org/2017/12/the-cyclists-alliance-rider-survey/)
 
-This is post is part one, focusing on the rider demographics of the elite women's peloton[^2]. Stay tuned for a follow up post looking at the race results and rankings of the world's top female cyclists.
+This is post is part one, focusing on the rider demographics of the elite women's peloton[^2]. Part two, looking at the relationship between age and number of seasons on rider ranking can be found [here](https://ameliabarber.netlify.com/2019/08/25/data-sciencing-womens-cycling-pt-2/).
 
 [^2]: Peloton is a fancy french word for the main group of riders in a bike race.
 
@@ -347,6 +347,11 @@ months <- female_riders %>%
 
 ggplotly(months)
 ```
+
+***
+### [Continue to Part 2](https://ameliabarber.netlify.com/2019/08/25/data-sciencing-womens-cycling-pt-2/)
+
+***
 
 I hope you enjoyed this post and if you are interested in following additional content related to women's professional cycling, you can check out the following resources:
 
