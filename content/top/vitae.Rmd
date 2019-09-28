@@ -19,7 +19,6 @@ last updated: July 20, 2019
 [Positions](#Positions)<br>
 [Research Support and Awards](#Awards)<br>
 [Publications](#Publications)<br>
-[Postdoctoral Coursework](#Courses)<br>
 [Academic Teaching Experience](#Teaching)<br>
 [Scientific Outreach](#Outreach)<br>
 [Spoken Languages](#Languages)
@@ -91,12 +90,6 @@ Debnath I., Norton JP, **Barber AE**, Ott EM, Dhakal BK, Kulesus RR, Mulvey MA. 
 Ebert AD, **Barber AE**, Heins BM, Svendsen CN. Ex vivo Delivery of GDNF Maintains Motor Function and Prevents Neuronal Loss in a Transgenic Mouse Model of Huntington’s disease. 2010. *Experimental Neurology*. Jul;224(1):155-62. 
 
 Ebert AD, Beres AJ, **Barber AE**, Svendsen CN. Human Neural Progenitor Cells Over-expressing IGF-1 Protect Dopamine Neurons and Restore Function in a Rat Model of Parkinson's Disease. 2008. *Experimental Neurology*. Jan;209(1):213-223. **>140 citations**
-
-
-### Postdoctoral Coursework {#Courses}
-
-**2019**. Microbial Genomics and Comparative Genomics. University of Gießen. Gießen, Germany. <br>
-**2018**. Fungal Pathogen Genomics. Wellcome Genome Campus. Cambridge, UK.
 
 ### Academic Teaching Experience {#Teaching}
 
