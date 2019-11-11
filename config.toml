@@ -1,5 +1,5 @@
-baseurl = "https://ameliabarber.netlify.com/"
-title = "Amelia E. Barber"
+baseurl = "https://barber.science"
+title = "Amelia E. Barber "
 theme = "hugo-theme-cleanwhite"
 languageCode = "en-us"
 # Enable comments by entering your Disqus shortname
@@ -17,7 +17,7 @@ home = ["HTML", "RSS", "Algolia"]
 
 [params]
   header_image = "img/header.jpeg"
-  SEOTitle = "Amelia E. Barber"
+  SEOTitle = "barber.science"
   description = "Website of Amelia E. Barber, PhD"
   keyword = "microbial genomics, fungal biology, antifungal resistance, genomics, computational biology"
   slogan = "Genomics & Resistance of Fungal Pathogens"
