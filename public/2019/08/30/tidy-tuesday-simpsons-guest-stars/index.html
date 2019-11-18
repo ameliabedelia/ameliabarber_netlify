@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="Amelia E. Barber ">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="//./static/img/header.jpeg">
+    <meta property="twitter:image" content="//./static/img/header.jpeg" />
+    
+
+    
+    <meta name="title" content="Tidy Tuesday: Simpsons Guest Stars" />
+    <meta property="og:title" content="Tidy Tuesday: Simpsons Guest Stars" />
+    <meta property="twitter:title" content="Tidy Tuesday: Simpsons Guest Stars" />
+    
+
+    
+    <meta name="description" content="Weekly data challenge using data on Simpsons guest stars">
+    <meta property="og:description" content="Weekly data challenge using data on Simpsons guest stars" />
+    <meta property="twitter:description" content="Weekly data challenge using data on Simpsons guest stars" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="microbial genomics, fungal biology, antifungal resistance, genomics, computational biology">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>Tidy Tuesday: Simpsons Guest Stars-barber.science</title>
+
+    <link rel="canonical" href="/2019/08/30/tidy-tuesday-simpsons-guest-stars/">
+
+    <link rel="stylesheet" href="/css/iDisqus.min.css"/>
+	
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    
+    <script src="/js/jquery.min.js"></script>
+    
+    
+    <script src="/js/bootstrap.min.js"></script>
+    
+    
+    <script src="/js/hux-blog.min.js"></script>
+	
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/docco.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</head>
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Amelia E. Barber </a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    
+		    
+                        <li><a href="/top/about/">About me</a></li>
+                    
+                        <li><a href="/top/vitae/">Vitae</a></li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/simpsons.jpg')
+    }
+</style>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/rstats" title="Rstats">
+                            Rstats
+                        </a>
+                        
+                        <a class="tag" href="/tags/tidy-tuesday" title="Tidy Tuesday">
+                            Tidy Tuesday
+                        </a>
+                        
+                        <a class="tag" href="/tags/data-science" title="data science">
+                            data science
+                        </a>
+                        
+                    </div>
+                    <h1>Tidy Tuesday: Simpsons Guest Stars</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+			Posted by 
+			
+		            Amelia E. Barber 
+			 
+			on 
+			Friday, August 30, 2019
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                
+
+
+<div id="tidy-tuesday-time-yall" class="section level3">
+<h3>Tidy Tuesday time, y’all</h3>
+<p>It’s been months since I did a <a href="https://github.com/rfordatascience/tidytuesday">Tidy Tuesday</a>, so I set aside an hour and said I had to post SOMETHING at the end of it. This week’s <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-08-27">dataset</a> was on Simpsons guest stars over the 30 (!!!) years the show has been on the air. Though I was initially tempted to do something looking at the most “famous” guest stars that have been on the show or the connectivity of the cast and guest stars in other projects outside of the show, both of those require additional data and more time than I had, so I went with the next thing that popped into my head, which was simply mapping the most common guest stars and their number of apperances in each season.</p>
+<hr />
+<p>Step one, load the packages we’ll be using and grab the data.</p>
+<pre class="r"><code>library(tidyverse)
+library(cowplot)
+
+simpsons &lt;- readr::read_delim(&quot;https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-08-27/simpsons-guests.csv&quot;, delim = &quot;|&quot;, quote = &quot;&quot;)</code></pre>
+<p>Looking at the most commonly-appearing guest stars, we see that Marcia Wallace (the voice of Edna Krabappel) is by far the most frequent guest star on the show with 175 apperances. The list drops off pretty quickly with Glenn Close rounding out the top 10 with nine apperances over the 30 seasons.</p>
+<pre class="r"><code>simpsons %&gt;% 
+    count(guest_star, name = &quot;total_n&quot;, sort = TRUE)</code></pre>
+<pre><code>## # A tibble: 795 x 2
+##    guest_star               total_n
+##    &lt;chr&gt;                      &lt;int&gt;
+##  1 Marcia Wallace               175
+##  2 Phil Hartman                  52
+##  3 Joe Mantegna                  29
+##  4 Maurice LaMarche              25
+##  5 Frank Welker                  21
+##  6 Kelsey Grammer                21
+##  7 Jon Lovitz                    19
+##  8 Kevin Michael Richardson      18
+##  9 Jackie Mason                  11
+## 10 Glenn Close                    9
+## # … with 785 more rows</code></pre>
+<p>For the purpose of making a cleaner visualization, I’ll focus on the 8 most frequently appearing guest stars, so let’s make a dataset with just these stars and their total number of apperances.</p>
+<pre class="r"><code>top_stars &lt;- simpsons %&gt;% 
+    count(guest_star, name = &quot;total_n&quot;, sort = TRUE) %&gt;% 
+    head(8) </code></pre>
+<p>We’ll use this as our filtering dataset for plotting, simultaneously adding the total number of apperances per guest star which we’ll use to order our data for plotting (and incorporate as text labels into our final plot).</p>
+<p>Ok, let’s get to plotting!</p>
+<pre class="r"><code>simpsons %&gt;%
+    count(season, guest_star) %&gt;%
+    inner_join(top_stars, by = &quot;guest_star&quot;) %&gt;% 
+    filter(season != &quot;Movie&quot;) %&gt;% # editorial choice; its not a season
+    mutate(guest_star = fct_reorder(guest_star, total_n),
+           season = fct_inseq(season)) %&gt;% 
+    ggplot(aes(season, guest_star)) +
+    geom_point(aes(size = n)) +
+    scale_size(&quot;# appearances&quot;)</code></pre>
+<p><img src="/post/2019-08-30-tidy-tuesday-simpsons-guest-stars_files/figure-html/bare%20plot-1.png" width="864" /></p>
+<p>Not a bad start using the default aesthetics, but it leaves some room for improvement in the prettiness department and we can make it cleaner, so its easier to understand.</p>
+<hr />
+<p>Looking at the raw data, some guest starts always reprise the same role - for example Marcia Wallace always plays Mrs. Krabappel and Joe Montegna always voices Fat Tony. Other guest stars rarely voice the same character twice, as we can see for Maurice LaMarche below:</p>
+<pre><code>## # A tibble: 25 x 2
+##    episode_title              role                                         
+##    &lt;chr&gt;                      &lt;chr&gt;                                        
+##  1 A Star Is Burns            George C. Scott; Hannibal Lecter; Captain Ja…
+##  2 The Seemingly Never-Endin… Commander McBragg                            
+##  3 Treehouse of Horror XVII   Orson Welles                                 
+##  4 G.I. (Annoyed Grunt)       Recruiter #2; Cap&#39;n Crunch                   
+##  5 The Wife Aquatic           First Mate Billy; Oceanographer              
+##  6 Stop or My Dog Will Shoot  Farmer; Horn Stuffer                         
+##  7 You Kent Always Say What … Fox announcer                                
+##  8 Treehouse of Horror XVIII  Government Official                          
+##  9 Husbands and Knives        Jock                                         
+## 10 Dangerous Curves           Toucan Sam; Cap&#39;n Crunch; Trix Rabbit        
+## 11 No Loan Again, Naturally   Dwight D. Eisenhower                         
+## 12 Waverly Hills 9-0-2-1-D&#39;oh City Inspector                               
+## 13 Once Upon a Time in Sprin… Nuclear Power Plant Guard                    
+## 14 Chief of Hearts            David Starsky                                
+## 15 Angry Dad: The Movie       Anthony Hopkins                              
+## # … with 10 more rows</code></pre>
+<p>Let’s incorporate the names of the main characters each actor voiced into our plot. It would also be nice if our plot listed the total number of guest apperances by each actor or actress. Once we make these changes and add more neutral theme we get this:</p>
+<p><img src="/post/2019-08-30-tidy-tuesday-simpsons-guest-stars_files/figure-html/intermediate%20plot-1.png" width="768" /></p>
+<p>Now we’re getting somewhere! The last thing we’ll do is add some Simpsons-themed colors and font, both of which are easily accessible through the <a href="https://github.com/Ryo-N7/tvthemes">tvthemes</a> package by <a href="https://twitter.com/@R_by_Ryo">Ryo</a></p>
+<p>And…huzzah!</p>
+<p><img src="/post/2019-08-30-tidy-tuesday-simpsons-guest-stars_files/figure-html/final%20plot-1.png" width="768" /></p>
+<p>(Ok, the whole thing took me more than an hour by the time I went back and added the blog text to the markdown, but this was still a useful exercise for me who typically spends too much time messing around with tiny details)</p>
+<p>View the rest of my Tidy Tuesday contributions <a href="https://github.com/ameliabedelia/tidy_tuesday">here</a>.</p>
+</div>
+
+
+                
+
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2019/08/25/data-sciencing-womens-cycling-pt-2/" data-toggle="tooltip" data-placement="top" title="Data sciencing women&#39;s cycling, pt 2">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                </ul>
+
+                
+<div id="disqus-comment"></div>
+
+
+
+            </div>
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        <a href="/tags/cv" title="cv">
+                            cv
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/cycling" title="cycling">
+                            cycling
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/data-science" title="data-science">
+                            data-science
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/misc" title="misc">
+                            misc
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/rstats" title="rstats">
+                            rstats
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/tidy-tuesday" title="tidy-tuesday">
+                            tidy-tuesday
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/womens-cycling" title="womens-cycling">
+                            womens-cycling
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                    
+                    <li>
+                        <a href="mailto:amelia.barber@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    <li>
+                        <a href="https://twitter.com/frau_dr_barber">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/ameliabedelia">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/barberae/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; Amelia E. Barber  2019
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-144248073-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+</body>
+</html>

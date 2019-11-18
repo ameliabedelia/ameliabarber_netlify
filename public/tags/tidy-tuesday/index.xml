@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tidy Tuesday on Amelia E. Barber </title>
+    <link>/tags/tidy-tuesday/</link>
+    <description>Recent content in Tidy Tuesday on Amelia E. Barber </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 30 Aug 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/tidy-tuesday/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Tidy Tuesday: Simpsons Guest Stars</title>
+      <link>/2019/08/30/tidy-tuesday-simpsons-guest-stars/</link>
+      <pubDate>Fri, 30 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/08/30/tidy-tuesday-simpsons-guest-stars/</guid>
+      <description>Tidy Tuesday time, y’all It’s been months since I did a Tidy Tuesday, so I set aside an hour and said I had to post SOMETHING at the end of it. This week’s dataset was on Simpsons guest stars over the 30 (!!!) years the show has been on the air. Though I was initially tempted to do something looking at the most “famous” guest stars that have been on the show or the connectivity of the cast and guest stars in other projects outside of the show, both of those require additional data and more time than I had, so I went with the next thing that popped into my head, which was simply mapping the most common guest stars and their number of apperances in each season.</description>
+    </item>
+    
+  </channel>
+</rss>

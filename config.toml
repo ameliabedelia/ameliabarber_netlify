@@ -16,7 +16,7 @@ customCSS = ["css/tables.css"]
 home = ["HTML", "RSS", "Algolia"]
 
 [params]
-  header_image = "img/header.jpeg"
+  header_image = "./static/img/header.jpeg"
   SEOTitle = "barber.science"
   description = "Website of Amelia E. Barber, PhD"
   keyword = "microbial genomics, fungal biology, antifungal resistance, genomics, computational biology"

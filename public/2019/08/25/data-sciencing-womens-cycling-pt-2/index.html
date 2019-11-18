@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="Amelia E. Barber ">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="//./static/img/header.jpeg">
+    <meta property="twitter:image" content="//./static/img/header.jpeg" />
+    
+
+    
+    <meta name="title" content="Data sciencing women&#39;s cycling, pt 2" />
+    <meta property="og:title" content="Data sciencing women&#39;s cycling, pt 2" />
+    <meta property="twitter:title" content="Data sciencing women&#39;s cycling, pt 2" />
+    
+
+    
+    <meta name="description" content="Exploring the relationship between ranking and age and number of seasons in women&#39;s professional cycling">
+    <meta property="og:description" content="Exploring the relationship between ranking and age and number of seasons in women&#39;s professional cycling" />
+    <meta property="twitter:description" content="Exploring the relationship between ranking and age and number of seasons in women&#39;s professional cycling" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="microbial genomics, fungal biology, antifungal resistance, genomics, computational biology">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>Data sciencing women&#39;s cycling, pt 2-barber.science</title>
+
+    <link rel="canonical" href="/2019/08/25/data-sciencing-womens-cycling-pt-2/">
+
+    <link rel="stylesheet" href="/css/iDisqus.min.css"/>
+	
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    
+    <script src="/js/jquery.min.js"></script>
+    
+    
+    <script src="/js/bootstrap.min.js"></script>
+    
+    
+    <script src="/js/hux-blog.min.js"></script>
+	
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/docco.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</head>
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Amelia E. Barber </a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    
+		    
+                        <li><a href="/top/about/">About me</a></li>
+                    
+                        <li><a href="/top/vitae/">Vitae</a></li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/LTON2019_Undrumsdal.jpg')
+    }
+</style>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/cycling" title="cycling">
+                            cycling
+                        </a>
+                        
+                        <a class="tag" href="/tags/womens-cycling" title="women&#39;s cycling">
+                            women&#39;s cycling
+                        </a>
+                        
+                        <a class="tag" href="/tags/data-science" title="data science">
+                            data science
+                        </a>
+                        
+                        <a class="tag" href="/tags/rstats" title="Rstats">
+                            Rstats
+                        </a>
+                        
+                    </div>
+                    <h1>Data sciencing women&#39;s cycling, pt 2</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+			Posted by 
+			
+			    Amelia
+			 
+			on 
+			Sunday, August 25, 2019
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                
+
+
+<p><strong>tl;dr The number of seasons a rider has been professional is a much better predictor of UCI ranking than age in female professional cycling and the 6th season as a professional is when the most riders have their best ranking.</strong></p>
+<p>In <a href="https://ameliabarber.netlify.com/2019/08/04/data-sciencing-womens-cycling-pt-1/">part 1</a> of my data sciencing of women’s professional cycling, I focused on the demographics of the women’s peloton (how the number of riders has changed over time, where the riders are from, how many seasons they stay). In this post, I’ve focused on rider rankings and their relationship to age and the number of seasons a rider has been professional for.</p>
+<p>Raw data covering women’s road rankings from 2009-2018 was obtained from the website of the UCI (Union Cycliste Internationale; the world governing body for professional cycling) in August of 2019. The rider database available on the site actually goes back a bit further than the ranking datasets, so it was possible to infer how many seasons riders had been professional prior to the ranking starting as well. If you are interested in the code used to generate this post, it can be found <a href="https://github.com/ameliabedelia/ameliabarber_netlify/blob/master/content/post/2019-08-25-data-sciencing-womens-cycling-pt-2.Rmd">here</a>.</p>
+<p><strong>Caveats:</strong> there is a large amount of variability in the dataset due to the athletes themselves and the stochastic nature of the sport, but I have focused my analyses on identifying overall trends from the data. I also acknowledge that focusing on UCI ranking is not without its problems due to the team nature of the sport and the presence of domestiques (riders who work solely for the team or lead rider, rather than their own placing).</p>
+<p><em>Data processing note: the UCI reports numeric rankings (1 to XXX) for each rider, but to normalize for the two-fold increase in the number of riders that occurred in the last 10 years, I transformed the data into percent rank across each year, where the top ranked rider becomes the 100% percentile and the bottom rider is at the 0% percentile.</em></p>
+<div id="riders-in-their-late-20s-are-the-highest-ranked-on-average-but-riders-of-all-age-groups-can-be-found-across-the-rankings." class="section level2">
+<h2>Riders in their late 20s are the highest ranked on average, but riders of all age groups can be found across the rankings.</h2>
+<p>As covered in my <a href="https://ameliabarber.netlify.com/2019/08/04/data-sciencing-womens-cycling-pt-1/">previous post</a>, the median age for professional cyclist according to the UCI dataset is 25, but the distribution is skewed towards young riders in the U23 range with a long tail of older riders. However, cycling is somewhat unique among professional sports in that it is not uncommon for people to <a href="https://www.bicycling.com/racing/a20031637/pro-cycling-evie-stevens/">pick it up later in life</a> or transition to it from other sports (whereas I cannot imagine someone “picking up” the sport of soccer with no prior experience and turning professional at the age of 30).</p>
+<p>If we do a smoothing of the dataset we find that, on average, riders in their mid to late 20s are the highest ranked.</p>
+<p><img src="/post/2019-08-25-data-sciencing-women-s-cycling-pt-2_files/figure-html/age%20vs%20rank%20curve-1.png" width="624" style="display: block; margin: auto auto auto 0;" /></p>
+<p>Young riders (18-19 years old) are the lowest ranked on average, even lower than the 40+ riders, but the uncertainty among older riders is higher because there just aren’t that many of them. I also examined whether this curve has changed over the past 10 years and found it has been largely consistent, though there have been some fluctuations in the tail end of the curve due to dominant older riders in particular seasons.</p>
+<p>However, <strong>this is a bit of an oversimplification</strong>, as there are riders of all rankings across the age spectrum as we can see in the graph below where each dot corresponds to an individual rider.</p>
+<p><img src="/post/2019-08-25-data-sciencing-women-s-cycling-pt-2_files/figure-html/age%20group%20vs%20rank%20beeswarm-1.png" width="672" style="display: block; margin: auto auto auto 0;" /></p>
+<p>From this, <strong>we can conclude that age alone is not sufficient as a predictor of ranking.</strong></p>
+<hr />
+<p><strong>Data visualization detour:</strong> I also made a raster map showing the density of different ages and rankings that gets around some of the overplotting issues from such a large, overlapping dataset. While it’s message might not be as intuitive as a simple smoothed curve or a dotplot, I think it really highlights the concentration of the U23 rider population in the bottom 50% of the peloton and how the top 20th percentiles are really dominated by riders from in their mid to late 20s.</p>
+<p><img src="/post/2019-08-25-data-sciencing-women-s-cycling-pt-2_files/figure-html/age%20percentile%20raster%20map-1.png" width="672" style="display: block; margin: auto auto auto 0;" /></p>
+<hr />
+</div>
+<div id="rider-rank-is-highly-correlated-with-the-number-of-seasons-as-a-professional" class="section level2">
+<h2>Rider rank is highly correlated with the number of seasons as a professional</h2>
+<p>So, if age itself is not strongly predictive of rider ranking, what might do a better job? Perhaps not surprisingly, we find a stronger correlation with the number of seasons a rider has been professional.</p>
+<p><img src="/post/2019-08-25-data-sciencing-women-s-cycling-pt-2_files/figure-html/no.%20seasons%20with%20rank-1.png" width="672" style="display: block; margin: auto auto auto 0;" /></p>
+<p>It makes sense that rider skill, and consequently ranking, increases with the number of seasons as a professional. Additionally, riders who are not improving or getting good results are likely falling out of the dataset because they can’t get a contract. Lastly, I think the exponential increase during the first few seasons can be partially explained by the hierarchical nature of the sport, where new riders often serve as domestiques or workers for the team’s lead rider(s).</p>
+<p>However, it is a little surprising that ranking doesn’t seem to decrease after a certain point. Is it truly the case that riders are quitting at their peak? Or, are rider’s ranks dropping off, but not dramatically enough to be visible at this scale?</p>
+<p>If we look at the individual career trajectories for the 73 riders in the data with at least 8 seasons, we see that they actually stratify into two populations: riders who eventually go onto have a placing in the top 10% of riders peak in their 5th-7th season and then decline a little bit in later seasons, and riders who never crack the top 10% who steadily increase until the end of the dataset, with the sharpest increase around season 5.</p>
+<p><img src="/post/2019-08-25-data-sciencing-women-s-cycling-pt-2_files/figure-html/rider%20trajectory%20individual%20riders-1.png" width="672" style="display: block; margin: auto auto auto 0;" /></p>
+<p>The underlying cause of this difference remains unknown, but one potential explanation for top riders decline is that the competition at the top of the sport is simply too hard to maintain as riders age. Alternately, these top riders transition from being the protected rider towards a road captain working for other instead of their own placing, whereas the riders who never rank as highly were always working as domestiques instead of riders going for their own placing.</p>
+<p>(This graph also highlights the noise in the dataset. There are trends, but there is by no means a “standard” career trajectory among riders.)</p>
+<p>The other interesting observation from this data is that the median first season ranking for riders who go onto have long professional careers (54th percentile) is much higher than the overall ranking for first season riders (32nd percentile), indicating that the riders who go onto have long professional careers start even their first season well above average.</p>
+</div>
+<div id="riders-have-their-highest-ranked-season-during-their-6th-year-as-a-professional" class="section level2">
+<h2>Riders have their highest ranked season during their 6th year as a professional</h2>
+<p>Looking at the overall trend of when riders peak during their career, the 6th season was the best ranked for cyclists who were professional for at least eight seasons. Not surprisingly, no rider had their best season during their first year as a pro, but some riders had their best ranked year after 10 years in the professional peloton!!</p>
+<p><img src="/post/2019-08-25-data-sciencing-women-s-cycling-pt-2_files/figure-html/best%20season%20histogram-1.png" width="672" style="display: block; margin: auto auto auto 0;" /></p>
+</div>
+<div id="career-length-stratifies-the-interaction-between-age-and-ranking" class="section level2">
+<h2>Career length stratifies the interaction between age and ranking</h2>
+<p>Finally, circling back to age and its relationship to ranking, we can see that rider ranking by age stratifies quite nicely by the length of a rider’s career. In the figure below, the colored line represents a generalized additive model for each group, while grey indicates a 95% confidence interval.</p>
+<p><img src="/post/2019-08-25-data-sciencing-women-s-cycling-pt-2_files/figure-html/career%20length%20age%20rank%20curve-1.png" width="672" style="display: block; margin: auto auto auto 0;" /></p>
+<p>For riders who are only professional for 1-3 years, age does not signifiantly effect their rankings, which stay largely constant across the age spectrum whether they start at age 18 or age 40. Looking at rankings during when riders are in their 20s, riders with long, 10+ year careers are the highest ranked during this age period, followed by those who are professional for 7-9 years, and then 4-6 years.</p>
+<hr />
+<p>If you are interested in following additional content related to women’s professional cycling, you can check out the following resources:</p>
+<ul>
+<li><p><strong><a href="https://www.youtube.com/channel/UCloqTh1nPpW13LCntQglS-Q">UCI YouTube Channel</a></strong> Video coverage of women’s races are often hard to find so it’s nice that the UCI often has race recap videos on it’s YouTube channel</p></li>
+<li><p><strong><a href="http://www.voxwomen.com/">Voxwomen</a></strong> Videos, rider blogs, and a podcast to take you behind the scenes of women’s bike racing</p></li>
+<li><p><strong><a href="https://www.instagram.com/velofocus/">Velo Focus</a></strong> Great race and candid photographs of womens cycling. Also on <a href="https://twitter.com/velofocus">Twitter</a></p></li>
+<li><p>Follow <strong><a href="https://twitter.com/pwcycling">Sarah Connoll on Twitter</a></strong> Former host of the podcast “Pro Women’s Cycling” who still tweets about women’s racing</p></li>
+</ul>
+</div>
+
+
+                
+
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2019/08/04/data-sciencing-womens-cycling-pt-1/" data-toggle="tooltip" data-placement="top" title="Data sciencing women&#39;s cycling, pt 1">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2019/08/30/tidy-tuesday-simpsons-guest-stars/" data-toggle="tooltip" data-placement="top" title="Tidy Tuesday: Simpsons Guest Stars">Next
+                            Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+<div id="disqus-comment"></div>
+
+
+
+            </div>
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        <a href="/tags/cv" title="cv">
+                            cv
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/cycling" title="cycling">
+                            cycling
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/data-science" title="data-science">
+                            data-science
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/misc" title="misc">
+                            misc
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/rstats" title="rstats">
+                            rstats
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/tidy-tuesday" title="tidy-tuesday">
+                            tidy-tuesday
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/womens-cycling" title="womens-cycling">
+                            womens-cycling
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                    
+                    <li>
+                        <a href="mailto:amelia.barber@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    <li>
+                        <a href="https://twitter.com/frau_dr_barber">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/ameliabedelia">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/barberae/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; Amelia E. Barber  2019
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-144248073-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+</body>
+</html>
