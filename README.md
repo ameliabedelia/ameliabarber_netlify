@@ -1,2 +1,2 @@
-# repo for ameliabarber.netlify.com
-[https://ameliabarber.netlify.com/](https://ameliabarber.netlify.com/)
+# repo for barber.science
+[https://barber.science/](https://barber.science/)
