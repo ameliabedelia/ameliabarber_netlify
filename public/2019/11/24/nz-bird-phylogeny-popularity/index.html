@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="Amelia E. Barber ">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="//img/header.jpeg">
+    <meta property="twitter:image" content="//img/header.jpeg" />
+    
+
+    
+    <meta name="title" content="Phylogeny vs. popularity in the birds of New Zealand" />
+    <meta property="og:title" content="Phylogeny vs. popularity in the birds of New Zealand" />
+    <meta property="twitter:title" content="Phylogeny vs. popularity in the birds of New Zealand" />
+    
+
+    
+    <meta name="description" content="Looking at the association between the phylogenetic relationship of New Zealand&#39;s birds and their popularity">
+    <meta property="og:description" content="Looking at the association between the phylogenetic relationship of New Zealand&#39;s birds and their popularity" />
+    <meta property="twitter:description" content="Looking at the association between the phylogenetic relationship of New Zealand&#39;s birds and their popularity" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="microbial genomics, fungal biology, antifungal resistance, genomics, computational biology">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>Phylogeny vs. popularity in the birds of New Zealand-barber.science</title>
+
+    <link rel="canonical" href="/2019/11/24/nz-bird-phylogeny-popularity/">
+
+    <link rel="stylesheet" href="/css/iDisqus.min.css"/>
+	
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    
+    <script src="/js/jquery.min.js"></script>
+    
+    
+    <script src="/js/bootstrap.min.js"></script>
+    
+    
+    <script src="/js/hux-blog.min.js"></script>
+	
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/docco.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</head>
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Amelia E. Barber </a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    
+		    
+                        <li><a href="/top/about/">About me</a></li>
+                    
+                        <li><a href="/top/vitae/">Vitae</a></li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/header.jpeg')
+    }
+</style>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/rstats" title="Rstats">
+                            Rstats
+                        </a>
+                        
+                        <a class="tag" href="/tags/tidy-tuesday" title="Tidy Tuesday">
+                            Tidy Tuesday
+                        </a>
+                        
+                        <a class="tag" href="/tags/data-science" title="data science">
+                            data science
+                        </a>
+                        
+                        <a class="tag" href="/tags/purrr" title="purrr">
+                            purrr
+                        </a>
+                        
+                    </div>
+                    <h1>Phylogeny vs. popularity in the birds of New Zealand</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+			Posted by 
+			
+		            Amelia E. Barber 
+			 
+			on 
+			Sunday, November 24, 2019
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                
+
+<h2 id="what-is-the-relationship-between-bird-phylogeny-and-popularity">What is the relationship between bird phylogeny and popularity?</h2>
+
+<p><img src="/post/2019-11-24-new-zealand-bird-taxonomy-popularity_files/kakapo.jpg" alt="kakapo" width="500px"/></p>
+
+<p>The <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-11-19">Tidy Tuesday</a> dataset this week is on New Zealand&rsquo;s &ldquo;Bird of the Year 2019&rdquo; so I thought it might be fun to look at how the phylogeny of the birds of NZ correlates with their popularity. **Are the most popular birds closely related to each other? Or are popular birds scattered throughout the <a href="https://en.wikipedia.org/wiki/Phylogenetic_tree">phylogenetic tree</a> of birds in the competition? **</p>
+
+<p><em>If you are a data scientist not familiar with evolutionary biology, a phylogeny is essentially a way of classifying organisms and their relationship to each other based on their evolutionary history - often measured by DNA similarity.</em></p>
+
+<p>The packages we&rsquo;ll be using this week, in addition to the core tidyverse packages, are <code>wikitaxa</code> to help convert common names to scientific names, <code>treeio</code> to read the phylogenetic tree into R, <code>ggtree</code> to visualize the phylogeny, and <code>patchwork</code> to combine the tree with a bar chart of the vote data, so let&rsquo;s load these packages and get started. Ironically, we&rsquo;re also going to use the <a href="https://purrr.tidyverse.org/"><code>purrr</code></a> package a lot in our bird data exploration.</p>
+
+<pre><code class="language-r">library(tidyverse)
+library(wikitaxa)
+library(treeio)
+library(ggtree)
+library(patchwork)
+</code></pre>
+
+<p>We can also grab the data from the Tidy Tuesday repo:</p>
+
+<pre><code class="language-r">nz_bird &lt;- readr::read_csv(&quot;https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-11-19/nz_bird.csv&quot;)
+</code></pre>
+
+<p>The  &ldquo;Bird of the Year&rdquo; voting was done in a rather complicated instant runoff system over several weeks, so if we look at the raw data, we can see that we have dates, hours, and vote ranks because people could vote for up to 5 birds. To simplify this, we&rsquo;ll just look at the total number of votes each bird received.</p>
+
+<pre><code class="language-r">nz_bird
+</code></pre>
+
+<pre><code>## # A tibble: 217,300 x 4
+##    date        hour vote_rank bird_breed         
+##    &lt;date&gt;     &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;              
+##  1 2019-10-28     8 vote_1    Gibson's Albatross 
+##  2 2019-10-28     8 vote_2    Tūī                
+##  3 2019-10-28     8 vote_3    Kākā               
+##  4 2019-10-28     8 vote_4    Kākāpō             
+##  5 2019-10-28     8 vote_5    Little Spotted Kiwi
+##  6 2019-10-28     8 vote_1    Spotted Shag       
+##  7 2019-10-28     8 vote_2    Fantail            
+##  8 2019-10-28     8 vote_3    Weka               
+##  9 2019-10-28     8 vote_4    &lt;NA&gt;               
+## 10 2019-10-28     8 vote_5    &lt;NA&gt;               
+## # … with 217,290 more rows
+</code></pre>
+
+<h2 id="extract-the-common-names-of-the-top-30-birds">Extract the common names of the top 30 birds</h2>
+
+<p>Overall, there were 85 different birds in the running for &ldquo;Bird of the Year&rdquo;.</p>
+
+<pre><code class="language-r">nz_bird %&gt;%
+    filter(!is.na(bird_breed)) %&gt;% 
+    distinct(bird_breed) %&gt;% 
+    nrow()
+</code></pre>
+
+<pre><code>## [1] 85
+</code></pre>
+
+<p>For the sake of overcrowding in our phylogenetic tree, we&rsquo;re going to focus on top 30 in terms of total votes</p>
+
+<pre><code class="language-r">top_birds &lt;- nz_bird %&gt;%
+    filter(!is.na(vote_rank) &amp; !is.na(bird_breed)) %&gt;%
+    count(bird_breed) %&gt;%
+    arrange(desc(n)) %&gt;%
+    top_n(30) %&gt;% 
+    pull(bird_breed)
+
+top_birds
+</code></pre>
+
+<pre><code>##  [1] &quot;Yellow-eyed penguin&quot;       &quot;Kākāpō&quot;                   
+##  [3] &quot;Black Robin&quot;               &quot;Kākā&quot;                     
+##  [5] &quot;Banded Dotterel&quot;           &quot;Kea&quot;                      
+##  [7] &quot;Tūī&quot;                       &quot;Blue Duck&quot;                
+##  [9] &quot;Fantail&quot;                   &quot;New Zealand Falcon&quot;       
+## [11] &quot;Kererū&quot;                    &quot;Morepork&quot;                 
+## [13] &quot;Antipodean Albatross&quot;      &quot;Little Penguin&quot;           
+## [15] &quot;Orange-fronted Parakeet&quot;   &quot;Rockhopper Penguin&quot;       
+## [17] &quot;Little Spotted Kiwi&quot;       &quot;Kingfisher&quot;               
+## [19] &quot;Southern Brown Kiwi&quot;       &quot;Fiordland Crested Penguin&quot;
+## [21] &quot;South Island Kōkako&quot;       &quot;Mōhua&quot;                    
+## [23] &quot;Kōkako&quot;                    &quot;New Zealand Dotterel&quot;     
+## [25] &quot;Rifleman&quot;                  &quot;Stitchbird&quot;               
+## [27] &quot;Takahē&quot;                    &quot;Bittern&quot;                  
+## [29] &quot;Fairy Tern&quot;                &quot;Saddleback&quot;
+</code></pre>
+
+<p>Unfortunately, the dataset only provides us with the common names of the birds, while any sort of taxonomic database is going to require (or be more accurate) if we can provide the scientific names.</p>
+
+<h2 id="using-wikitaxa-to-obtain-scientific-names-from-a-bird-s-common-name">Using <code>wikitaxa</code> to obtain scientific names from a bird&rsquo;s common name</h2>
+
+<p>I initially tried to get the scientific names for the birds from their common name using the <code>comm2sci()</code> function from the <code>taxize</code> package, but the results were pretty incomplete and inaccurate, so I ended up using the <code>wikitaxa</code> package which provides an easy way to access the WikiSpecies API.</p>
+
+<p>To search Wikispecies, I took a vector of the top birds, and used purrr&rsquo;s <code>map()</code> function to search the Wikispecies database for each bird name.</p>
+
+<pre><code class="language-r">bird_list &lt;- top_birds %&gt;% 
+    set_names() %&gt;% 
+    map(wikitaxa::wt_wikispecies_search)
+</code></pre>
+
+<h2 id="pluck-hits-from-wikispecies-results-list">Pluck hits from Wikispecies results list</h2>
+
+<p>If we look at a sample result from our WikiSpecies search results, we can see the resulting list has a lot of stuff we don&rsquo;t really care about.</p>
+
+<pre><code class="language-r">bird_list[[1]]
+</code></pre>
+
+<pre><code>## $batchcomplete
+## [1] &quot;&quot;
+## 
+## $query
+## $query$searchinfo
+## $query$searchinfo$totalhits
+## [1] 4
+## 
+## $query$searchinfo$suggestion
+## [1] &quot;yellow eyles pengi&quot;
+## 
+## $query$searchinfo$suggestionsnippet
+## [1] &quot;yellow &lt;em&gt;eyles pengi&lt;/em&gt;&quot;
+## 
+## 
+## $query$search
+## # A tibble: 4 x 7
+##      ns title       pageid   size wordcount snippet                  timestamp  
+##   &lt;int&gt; &lt;chr&gt;        &lt;int&gt;  &lt;int&gt;     &lt;int&gt; &lt;chr&gt;                    &lt;chr&gt;      
+## 1     0 Megadyptes… 3.21e4    800        74 &quot; (Endangered) čeština:… 2019-09-18…
+## 2     0 List of vi… 9.65e5 156654     14868 &quot;&lt;span class=\&quot;searchma… 2018-02-15…
+## 3     0 List of vi… 1.10e6 173807     16483 &quot;&lt;span class=\&quot;searchma… 2018-05-23…
+## 4     0 List of vi… 1.07e6 703111        61 &quot;Begomovirus ssDNA(+/-)… 2019-11-24…
+</code></pre>
+
+<p>To grab the information we are most interested in (the search results themselves), we can use purrr&rsquo;s aptly named <code>pluck()</code> function to grab just the table with our potential species names.</p>
+
+<pre><code class="language-r">query_results &lt;- map(bird_list, ~pluck(.x, &quot;query&quot;, &quot;search&quot;))
+</code></pre>
+
+<p>As an example, here is what the database came up with for the second item in our list, the <a href="https://en.wikipedia.org/wiki/Kakapo">Kākāpō</a>:</p>
+
+<pre><code class="language-r">query_results[[2]] %&gt;% 
+    select(title)
+</code></pre>
+
+<pre><code>## # A tibble: 3 x 1
+##   title                  
+##   &lt;chr&gt;                  
+## 1 Strigops habroptila    
+## 2 Strigops               
+## 3 Ngaheremyia fuscipennis
+</code></pre>
+
+<h2 id="condense-multiple-wikispecies-hits-down-to-a-single-correct-scientific-name">Condense multiple Wikispecies hits down to a single (correct) scientific name</h2>
+
+<p>If we looked at the results for the Kākāpō above where the first search result is the correct scientific name, we might assume that it would work to just take the first result for all our searches (we can also use <code>purrr::map_dfr()</code> to return a table of the results instead of a list).</p>
+
+<pre><code class="language-r">top_result &lt;- map_dfr(query_results, ~head(.x, 1), .id = &quot;common_name&quot;) %&gt;% 
+    select(common_name, latin_name = title)
+top_result
+</code></pre>
+
+<pre><code>## # A tibble: 27 x 2
+##    common_name         latin_name                            
+##    &lt;chr&gt;               &lt;chr&gt;                                 
+##  1 Yellow-eyed penguin Megadyptes antipodes                  
+##  2 Kākāpō              Strigops habroptila                   
+##  3 Black Robin         Black robin associated gemykibivirus 1
+##  4 Kākā                Nestor meridionalis                   
+##  5 Kea                 Steven Chew Kea Foo                   
+##  6 Tūī                 Domene tui                            
+##  7 Blue Duck           Hymenolaimus malacorhynchos           
+##  8 Fantail             Rhipidura maculipectus                
+##  9 New Zealand Falcon  Falco novaeseelandiae                 
+## 10 Kererū              Hemiphaga novaeseelandiae             
+## # … with 17 more rows
+</code></pre>
+
+<p>However, if we take a closer look at the result, we can see that our strategy didn&rsquo;t work perfectly. For example, for the black robin, it picked a virus that infects black robins instead of the actual bird itself. And for the kea, it chose Steven Chew Kea Foo, the ecologist for which (I assume) the bird was named, instead of the bird itself.</p>
+
+<p>If this was a dataset with 1000 birds, I would have had to get more creative on how to fix the problem. But because there were only a few mistakes to fix, I just manually did it by combining the results for all birds into a single dataframe, excluding the hits that I knew were wrong, and then using <code>dplyr::distinct()</code> to condense them down to one hit per species. There were also a couple birds that wikitaxa couldn&rsquo;t assign down to the species level from the common name, such as the <a href="https://en.wikipedia.org/wiki/Rifleman_(bird)">Rifleman</a>, so I googled them and replaced the genus name with a full species name (eg. <em>Acanthisitta</em> to <em>Acanthisitta chloris</em>).</p>
+
+<p>Unfortunately, the WikiSpecies search wasn&rsquo;t able to find matches for 3 of our 30 birds. To figure out which birds were missing results and save them for manual entry later, I used <code>purrr::keep()</code>.</p>
+
+<pre><code class="language-r">missing_birds &lt;- keep(query_results, is.null) %&gt;% 
+    names()
+missing_birds
+</code></pre>
+
+<pre><code>## [1] &quot;Banded Dotterel&quot;           &quot;Southern Brown Kiwi&quot;      
+## [3] &quot;Fiordland Crested Penguin&quot;
+</code></pre>
+
+<p>Again, if this was part of a bigger project, I would have tried to webscrap their Latin names somehow, but because it was only 3 entries, I just googled them and made a separate tibble of the missing birds, which I combined with the WikiSpecies list above.</p>
+
+<pre><code class="language-r">missing_bird_names &lt;- tibble(
+    common_name = missing_birds,
+    latin_name = c(&quot;Charadrius bicinctus&quot;, &quot;Apteryx australis&quot;, &quot;Eudyptes pachyrhynchus&quot;)
+)
+</code></pre>
+
+<p>Now at the end of it, we have a table with the common and scientific names of the top 30 birds in the New Zealand Bird of the Year voting, ready for phylogenetic analysis</p>
+
+<pre><code class="language-r">bird_names_complete &lt;- bind_rows(bird_names, missing_bird_names)
+bird_names_complete
+</code></pre>
+
+<pre><code>## # A tibble: 30 x 2
+##    common_name         latin_name                   
+##    &lt;chr&gt;               &lt;chr&gt;                        
+##  1 Yellow-eyed penguin Megadyptes antipodes         
+##  2 Kākāpō              Strigops habroptila          
+##  3 Black Robin         Petroica traversi            
+##  4 Kākā                Nestor meridionalis          
+##  5 Kea                 Nestor notabilis             
+##  6 Tūī                 Prosthemadera novaeseelandiae
+##  7 Blue Duck           Hymenolaimus malacorhynchos  
+##  8 Fantail             Rhipidura maculipectus       
+##  9 New Zealand Falcon  Falco novaeseelandiae        
+## 10 Kererū              Hemiphaga novaeseelandiae    
+## # … with 20 more rows
+</code></pre>
+
+<h2 id="using-ncbi-taxonomy-to-infer-a-phylogeny-among-the-most-popular-birds-of-new-zealand">Using NCBI Taxonomy to infer a phylogeny among the most popular birds of New Zealand</h2>
+
+<p>There are a lot of way to assign phylogenetic relationships, but because I am not a bird taxonomist and the overall goal was to look at bird popularity through the lens of species relationship, not create the most accurate NZ bird phylogeny, I decided to the use the <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Common Tree</a> to generate a phylogeny, rather than building my own from available sequence data.</p>
+
+<p>To do this, I exported my list of newly-assembled Latin names to a text file, and uploaded that into the <a href="https://www.ncbi.nlm.nih.gov/Taxonomy/CommonTree/wwwcmt.cgi">NCBI Common Tree</a> web portal</p>
+
+<pre><code class="language-r">plot_set &lt;- bird_names_complete %&gt;% 
+    pull(latin_name)
+
+write_lines(plot_set, &quot;sci_names.txt&quot;)
+</code></pre>
+
+<p>Resulting in this lovely phylogeny:</p>
+
+<p><img src="/post/2019-11-24-new-zealand-bird-taxonomy-popularity_files/Screenshot 2019-11-24 at 08.29.14.png" alt="ncbi-screenshot" /></p>
+
+<p>The fantail (<em>Rhipidura maculipectus</em>) was not found in the NCBI taxonomy database, but it was able to place all the other birds into a phylogeny, which I then exported as a PHYLIP file to bring back into R.</p>
+
+<h2 id="using-treeio-to-import-and-manipulate-tree-data">Using <code>treeio</code> to import and manipulate tree data</h2>
+
+<p>To bring the NCBI-generated phylogeny back into R, we can use <code>treeio::read.tree()</code>, which nicely allows us to convert the Newick text file into a tibble for tidyverse-style manipulation.</p>
+
+<pre><code class="language-r">raw_tree &lt;- treeio::read.tree(here::here(&quot;content/post/phyliptree_fix.phy&quot;)) %&gt;% 
+    as_tibble() %&gt;% 
+    mutate(label = str_replace_all(label, &quot;_&quot;, &quot; &quot;)) %&gt;% 
+    left_join(bird_names_complete, by = c(&quot;label&quot; = &quot;latin_name&quot;)) %&gt;%
+    mutate(label = if_else(!is.na(common_name), glue::glue(&quot;{common_name} ({label})&quot;),
+                           label))
+</code></pre>
+
+<p>In this case, we&rsquo;re adding back the common names which got discarded when the list went to NCBI and using <code>glue()</code> to create nice tree labels that list both the common name and the scientific name.</p>
+
+<p>We can then convert this back to a phylo object and visualize a cladogram of our popular New Zealand birds using <code>ggtree</code>.</p>
+
+<pre><code class="language-r">tree &lt;- treeio::as.phylo(raw_tree)
+
+ggtree(tree, branch.length = &quot;none&quot;) +
+    geom_nodelab(geom = &quot;label&quot;, size = 3) +
+    geom_tiplab() +
+    coord_cartesian(clip = 'off') +
+    theme(plot.margin=margin(6, 250, 6, 6))
+</code></pre>
+
+<p><img src="/post/2019-11-24-new-zealand-bird-taxonomy-popularity_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+
+<h2 id="examining-taxonomic-relationship-vs-bird-popularity">Examining taxonomic relationship vs. bird popularity</h2>
+
+<p><strong>So how does phylogenetic relationship correlate with bird popularity?</strong></p>
+
+<p>Let&rsquo;s first make a graph of how many votes each of the birds in our phylogeny got by going back to our original Tidy Tuesday NZ birds dataset, counting the number of votes for each bird species, and adding their Latin name to make the same &ldquo;Common name (Latin name)&rdquo; label we used in our tree.</p>
+
+<pre><code class="language-r">vote_df &lt;- nz_bird %&gt;%
+    filter(!is.na(vote_rank) &amp; !is.na(bird_breed)) %&gt;%
+    count(bird_breed) %&gt;%
+    arrange(desc(n)) %&gt;%
+    top_n(30) %&gt;% 
+    left_join(bird_names_complete, by = c(&quot;bird_breed&quot; = &quot;common_name&quot;)) %&gt;% 
+    mutate(label = glue::glue(&quot;{bird_breed} ({latin_name})&quot;)) %&gt;% 
+    select(label, n)
+
+vote_df
+</code></pre>
+
+<pre><code>## # A tibble: 30 x 2
+##    label                                          n
+##    &lt;glue&gt;                                     &lt;int&gt;
+##  1 Yellow-eyed penguin (Megadyptes antipodes) 12022
+##  2 Kākāpō (Strigops habroptila)               11161
+##  3 Black Robin (Petroica traversi)             8304
+##  4 Kākā (Nestor meridionalis)                  7655
+##  5 Banded Dotterel (Charadrius bicinctus)      6692
+##  6 Kea (Nestor notabilis)                      6364
+##  7 Tūī (Prosthemadera novaeseelandiae)         6288
+##  8 Blue Duck (Hymenolaimus malacorhynchos)     6194
+##  9 Fantail (Rhipidura maculipectus)            6120
+## 10 New Zealand Falcon (Falco novaeseelandiae)  5992
+## # … with 20 more rows
+</code></pre>
+
+<p>Because ggtree objects play very nicely with the <code>tidyverse</code>, we can use <code>dplyr</code> verbs to take our tree, filter the tips where our species names are, use <code>select()</code> to get the y coordinate of each tip, and then join that with our calculated vote dataframe to create a bar chart with y positions that match our tree. We&rsquo;ll also highlight the 3 bird species who got the most votes in the New Zealand Bird of the Year competition in our phylogeny and in our plot to really distinguish them.</p>
+
+<p>(the plot doesn&rsquo;t look like much on its own)</p>
+
+<pre><code class="language-r">p2 &lt;- p1 %&gt;% 
+    filter(isTip) %&gt;% 
+    select(label, y) %&gt;%
+    left_join(vote_df) %&gt;%
+    mutate(highlight = if_else(n &gt; 8000, &quot;yes&quot;, &quot;no&quot;)) %&gt;% 
+    ggplot(aes(y, n, fill = highlight)) + 
+    geom_col(show.legend = FALSE) + 
+    scale_fill_manual(values = colors) +
+    coord_flip() +
+    annotate(&quot;text&quot;, x = 0.5, y = 12500, label = &quot;Total # Votes&quot;, hjust = 1) +
+    xlim(0.5, 29.5) +
+    theme_tree2()
+p2
+</code></pre>
+
+<p><img src="/post/2019-11-24-new-zealand-bird-taxonomy-popularity_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+
+<p>But using <code>patchwork</code>, we can combine our tree with our bar chart into one seamless plot:</p>
+
+<pre><code class="language-r">p1 + p2 + plot_annotation(
+    title = &quot;Are closely related New Zealand birds equally popular?&quot;,
+    subtitle = glue::glue(&quot;Among the 30 most popular birds in the 'NZ Bird of the Year competition'
+                          The three bird species receiving the most votes are highlighted in teal.&quot;),
+    caption = &quot;Data: NZ Forest and Bird Organization\n Visualization @frau_dr_barber&quot;,
+    theme = cowplot::theme_map()
+    )
+</code></pre>
+
+<p><img src="/post/2019-11-24-new-zealand-bird-taxonomy-popularity_files/figure-html/unnamed-chunk-21-1.png" width="768" /></p>
+
+<h3 id="so-are-the-most-popular-birds-closely-related">So, are the most popular birds closely related?</h3>
+
+<p>Not really. Looking at the plot, there doesn&rsquo;t seem to be a clear relationship between where a species is in the phylogeny and the number of votes they received. The three birds receiving the most votes belong to different families. The overall winner, the yellow-eyed penguin is in the <em>Spheniscidae</em> family, the second place kākāpō (of <a href="https://r4ds.had.co.nz/">R4DS</a> cover fame) is in the <em>Psittacidae</em> family, while the third place black robin is a <em>passeriformes</em>.</p>
+
+<p>My guess is that bird popularity is mostly a factor of bird cuteness, which is an evolutionarily <a href="https://en.wikipedia.org/wiki/Convergent_evolution">convergent trait</a>, rather than arising from a particilar branch of the tree.</p>
+
+<hr />
+
+<p>End note: the critically-endangered kākāpō is currently battling an aspergillosis outbreak <em>(incidentally, one of the main fungi I study in my day job)</em>, so if you have enjoyed this post, please consider donating to their rescue effort.<br />
+<a href="https://www.doc.govt.nz/kakapo-donate">https://www.doc.govt.nz/kakapo-donate</a></p>
+
+
+                
+
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2019/08/30/tidy-tuesday-simpsons-guest-stars/" data-toggle="tooltip" data-placement="top" title="Tidy Tuesday: Simpsons Guest Stars">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                </ul>
+
+                
+<div id="disqus-comment"></div>
+
+
+
+            </div>
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        <a href="/tags/cv" title="cv">
+                            cv
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/cycling" title="cycling">
+                            cycling
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/data-science" title="data-science">
+                            data-science
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/misc" title="misc">
+                            misc
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/purrr" title="purrr">
+                            purrr
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/rstats" title="rstats">
+                            rstats
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/tidy-tuesday" title="tidy-tuesday">
+                            tidy-tuesday
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/womens-cycling" title="womens-cycling">
+                            womens-cycling
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                    
+                    <li>
+                        <a href="mailto:amelia.barber@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    <li>
+                        <a href="https://twitter.com/frau_dr_barber">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/ameliabedelia">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/barberae/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; Amelia E. Barber  2019
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-144248073-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+</body>
+</html>

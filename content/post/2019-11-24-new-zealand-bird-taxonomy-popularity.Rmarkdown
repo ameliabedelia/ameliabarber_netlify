@@ -23,7 +23,7 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 
 <img src="/post/2019-11-24-new-zealand-bird-taxonomy-popularity_files/kakapo.jpg" alt="kakapo" width="500px"/>
 
-The [Tidy Tuesday dataset](https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-11-19) this week is on New Zealand's "Bird of the Year 2019" so I thought it might be fun to look at how the phylogeny of the birds of NZ correlates with their popularity. Are the most popular birds closely related to each other? Or are popular birds scattered throughout the [phylogenetic tree](https://en.wikipedia.org/wiki/Phylogenetic_tree) of birds in the competition? 
+The [Tidy Tuesday](https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-11-19) dataset this week is on New Zealand's "Bird of the Year 2019" so I thought it might be fun to look at how the phylogeny of the birds of NZ correlates with their popularity. **Are the most popular birds closely related to each other? Or are popular birds scattered throughout the [phylogenetic tree](https://en.wikipedia.org/wiki/Phylogenetic_tree) of birds in the competition? **
 
 _If you are a data scientist not familiar with evolutionary biology, a phylogeny is essentially a way of classifying organisms and their relationship to each other based on their evolutionary history - often measured by DNA similarity._
 
@@ -37,7 +37,7 @@ library(ggtree)
 library(patchwork)
 ```
 
-We can also grab the data from the Tidy Tuesday repo.
+We can also grab the data from the Tidy Tuesday repo:
 
 ```{r}
 nz_bird <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-11-19/nz_bird.csv")
@@ -51,7 +51,7 @@ nz_bird
 
 ## Extract the common names of the top 30 birds
 
-Overall, there were 85 different birds in the running for Bird of the Year.
+Overall, there were 85 different birds in the running for "Bird of the Year".
 
 ```{r}
 nz_bird %>%
