@@ -10,7 +10,7 @@ tags:
   - data science
   - purrr
 subtitle: ''
-description: "Looking at the association between the phylogenetic relationship of New Zealand's birds and their popularity"
+description: "Looking at the association between the popularity of New Zealand's birds and their phylogeny"
 image: ''
 showtoc: false
 ---
