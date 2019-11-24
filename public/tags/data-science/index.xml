@@ -6,10 +6,19 @@
     <description>Recent content in data science on Amelia E. Barber </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 30 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 24 Nov 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/data-science/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Phylogeny vs. popularity in the birds of New Zealand</title>
+      <link>/2019/11/24/nz-bird-phylogeny-popularity/</link>
+      <pubDate>Sun, 24 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/11/24/nz-bird-phylogeny-popularity/</guid>
+      <description>What is the relationship between bird phylogeny and popularity? The Tidy Tuesday dataset this week is on New Zealand&amp;rsquo;s &amp;ldquo;Bird of the Year 2019&amp;rdquo; so I thought it might be fun to look at how the phylogeny of the birds of NZ correlates with their popularity. Are the most popular birds closely related to each other? Or are popular birds scattered throughout the phylogenetic tree of birds in the competition?</description>
+    </item>
     
     <item>
       <title>Tidy Tuesday: Simpsons Guest Stars</title>

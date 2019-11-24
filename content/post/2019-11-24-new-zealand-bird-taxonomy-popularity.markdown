@@ -117,11 +117,11 @@ top_birds
 
 Unfortunately, the dataset only provides us with the common names of the birds, while any sort of taxonomic database is going to require (or be more accurate) if we can provide the scientific names.
 
-## Using `wikitaxa` to obtain for scientific names from a bird's common name
+## Using `wikitaxa` to obtain scientific names from a bird's common name
 
 I initially tried to get the scientific names for the birds from their common name using the `comm2sci()` function from the `taxize` package, but the results were pretty incomplete and inaccurate, so I ended up using the `wikitaxa` package which provides an easy way to access the WikiSpecies API.
 
-To search WikiSpecies, I took a vector of the top birds, and used purrr's `map()` function to search WikiSpecies for each bird name.
+To search Wikispecies, I took a vector of the top birds, and used purrr's `map()` function to search the Wikispecies database for each bird name.
 
 
 ```r
@@ -130,7 +130,7 @@ bird_list <- top_birds %>%
     map(wikitaxa::wt_wikispecies_search)
 ```
 
-## Pluck hits from WikiSpecies results list
+## Pluck hits from Wikispecies results list
 
 If we look at a sample result from our WikiSpecies search results, we can see the resulting list has a lot of stuff we don't really care about.
 
@@ -190,19 +190,37 @@ query_results[[2]] %>%
 ```
 
 
-## Condense multiple WikiSpecies hits down to a single (correct) scientific name
+## Condense multiple Wikispecies hits down to a single (correct) scientific name
 
-If we looked at the results for the Kākāpō above where the first search result is, indeed, the scientific name, we might assume that it would work to just take the first result for all our searches (we can also use `purrr::map_dfr()` to return a table of the results instead of a list).
+If we looked at the results for the Kākāpō above where the first search result is the correct scientific name, we might assume that it would work to just take the first result for all our searches (we can also use `purrr::map_dfr()` to return a table of the results instead of a list).
 
 
 ```r
 top_result <- map_dfr(query_results, ~head(.x, 1), .id = "common_name") %>% 
     select(common_name, latin_name = title)
+top_result
 ```
 
-However, if we take a closer look at the result, we can see that our strategy didn't work perfectly. For example, for the black robin, it picked a virus that infects black robins instead of the actual bird itself. And for the Kea, it chose Steven Chew Kea Foo, the ecologist for which (I assume) the bird was named, instead of the bird itself.
+```
+## # A tibble: 27 x 2
+##    common_name         latin_name                            
+##    <chr>               <chr>                                 
+##  1 Yellow-eyed penguin Megadyptes antipodes                  
+##  2 Kākāpō              Strigops habroptila                   
+##  3 Black Robin         Black robin associated gemykibivirus 1
+##  4 Kākā                Nestor meridionalis                   
+##  5 Kea                 Steven Chew Kea Foo                   
+##  6 Tūī                 Domene tui                            
+##  7 Blue Duck           Hymenolaimus malacorhynchos           
+##  8 Fantail             Rhipidura maculipectus                
+##  9 New Zealand Falcon  Falco novaeseelandiae                 
+## 10 Kererū              Hemiphaga novaeseelandiae             
+## # … with 17 more rows
+```
 
-If this was a dataset with 1000 birds, I don't know how I would fix the problem. But because there were only a few mistakes to fix, I just manually did it by combining the results for all birds into a single dataframe, excluding the hits that I knew were wrong, and then using `dplyr::distinct()` to condense them down to one hit per species. There were also a couple birds that wikitaxa couldn't assign down to the species level from the common name, such as the [Rifleman](https://en.wikipedia.org/wiki/Rifleman_(bird)), so I googled them and replaced the genus name with a full species name (eg. _Acanthisitta_ to _Acanthisitta chloris_).
+However, if we take a closer look at the result, we can see that our strategy didn't work perfectly. For example, for the black robin, it picked a virus that infects black robins instead of the actual bird itself. And for the kea, it chose Steven Chew Kea Foo, the ecologist for which (I assume) the bird was named, instead of the bird itself.
+
+If this was a dataset with 1000 birds, I would have had to get more creative on how to fix the problem. But because there were only a few mistakes to fix, I just manually did it by combining the results for all birds into a single dataframe, excluding the hits that I knew were wrong, and then using `dplyr::distinct()` to condense them down to one hit per species. There were also a couple birds that wikitaxa couldn't assign down to the species level from the common name, such as the [Rifleman](https://en.wikipedia.org/wiki/Rifleman_(bird)), so I googled them and replaced the genus name with a full species name (eg. _Acanthisitta_ to _Acanthisitta chloris_).
 
 
 
@@ -386,9 +404,9 @@ p1 + p2 + plot_annotation(
 
 ### So, are the most popular birds closely related?
 
-Not really. Looking at the plot, there doesn't seem to be a clear relationship between where a species is in the phylogeny and the number of votes they received. 
+Not really. Looking at the plot, there doesn't seem to be a clear relationship between where a species is in the phylogeny and the number of votes they received. The three birds receiving the most votes belong to different families. The overall winner, the yellow-eyed penguin is in the _Spheniscidae_ family, the second place kākāpō (of [R4DS](https://r4ds.had.co.nz/) cover fame) is in the _Psittacidae_ family, while the third place black robin is a _passeriformes_.
 
-Additionally, the three birds receiving the most votes belong to different families. The overall winner, the yellow-eyed penguin is in the _Spheniscidae_ family, the second place kākāpō (of [R4DS](https://r4ds.had.co.nz/) cover fame) is in the _Psittacidae_ family, while the third place black robin is a _passeriformes_.
+My guess is that bird popularity is mostly a factor of bird cuteness, which is an evolutionarily [convergent trait](https://en.wikipedia.org/wiki/Convergent_evolution), rather than arising from a particilar branch of the tree.
 
 ***
 
