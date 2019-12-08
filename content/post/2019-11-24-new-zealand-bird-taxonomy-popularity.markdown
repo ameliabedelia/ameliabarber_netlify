@@ -21,7 +21,7 @@ showtoc: false
 
 <img src="/post/2019-11-24-new-zealand-bird-taxonomy-popularity_files/kakapo.jpg" alt="kakapo" width="500px"/>
 
-The [Tidy Tuesday](https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-11-19) dataset this week is on New Zealand's "Bird of the Year 2019" so I thought it might be fun to look at how the phylogeny of the birds of NZ correlates with their popularity. **Are the most popular birds closely related to each other? Or are popular birds scattered throughout the [phylogenetic tree](https://en.wikipedia.org/wiki/Phylogenetic_tree) of birds in the competition? **
+The [Tidy Tuesday](https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-11-19) dataset this week is on New Zealand's "Bird of the Year 2019" so I thought it might be fun to look at how the phylogeny of the birds of NZ correlates with their popularity. **Are the most popular birds closely related to each other?** Or are popular birds scattered throughout the [phylogenetic tree](https://en.wikipedia.org/wiki/Phylogenetic_tree) of birds in the competition?
 
 _If you are a data scientist not familiar with evolutionary biology, a phylogeny is essentially a way of classifying organisms and their relationship to each other based on their evolutionary history - often measured by DNA similarity._
 
@@ -132,7 +132,7 @@ bird_list <- top_birds %>%
 
 ## Pluck hits from Wikispecies results list
 
-If we look at a sample result from our WikiSpecies search results, we can see the resulting list has a lot of stuff we don't really care about.
+If we look at a sample result from our Wikispecies search results, we can see the resulting list has a lot of stuff we don't really care about.
 
 
 ```r
@@ -149,10 +149,10 @@ bird_list[[1]]
 ## [1] 4
 ## 
 ## $query$searchinfo$suggestion
-## [1] "yellow eyles pengi"
+## [1] "yellow eyrei pengi"
 ## 
 ## $query$searchinfo$suggestionsnippet
-## [1] "yellow <em>eyles pengi</em>"
+## [1] "yellow <em>eyrei pengi</em>"
 ## 
 ## 
 ## $query$search
@@ -162,7 +162,7 @@ bird_list[[1]]
 ## 1     0 Megadyptes… 3.21e4    800        74 " (Endangered) čeština:… 2019-09-18…
 ## 2     0 List of vi… 9.65e5 156654     14868 "<span class=\"searchma… 2018-02-15…
 ## 3     0 List of vi… 1.10e6 173807     16483 "<span class=\"searchma… 2018-05-23…
-## 4     0 List of vi… 1.07e6 703111        61 "Begomovirus ssDNA(+/-)… 2019-11-24…
+## 4     0 List of vi… 1.07e6 704681        61 "Begomovirus ssDNA(+/-)… 2019-12-07…
 ```
 
 To grab the information we are most interested in (the search results themselves), we can use purrr's aptly named `pluck()` function to grab just the table with our potential species names.
@@ -224,7 +224,7 @@ If this was a dataset with 1000 birds, I would have had to get more creative on 
 
 
 
-Unfortunately, the WikiSpecies search wasn't able to find matches for 3 of our 30 birds. To figure out which birds were missing results and save them for manual entry later, I used `purrr::keep()`.
+Unfortunately, the Wikispecies search wasn't able to find matches for 3 of our 30 birds. To figure out which birds were missing results and save them for manual entry later, I used `purrr::keep()`.
 
 
 ```r
@@ -238,7 +238,7 @@ missing_birds
 ## [3] "Fiordland Crested Penguin"
 ```
 
-Again, if this was part of a bigger project, I would have tried to webscrap their Latin names somehow, but because it was only 3 entries, I just googled them and made a separate tibble of the missing birds, which I combined with the WikiSpecies list above.
+Again, if this was part of a bigger project, I would have tried to webscrap their Latin names somehow, but because it was only 3 entries, I just googled them and made a separate tibble of the missing birds, which I combined with the Wikispecies list above.
 
 
 ```r
@@ -410,6 +410,16 @@ My guess is that bird popularity is mostly a factor of bird cuteness, which is a
 
 ***
 
-End note: the critically-endangered kākāpō is currently battling an aspergillosis outbreak *(incidentally, one of the main fungi I study in my day job)*, so if you have enjoyed this post, please consider donating to their rescue effort.  
+**Update: Dec 10, 2019**
+
+Because I initially chose to focus on the 30 most popular birds, there were a lot of species on thir own branches that are not truly "orphan" species, so I opted to go back and remake the phylogeny with all 80 birds instead of just focusing on the most popular birds.
+
+![full phylogeny](/post/2019-11-24-new-zealand-bird-taxonomy-popularity_files/nz-birds-big.png)
+
+Though a bit large and unwieldy, I think this approach provides a more complete picture of the relationship between popularity and phylogeny among the birds of New Zealand. The overall conclusions remain unchanged - there are myriad examples of nearest neighbor species having very different levels of popularity, and the top birds all belong to different families. However, with the full tree it is also evident that there is some association in the population among orders. For example, the 11 species in the Pelecaniformes, which includes pelicans, are all uniformly unpopular, while all four birds in the Psittacidae order all have above average popularity.
+
+***
+
+*End note: the critically-endangered kākāpō is currently battling an aspergillosis outbreak, so if you have enjoyed this post, please consider donating to their rescue effort.* 
 https://www.doc.govt.nz/kakapo-donate
 

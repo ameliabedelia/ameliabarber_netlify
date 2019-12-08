@@ -21,9 +21,9 @@
     
 
     
-    <meta name="description" content="Looking at the association between the phylogenetic relationship of New Zealand&#39;s birds and their popularity">
-    <meta property="og:description" content="Looking at the association between the phylogenetic relationship of New Zealand&#39;s birds and their popularity" />
-    <meta property="twitter:description" content="Looking at the association between the phylogenetic relationship of New Zealand&#39;s birds and their popularity" />
+    <meta name="description" content="Looking at the association between the popularity of New Zealand&#39;s birds and their phylogeny">
+    <meta property="og:description" content="Looking at the association between the popularity of New Zealand&#39;s birds and their phylogeny" />
+    <meta property="twitter:description" content="Looking at the association between the popularity of New Zealand&#39;s birds and their phylogeny" />
     
 
     
@@ -206,7 +206,7 @@
 
 <p><img src="/post/2019-11-24-new-zealand-bird-taxonomy-popularity_files/kakapo.jpg" alt="kakapo" width="500px"/></p>
 
-<p>The <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-11-19">Tidy Tuesday</a> dataset this week is on New Zealand&rsquo;s &ldquo;Bird of the Year 2019&rdquo; so I thought it might be fun to look at how the phylogeny of the birds of NZ correlates with their popularity. **Are the most popular birds closely related to each other? Or are popular birds scattered throughout the <a href="https://en.wikipedia.org/wiki/Phylogenetic_tree">phylogenetic tree</a> of birds in the competition? **</p>
+<p>The <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-11-19">Tidy Tuesday</a> dataset this week is on New Zealand&rsquo;s &ldquo;Bird of the Year 2019&rdquo; so I thought it might be fun to look at how the phylogeny of the birds of NZ correlates with their popularity. <strong>Are the most popular birds closely related to each other?</strong> Or are popular birds scattered throughout the <a href="https://en.wikipedia.org/wiki/Phylogenetic_tree">phylogenetic tree</a> of birds in the competition?</p>
 
 <p><em>If you are a data scientist not familiar with evolutionary biology, a phylogeny is essentially a way of classifying organisms and their relationship to each other based on their evolutionary history - often measured by DNA similarity.</em></p>
 
@@ -302,7 +302,7 @@ top_birds
 
 <h2 id="pluck-hits-from-wikispecies-results-list">Pluck hits from Wikispecies results list</h2>
 
-<p>If we look at a sample result from our WikiSpecies search results, we can see the resulting list has a lot of stuff we don&rsquo;t really care about.</p>
+<p>If we look at a sample result from our Wikispecies search results, we can see the resulting list has a lot of stuff we don&rsquo;t really care about.</p>
 
 <pre><code class="language-r">bird_list[[1]]
 </code></pre>
@@ -316,10 +316,10 @@ top_birds
 ## [1] 4
 ## 
 ## $query$searchinfo$suggestion
-## [1] &quot;yellow eyles pengi&quot;
+## [1] &quot;yellow eyrei pengi&quot;
 ## 
 ## $query$searchinfo$suggestionsnippet
-## [1] &quot;yellow &lt;em&gt;eyles pengi&lt;/em&gt;&quot;
+## [1] &quot;yellow &lt;em&gt;eyrei pengi&lt;/em&gt;&quot;
 ## 
 ## 
 ## $query$search
@@ -329,7 +329,7 @@ top_birds
 ## 1     0 Megadyptes… 3.21e4    800        74 &quot; (Endangered) čeština:… 2019-09-18…
 ## 2     0 List of vi… 9.65e5 156654     14868 &quot;&lt;span class=\&quot;searchma… 2018-02-15…
 ## 3     0 List of vi… 1.10e6 173807     16483 &quot;&lt;span class=\&quot;searchma… 2018-05-23…
-## 4     0 List of vi… 1.07e6 703111        61 &quot;Begomovirus ssDNA(+/-)… 2019-11-24…
+## 4     0 List of vi… 1.07e6 704681        61 &quot;Begomovirus ssDNA(+/-)… 2019-12-07…
 </code></pre>
 
 <p>To grab the information we are most interested in (the search results themselves), we can use purrr&rsquo;s aptly named <code>pluck()</code> function to grab just the table with our potential species names.</p>
@@ -380,7 +380,7 @@ top_result
 
 <p>If this was a dataset with 1000 birds, I would have had to get more creative on how to fix the problem. But because there were only a few mistakes to fix, I just manually did it by combining the results for all birds into a single dataframe, excluding the hits that I knew were wrong, and then using <code>dplyr::distinct()</code> to condense them down to one hit per species. There were also a couple birds that wikitaxa couldn&rsquo;t assign down to the species level from the common name, such as the <a href="https://en.wikipedia.org/wiki/Rifleman_(bird)">Rifleman</a>, so I googled them and replaced the genus name with a full species name (eg. <em>Acanthisitta</em> to <em>Acanthisitta chloris</em>).</p>
 
-<p>Unfortunately, the WikiSpecies search wasn&rsquo;t able to find matches for 3 of our 30 birds. To figure out which birds were missing results and save them for manual entry later, I used <code>purrr::keep()</code>.</p>
+<p>Unfortunately, the Wikispecies search wasn&rsquo;t able to find matches for 3 of our 30 birds. To figure out which birds were missing results and save them for manual entry later, I used <code>purrr::keep()</code>.</p>
 
 <pre><code class="language-r">missing_birds &lt;- keep(query_results, is.null) %&gt;% 
     names()
@@ -391,7 +391,7 @@ missing_birds
 ## [3] &quot;Fiordland Crested Penguin&quot;
 </code></pre>
 
-<p>Again, if this was part of a bigger project, I would have tried to webscrap their Latin names somehow, but because it was only 3 entries, I just googled them and made a separate tibble of the missing birds, which I combined with the WikiSpecies list above.</p>
+<p>Again, if this was part of a bigger project, I would have tried to webscrap their Latin names somehow, but because it was only 3 entries, I just googled them and made a separate tibble of the missing birds, which I combined with the Wikispecies list above.</p>
 
 <pre><code class="language-r">missing_bird_names &lt;- tibble(
     common_name = missing_birds,
@@ -542,7 +542,17 @@ p2
 
 <hr />
 
-<p>End note: the critically-endangered kākāpō is currently battling an aspergillosis outbreak <em>(incidentally, one of the main fungi I study in my day job)</em>, so if you have enjoyed this post, please consider donating to their rescue effort.<br />
+<p><strong>Update: Dec 10, 2019</strong></p>
+
+<p>Because I initially chose to focus on the 30 most popular birds, there were a lot of species on thir own branches that are not truly &ldquo;orphan&rdquo; species, so I opted to go back and remake the phylogeny with all 80 birds instead of just focusing on the most popular birds.</p>
+
+<p><img src="/post/2019-11-24-new-zealand-bird-taxonomy-popularity_files/nz-birds-big.png" alt="full phylogeny" /></p>
+
+<p>Though a bit large and unwieldy, I think this approach provides a more complete picture of the relationship between popularity and phylogeny among the birds of New Zealand. The overall conclusions remain unchanged - there are myriad examples of nearest neighbor species having very different levels of popularity, and the top birds all belong to different families. However, with the full tree it is also evident that there is some association in the population among orders. For example, the 11 species in the Pelecaniformes, which includes pelicans, are all uniformly unpopular, while all four birds in the Psittacidae order all have above average popularity.</p>
+
+<hr />
+
+<p><em>End note: the critically-endangered kākāpō is currently battling an aspergillosis outbreak, so if you have enjoyed this post, please consider donating to their rescue effort.</em>
 <a href="https://www.doc.govt.nz/kakapo-donate">https://www.doc.govt.nz/kakapo-donate</a></p>
 
 

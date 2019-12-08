@@ -62,23 +62,23 @@ simpsons &lt;- readr::read_delim(&quot;https://raw.githubusercontent.com/rfordat
 <hr />
 <p>Looking at the raw data, some guest starts always reprise the same role - for example Marcia Wallace always plays Mrs. Krabappel and Joe Montegna always voices Fat Tony. Other guest stars rarely voice the same character twice, as we can see for Maurice LaMarche below:</p>
 <pre><code>## # A tibble: 25 x 2
-##    episode_title              role                                         
-##    &lt;chr&gt;                      &lt;chr&gt;                                        
-##  1 A Star Is Burns            George C. Scott; Hannibal Lecter; Captain Ja…
-##  2 The Seemingly Never-Endin… Commander McBragg                            
-##  3 Treehouse of Horror XVII   Orson Welles                                 
-##  4 G.I. (Annoyed Grunt)       Recruiter #2; Cap&#39;n Crunch                   
-##  5 The Wife Aquatic           First Mate Billy; Oceanographer              
-##  6 Stop or My Dog Will Shoot  Farmer; Horn Stuffer                         
-##  7 You Kent Always Say What … Fox announcer                                
-##  8 Treehouse of Horror XVIII  Government Official                          
-##  9 Husbands and Knives        Jock                                         
-## 10 Dangerous Curves           Toucan Sam; Cap&#39;n Crunch; Trix Rabbit        
-## 11 No Loan Again, Naturally   Dwight D. Eisenhower                         
-## 12 Waverly Hills 9-0-2-1-D&#39;oh City Inspector                               
-## 13 Once Upon a Time in Sprin… Nuclear Power Plant Guard                    
-## 14 Chief of Hearts            David Starsky                                
-## 15 Angry Dad: The Movie       Anthony Hopkins                              
+##    episode_title               role                                             
+##    &lt;chr&gt;                       &lt;chr&gt;                                            
+##  1 A Star Is Burns             George C. Scott; Hannibal Lecter; Captain James …
+##  2 The Seemingly Never-Ending… Commander McBragg                                
+##  3 Treehouse of Horror XVII    Orson Welles                                     
+##  4 G.I. (Annoyed Grunt)        Recruiter #2; Cap&#39;n Crunch                       
+##  5 The Wife Aquatic            First Mate Billy; Oceanographer                  
+##  6 Stop or My Dog Will Shoot   Farmer; Horn Stuffer                             
+##  7 You Kent Always Say What Y… Fox announcer                                    
+##  8 Treehouse of Horror XVIII   Government Official                              
+##  9 Husbands and Knives         Jock                                             
+## 10 Dangerous Curves            Toucan Sam; Cap&#39;n Crunch; Trix Rabbit            
+## 11 No Loan Again, Naturally    Dwight D. Eisenhower                             
+## 12 Waverly Hills 9-0-2-1-D&#39;oh  City Inspector                                   
+## 13 Once Upon a Time in Spring… Nuclear Power Plant Guard                        
+## 14 Chief of Hearts             David Starsky                                    
+## 15 Angry Dad: The Movie        Anthony Hopkins                                  
 ## # … with 10 more rows</code></pre>
 <p>Let’s incorporate the names of the main characters each actor voiced into our plot. It would also be nice if our plot listed the total number of guest apperances by each actor or actress. Once we make these changes and add more neutral theme we get this:</p>
 <p><img src="/post/2019-08-30-tidy-tuesday-simpsons-guest-stars_files/figure-html/intermediate%20plot-1.png" width="768" /></p>

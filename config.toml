@@ -22,7 +22,7 @@ home = ["HTML", "RSS", "Algolia"]
   keyword = "microbial genomics, fungal biology, antifungal resistance, genomics, computational biology"
   slogan = "Genomics & Resistance of Fungal Pathogens"
 
-  image_404 = "img/me.jpg"
+  image_404 = "img/me.jpeg"
   title_404 = ""
 
   # leancloud storage for page view counter
