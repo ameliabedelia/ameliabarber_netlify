@@ -1,0 +1,334 @@
+---
+title: ECFG Tweet Analysis
+author: ''
+date: '2020-02-22'
+slug: ecfg-tweet-analysis
+categories: []
+tags: 
+  - Rstats
+  - mycology
+  - Twitter
+  - data science
+subtitle: ''
+description: 'Analysis of tweets from the 15th European Conference of Fungal Genetics (Feb 17-20, 2020)'
+image: '/post/2020-02-22-ecfg-tweet-analysis_files/IMG_20200216_105822-01.jpg'
+showtoc: false
+
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, fig.align="left")
+```
+
+Scientists love Twitter, so tweeting while attending conferences is a popular activity. While I was at the [15th European Conference on Fungal Genetics](https://www.ecfg15.org/), I was curious to look at how many other people were tweeting and what they were tweeting about.
+
+***
+
+**Methods**: Data was collected by querying Twitter's REST API for tweets using the hashtag [#ecfg15](https://twitter.com/hashtag/ECFG15) or mentioning [\@ECFG_15](https://twitter.com/ecfg_15) using the [`rtweet`](https://rtweet.info/) package. *(Data scraped 2012-02-22)* Retweets were not included in the analysis. If you are interested, you can download the raw data I extracted [here](https://github.com/ameliabedelia/ameliabarber_netlify/blob/master/static/post/2020-02-22-ecfg-tweet-analysis_files/ecfg_tweets.csv) or can view the code used to generate this post [here](https://github.com/ameliabedelia/ameliabarber_netlify/blob/master/content/post/2020-02-22-ecfg-tweet-analysis.Rmd).
+
+***
+
+```{r packages & theme}
+library(tidyverse)
+library(rtweet)
+library(lubridate)
+library(cowplot)
+library(tidytext)
+library(wordcloud)
+library(widyr)
+library(igraph)
+library(ggraph)
+library(paletteer)
+
+set.seed(2020)
+
+# colors
+orange <- "#D86143"
+teal <- "#347B99"
+
+font <- "Roboto"
+
+theme_set(theme_minimal_grid(font_family = font))
+
+```
+
+
+```{r get and clean Twitter data, eval=FALSE}
+
+#this is how the data was scraped
+
+raw_tweets <- search_tweets("ecfg15 OR ECFG_15", include_rts = FALSE, n = 1500, retryonratelimit = TRUE)
+
+tweets <- raw_tweets %>%
+    mutate(
+        hour = hour(created_at),
+        day = floor_date(created_at, "day")
+        )
+
+# save as rda - keeps list columns and POSIXct values intact
+save(tweets, file ="~/Documents/R/ameliabarber_netlify/static/post/tweets.rda")
+
+# save as csv
+write_as_csv(raw_tweets, "ecfg_tweets.csv")
+```
+
+
+```{r load rda}
+load("~/Documents/R/ameliabarber_netlify/static/post/tweets.rda")
+```
+
+
+## Overall Twitter activity
+
+For the majority of attendees, the conference started on February 17th with either organism-specific workshops during the day or the welcome reception and keynote in the evening. The conference start is clearly evident from the sharp uptick in Twitter activity for the hastag on this day. February 18th (the second conference day) had the highest overall Twitter activity with 182 tweets. 
+
+```{r tweet counts per day, fig.width=6}
+tweets %>%
+    mutate(
+      day_int = day(created_at)) %>% 
+    filter(between(day_int, 15, 21)) %>% 
+    ggplot(aes(day)) +
+    geom_bar(fill = orange) +
+    geom_text(stat='count', aes(label = ..count..), vjust = -1,
+              family = font) +
+    labs(x = NULL, y = NULL, 
+         title = "Daily tweets using #ECFG15 or @ECFG_15\n") +
+    scale_y_continuous(expand = expansion(mult = c(0, 0.05))) +
+    coord_cartesian(clip = "off") +
+    theme_minimal_hgrid(font_family = font) +
+    theme(axis.text.y = element_blank())
+```
+
+
+```{r media tweets dataset}
+media_tweets <- tweets %>% 
+    unnest_longer(media_type) %>% # unnest list column
+    mutate(media_type = replace_na(media_type, "no photo")) %>% 
+    count(media_type) %>% 
+    mutate(percent = n / sum(n),
+           meh = "meh")
+```
+
+What about tweets with photos? Overall, `r media_tweets[[2, 3]] %>% scales::percent()` of tweets from ECFG had a photo attached to them.
+
+```{r plot tweets with media, fig.height=2, fig.width=4}
+media_tweets %>% 
+    ggplot(aes(meh, percent, fill = media_type)) +
+    geom_col(position = "fill", show.legend = FALSE) +
+    coord_flip() +
+    scale_x_discrete(expand = expansion(mult = c(0, 0.05))) +
+    scale_y_continuous(labels = scales::percent) +
+    annotate("text", y = c(0.05, 0.95), x = 1, label = c("with photo", "no photo"), 
+             vjust = 0.5, hjust = c(0, 1), color = "white", family = font) +
+    scale_fill_manual(values = c(teal, orange)) +
+    labs(x = "", y = "",
+         title = " Fraction of tweets with media") +
+    background_grid(major = "none") +
+    theme(axis.text.y = element_blank())
+```
+
+## Who are the most active Twitter users at #ECFG15?
+
+```{r high tweeters df}
+conf_tweets <- tweets %>%
+    filter(created_at >="2020-02-17" & created_at < "2020-02-21") %>%
+    count(screen_name, sort = TRUE)
+```
+
+
+Looking at tweets posted during the four days of conference (Feb 17-20), [Nick Talbot](https://twitter.com/talbotlabTSL) was far and away the most active poster during the conference, with [Bart Thomma](https://twitter.com/Team_Thomma) and [Michelle Momany](https://twitter.com/mcmomany) rounding out the top 3. **Overall, `r nrow(conf_tweets)` unique users tweeted under the conference hashtag during the meeting!**
+
+```{r high tweeters plot, fig.width=6}
+conf_tweets %>% 
+    head(10) %>% 
+    mutate(screen_name = fct_reorder(screen_name, n)) %>% 
+    ggplot(aes(screen_name, n)) +
+    geom_col(fill = teal) +
+    geom_text(aes(y = n, label = n), hjust = 1.5, color = "white", family = font) +
+    scale_y_continuous(expand = expansion(mult = c(0, 0.05))) +
+    coord_flip() +
+    labs(x = NULL, y = "# tweets",
+         title = "Top 10 tweeters of ECFG15",
+         subtitle = "Counting tweets using #ECFG15 or @ECFG_15 between Feb 17-20th\n") +
+    background_grid("x") +
+    theme(axis.text.x = element_blank(),
+          plot.title.position = "plot")
+```
+
+*Note: I am much more of a Twitter lurker and posted I think all of 11 tweets, and part of that was documenting my [sleeper train journey](https://twitter.com/frau_dr_barber/status/1228758554716393473) from Germany to Rome.*
+
+## What sessions have the highest level of Twitter activity?
+
+The plenary sessions had the highest level of Twitter engagment (as measured by tweets/hour), with the keynote talks and concurrent sessions being a bit more variable. However, people often tweet *after* talks rather than during, so it is not completely accurate to associate time slots with particular sessions or speakers. Not surprisingly, lunch periods had the lowest levels of activity on Twitter.
+
+```{r create shape df for session types}
+workshop <- tibble(
+    id = "Workshop",
+    group = rep(1:3, each = 4),
+    day = c(rep(17, 8), rep(20, 4)),
+    x = c(9, 13, 13, 9, 14, 18, 18, 14, 16, 18, 18, 16),
+    y = rep(c(0, 0, Inf, Inf), 3)
+)
+
+lunch <- tibble(
+    id = "Lunch",
+    group = rep(11:14, 4),
+    day = rep(c(17, 18, 19, 20), 4),
+    x = rep(c(13, 14, 14, 13), each = 4),
+    y = rep(c(0, 0, Inf, Inf), each = 4)
+)
+
+keynote <- tibble(
+    id = "Keynote",
+    group = rep(4:7, each = 4),
+    day = rep(c(17, 18, 19, 20), each = 4),
+    x = c(20, 21, 21, 20, rep(c(9, 10, 10, 9), 3)),
+    y = rep(c(0, 0, Inf, Inf), 4)
+)
+
+plenary <- tibble(
+    id = "Plenary Session",
+    group = rep(8:10, each = 4),
+    day = rep(c(18, 19, 20), each = 4),
+    x = rep(c(10, 13, 13, 10), 3),
+    y = rep(c(0, 0, Inf, Inf), 3)
+)
+
+concurrent <- tibble(
+    id = "Concurrent Sessions",
+    group = rep(15:16, each = 4),
+    day = rep(c(18, 19), each = 4),
+    x = rep(c(14, 18, 18, 14), 2),
+    y = rep(c(0, 0, Inf, Inf), 2)
+)
+
+posters <- tibble(
+    id = "Posters & Flash Talks",
+    group = 1,
+    day = rep(c(18, 19, 20), each = 4),
+    x = c(rep(c(18, 20, 20, 18), 2), 14, 16, 16, 14),
+    y = rep(c(0, 0, Inf, Inf), 3)
+)
+    
+timeslot_polys <- bind_rows(keynote, plenary, lunch, concurrent, posters, workshop) %>% 
+    mutate(id = fct_inorder(id),
+           day = str_c("Feb. ", day))
+
+```
+
+
+```{r tweet freq by session type plot, fig.width=6, fig.height=8}
+tweets %>%
+    mutate(day = day(created_at),
+           hour = hour(created_at) + 1) %>% 
+    filter(between(day, 17, 20), between(hour, 8, 21)) %>% # filter for conference days and times
+    mutate(day = str_c("Feb. ", day)) %>% 
+    count(day, hour) %>% 
+    ggplot(aes(hour, n)) +
+    geom_polygon(data = timeslot_polys, aes(x = x, y = y, group = group,
+                                            fill = id), alpha = 0.5) +
+    geom_col(position = position_nudge(x = 0.5)) +
+    facet_wrap(vars(day), ncol = 1) +
+    scale_x_continuous(labels = function(x) str_c(x, ":00")) +
+    scale_fill_paletteer_d("ggthemes::calc", name = "") +
+    labs(x = NULL, y = "# tweets",
+         title = "Tweet frequency by session and day at #ECFG15") +
+    panel_border() +
+    theme(legend.position = "top",
+          plot.title.position = "plot")
+```
+
+## Most commonly-used words in ECFG15 tweets
+
+Not surprisingly, outside of the conference hashtag, fungi, fungal, talk, and poster were the most frequently used words in conference tweets. 
+
+```{r tidy tweet word df}
+tweet_words <- tweets %>%
+    mutate(text = str_replace_all(text,                                "\\s?(f|ht)(tp)(s?)(://)([^\\.]*)[\\.|/](\\S*)", ""), # remove links
+           text = str_replace_all(text, "@\\S+", "")) %>% # remove @mentions
+    unnest_tokens(word, text) %>% 
+    anti_join(stop_words)
+```
+
+
+```{r word count, fig.align="center"}
+word_counts <- tweet_words %>% 
+    count(word, name = "freq", sort = TRUE) 
+
+word_counts %>%
+    head(10) %>% 
+    rename("# occurrences" = "freq") %>% 
+    knitr::kable("html") %>% 
+    kableExtra::kable_styling(bootstrap_options = c("striped", "responsive", "hover"),
+                                  full_width = FALSE, position = "left")
+```
+
+Which can be nicely visualized in a wordcloud...
+
+```{r word cloud, fig.width=7}
+wc_thresh <- 190L
+word_font <- "Roboto Condensed"
+
+wordcloud_df <- word_counts %>% # change conf hashtag freq for better word vis ratio
+    mutate(freq = if_else(freq > wc_thresh, wc_thresh, freq))
+
+wordcloud(words = wordcloud_df$word, freq = wordcloud_df$freq, 
+          min.freq = 8, max.words = 200, random.order = FALSE, 
+          rot.per = 0.35, colors = c(orange, teal), 
+          family = word_font)
+```
+
+## Commonly-occurring words in tweets from ECFG15
+
+Tweets are, by nature, short in length, which is a bit limiting for text analysis, but I was still interested to do look at the relationship between words used in tweets from the conference.
+
+The first way you can do this is looking at the pairwise occurrence of words within tweets, selecting the most commonly used pairs, which are often the most commonly used words as well. Doing this, we can see there is a core network of commonly used words (fungal, talk, session), as well as small satelite clusters that are commonly used in tweets with each other, but not more globally (names and specific phrases e.g. extracellular vesicles).
+
+```{r word pair df}
+tweet_word_pairs <- tweet_words %>%
+    select(status_id, word) %>%
+    filter(!word %in% c("ecfg15", "amp")) %>% 
+    pairwise_count(word, status_id, sort = TRUE)
+```
+
+
+```{r word pair graph, fig.width=9, fig.height=6}
+word_font <- "Roboto Condensed"
+
+tweet_word_pairs %>% 
+    filter(n > 5) %>%
+    graph_from_data_frame() %>% 
+    ggraph(layout = "fr") +
+    geom_edge_link(aes(alpha = n, width = n), color = teal, show.legend = FALSE) +
+    geom_node_point(color = orange, alpha = 0.9, size = 3) +
+    geom_node_text(aes(label = name), repel = TRUE, 
+                   point.padding = unit(0.2, "lines"), family = word_font) +
+  labs(title = "Co-occurring words in tweets from ECFG15",
+       subtitle = "Line intensity indicates word combination frequency\n")
+```
+
+An alternative way to look at relationships between words is to calculate pairwise correlations for words within each tweet, and filter on the strength of the correlation. This removes some of the bias of only looking at the most common words, but at the cost of rare words with high correlations to each other being perhaps falsely prominent. (Note: I *did* do a small amount of filtering to declutter the graph and only included words that were used at least 4 times)
+
+```{r word cor df}
+word_cors <- tweet_words %>% 
+    group_by(word) %>% 
+    filter(n() > 4, !str_starts(word, "[1-9]")) %>% 
+    pairwise_cor(word, status_id, sort = TRUE)
+```
+
+```{r word cor graph, fig.width=9, fig.height=6}
+word_cors %>% 
+    filter(correlation > 0.32) %>% 
+    graph_from_data_frame() %>% 
+    ggraph(layout = "fr") + 
+    geom_edge_link(aes(alpha = correlation, width = correlation),
+                   edge_color = teal, show.legend = FALSE) +
+    geom_node_point(color = orange, size = 3) +
+    geom_node_text(aes(label = name), repel = TRUE, 
+                   point.padding = unit(0.2, "lines"), family = word_font) +
+    labs(title = "Word correlation in tweets from ECFG15",
+       subtitle = "Line intensity indicates strength of pairwise word correlation\n")
+```
+
+***
+
+Thanks for reading! If you enjoyed this post, check out some of the other data exploration [posts](http://barber.science/tags/data-science) I've done or give me a follow on [Twitter](https://twitter.com/frau_dr_barber).

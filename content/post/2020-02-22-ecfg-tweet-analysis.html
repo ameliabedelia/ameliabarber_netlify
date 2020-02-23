@@ -1,0 +1,153 @@
+---
+title: ECFG Tweet Analysis
+author: ''
+date: '2020-02-22'
+slug: ecfg-tweet-analysis
+categories: []
+tags: 
+  - Rstats
+  - mycology
+  - Twitter
+  - data science
+subtitle: ''
+description: 'Analysis of tweets from the 15th European Conference of Fungal Genetics (Feb 17-20, 2020)'
+image: '/post/2020-02-22-ecfg-tweet-analysis_files/IMG_20200216_105822-01.jpg'
+showtoc: false
+
+---
+
+<script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
+
+
+<p>Scientists love Twitter, so tweeting while attending conferences is a popular activity. While I was at the <a href="https://www.ecfg15.org/">15th European Conference on Fungal Genetics</a>, I was curious to look at how many other people were tweeting and what they were tweeting about.</p>
+<hr />
+<p><strong>Methods</strong>: Data was collected by querying Twitter’s REST API for tweets using the hashtag <a href="https://twitter.com/hashtag/ECFG15">#ecfg15</a> or mentioning <a href="https://twitter.com/ecfg_15">@ECFG_15</a> using the <a href="https://rtweet.info/"><code>rtweet</code></a> package. <em>(Data scraped 2012-02-22)</em> Retweets were not included in the analysis. If you are interested, you can download the raw data I extracted <a href="https://github.com/ameliabedelia/ameliabarber_netlify/blob/master/static/post/2020-02-22-ecfg-tweet-analysis_files/ecfg_tweets.csv">here</a> or can view the code used to generate this post <a href="https://github.com/ameliabedelia/ameliabarber_netlify/blob/master/content/post/2020-02-22-ecfg-tweet-analysis.Rmd">here</a>.</p>
+<hr />
+<div id="overall-twitter-activity" class="section level2">
+<h2>Overall Twitter activity</h2>
+<p>For the majority of attendees, the conference started on February 17th with either organism-specific workshops during the day or the welcome reception and keynote in the evening. The conference start is clearly evident from the sharp uptick in Twitter activity for the hastag on this day. February 18th (the second conference day) had the highest overall Twitter activity with 182 tweets.</p>
+<p><img src="/post/2020-02-22-ecfg-tweet-analysis_files/figure-html/tweet%20counts%20per%20day-1.png" width="576" style="display: block; margin: auto auto auto 0;" /></p>
+<p>What about tweets with photos? Overall, 55% of tweets from ECFG had a photo attached to them.</p>
+<p><img src="/post/2020-02-22-ecfg-tweet-analysis_files/figure-html/plot%20tweets%20with%20media-1.png" width="384" style="display: block; margin: auto auto auto 0;" /></p>
+</div>
+<div id="who-are-the-most-active-twitter-users-at-ecfg15" class="section level2">
+<h2>Who are the most active Twitter users at #ECFG15?</h2>
+<p>Looking at tweets posted during the four days of conference (Feb 17-20), <a href="https://twitter.com/talbotlabTSL">Nick Talbot</a> was far and away the most active poster during the conference, with <a href="https://twitter.com/Team_Thomma">Bart Thomma</a> and <a href="https://twitter.com/mcmomany">Michelle Momany</a> rounding out the top 3. <strong>Overall, 122 unique users tweeted under the conference hashtag during the meeting!</strong></p>
+<p><img src="/post/2020-02-22-ecfg-tweet-analysis_files/figure-html/high%20tweeters%20plot-1.png" width="576" style="display: block; margin: auto auto auto 0;" /></p>
+<p><em>Note: I am much more of a Twitter lurker and posted I think all of 11 tweets, and part of that was documenting my <a href="https://twitter.com/frau_dr_barber/status/1228758554716393473">sleeper train journey</a> from Germany to Rome.</em></p>
+</div>
+<div id="what-sessions-have-the-highest-level-of-twitter-activity" class="section level2">
+<h2>What sessions have the highest level of Twitter activity?</h2>
+<p>The plenary sessions had the highest level of Twitter engagment (as measured by tweets/hour), with the keynote talks and concurrent sessions being a bit more variable. However, people often tweet <em>after</em> talks rather than during, so it is not completely accurate to associate time slots with particular sessions or speakers. Not surprisingly, lunch periods had the lowest levels of activity on Twitter.</p>
+<p><img src="/post/2020-02-22-ecfg-tweet-analysis_files/figure-html/tweet%20freq%20by%20session%20type%20plot-1.png" width="576" style="display: block; margin: auto auto auto 0;" /></p>
+</div>
+<div id="most-commonly-used-words-in-ecfg15-tweets" class="section level2">
+<h2>Most commonly-used words in ECFG15 tweets</h2>
+<p>Not surprisingly, outside of the conference hashtag, fungi, fungal, talk, and poster were the most frequently used words in conference tweets.</p>
+<table class="table table-striped table-responsive table-hover" style="width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:left;">
+word
+</th>
+<th style="text-align:right;">
+# occurrences
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+ecfg15
+</td>
+<td style="text-align:right;">
+617
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+fungi
+</td>
+<td style="text-align:right;">
+94
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+talk
+</td>
+<td style="text-align:right;">
+88
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+fungal
+</td>
+<td style="text-align:right;">
+83
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+poster
+</td>
+<td style="text-align:right;">
+63
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+cell
+</td>
+<td style="text-align:right;">
+46
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+fusarium
+</td>
+<td style="text-align:right;">
+45
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+plant
+</td>
+<td style="text-align:right;">
+42
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+rome
+</td>
+<td style="text-align:right;">
+42
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+session
+</td>
+<td style="text-align:right;">
+42
+</td>
+</tr>
+</tbody>
+</table>
+<p>Which can be nicely visualized in a wordcloud…</p>
+<p><img src="/post/2020-02-22-ecfg-tweet-analysis_files/figure-html/word%20cloud-1.png" width="672" style="display: block; margin: auto auto auto 0;" /></p>
+</div>
+<div id="commonly-occurring-words-in-tweets-from-ecfg15" class="section level2">
+<h2>Commonly-occurring words in tweets from ECFG15</h2>
+<p>Tweets are, by nature, short in length, which is a bit limiting for text analysis, but I was still interested to do look at the relationship between words used in tweets from the conference.</p>
+<p>The first way you can do this is looking at the pairwise occurrence of words within tweets, selecting the most commonly used pairs, which are often the most commonly used words as well. Doing this, we can see there is a core network of commonly used words (fungal, talk, session), as well as small satelite clusters that are commonly used in tweets with each other, but not more globally (names and specific phrases e.g. extracellular vesicles).</p>
+<p><img src="/post/2020-02-22-ecfg-tweet-analysis_files/figure-html/word%20pair%20graph-1.png" width="864" style="display: block; margin: auto auto auto 0;" /></p>
+<p>An alternative way to look at relationships between words is to calculate pairwise correlations for words within each tweet, and filter on the strength of the correlation. This removes some of the bias of only looking at the most common words, but at the cost of rare words with high correlations to each other being perhaps falsely prominent. (Note: I <em>did</em> do a small amount of filtering to declutter the graph and only included words that were used at least 4 times)</p>
+<p><img src="/post/2020-02-22-ecfg-tweet-analysis_files/figure-html/word%20cor%20graph-1.png" width="864" style="display: block; margin: auto auto auto 0;" /></p>
+<hr />
+<p>Thanks for reading! If you enjoyed this post, check out some of the other data exploration <a href="http://barber.science/tags/data-science">posts</a> I’ve done or give me a follow on <a href="https://twitter.com/frau_dr_barber">Twitter</a>.</p>
+</div>
