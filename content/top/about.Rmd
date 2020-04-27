@@ -14,7 +14,9 @@ knitr::opts_chunk$set(echo = TRUE)
 ## About Me
 ![me](/top/about_files/hello-world.jpeg)\
 
-I am currently a postdoc at the [Leibniz Institute of Natural Product Research and Infection Biology - Hans Knöll Institute](https://www.leibniz-hki.de/en/home.html) in Jena, Germany and the [Institute for Hygiene and Microbiology at the University of Würzburg](https://www.hygiene.uni-wuerzburg.de/startseite/) studying fungal biology and comparitive genomics of *Aspergillus* and *Candida* spp, with a special focus on antifungal resistance.<br>
+Starting Fall 2020, I am leading the newly formed junior research group [Fungal Informatics](https://www.leibniz-hki.de/en/fungal-informatics.html) at the [Leibniz Institute of Natural Product Research and Infection Biology - Hans Knöll Institute](https://www.leibniz-hki.de/en/home.html) in Jena, Germany. This group is hosted by the Systems Biology & Bioinformatics group of [Gianni Panagiotou](https://www.leibniz-hki.de/en/systembiologie-und-bioinformatik.html) and is financially supported by the [Balance of the Microverse Excellence Cluster](https://www.microverse-cluster.de/en/). 
+
+I also did my postdoctoral work at the Leibiz-HKI, studying fungal biology, antifungal resistance, and comparative genomics of *Aspergillus* and *Candida* spp.<br>
 
 Prior to that, I was a PhD student at the University of Utah in the group of [Matthew Mulvey](https://www.bioscience.utah.edu/faculty/mulvey/mulvey.php) studying how the vast genetic diversity seen in *Escherichia coli* strains translates to differences in disease progression and host response during sepsis using a novel zebrafish model of disease we developed.<br>
 

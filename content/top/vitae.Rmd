@@ -12,11 +12,10 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Curriculum Vitae
 
-*last updated: November 1, 2019*
+*last updated: April 27, 2020*
 
 A pdf version of my complete CV can be found [here](/top/vitae_files/CV.pdf)\
 
-[Details](#Details)<br>
 [Education](#Education)<br>
 [Positions](#Positions)<br>
 [Research Support and Awards](#Awards)<br>
@@ -26,11 +25,10 @@ A pdf version of my complete CV can be found [here](/top/vitae_files/CV.pdf)\
 [Spoken Languages](#Languages)
 
 
-### Details {#Details}
+### Details
 Amelia E. Barber<br>
 Email: amelia.barber[at]gmail.com<br>
-Citizenship: USA<br>
-Permenant Residency: Germany<br>
+
 
 ### Education {#Education}
 PhD, **University of Utah** (2016)<br>
@@ -42,7 +40,12 @@ BS, **University of Wisconin-Madison** (2006)<br>
 Medical Microbiology and Immunology, Women's Studies
 
 ### Positions
-**Postdoctoral Fellow** (2016-present)<br>
+
+**Junior Group Leader** (2020-present)<br>
+Leibniz Institute for Natural Product Research and Infection Biology -  Hans Knöll Institute. Jena, Germany.<br>
+
+
+**Postdoctoral Fellow** (2016-2020)<br>
 Leibniz Institute for Natural Product Research and Infection Biology -  Hans Knöll Institute. Jena, Germany.<br>
 Institute of Hygiene and Microbiology, University of Würzburg. Würzburg, Germany.<br>
 + Research group of Oliver Kurzai
@@ -67,12 +70,9 @@ University of Wisconsin-Madison, School of Nursing. Madison, WI.<br>
 ### Reseach Support and Awards {#Awards}
 **2018**. International Society for Human and Animal Mycology Attendance Grant <br>
 **2017**. European Confederation of Medical Mycology Young Investigators Travel Award <br>
-**2015**. University of Utah Microbial Pathogenesis Poster Competition, 1st place <br>
 **2015**. ASM Richard and Mary Finkelstein Travel Award <br>
-**2012-2014**. NIAID T-32 Microbial Pathogenesis Training Grant <br>
 **2015**. University of Utah Graduate School Travel Award <br>
-**2012**. University of Utah Alma Mater Travel Award <br>
-**2011**. University of Utah Bioscience Symposium Poster Competition Winner
+**2012-2014**. NIAID T-32 Microbial Pathogenesis Training Grant <br>
 
 ### Publications {#Publications}
 Hamprecht A, **Barber AE**, Mellinghoff SC, Thelen P, Walther G, Yu Y, Neurgaonkar P, Dandekar T, Cornely OA, Martin R, Kurzai O. Occurence of Candida auris in Germany is linked to prior exposure to foreign healthcare. 2019. *Emerging Infectious Diseases*. Sept;25(9).
