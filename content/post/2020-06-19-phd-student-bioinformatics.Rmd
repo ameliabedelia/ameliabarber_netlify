@@ -17,7 +17,7 @@ showtoc: false
 
 My group at the [**Leibniz Institute for Natural Product Research and Infection Biology – Hans Knöll Institute**](https://www.leibniz-hki.de/en/) is recruiting a PhD student in the field of bioinformatics and microbial ecology to investigate how environmental fungi cause human disease using genomic, transcriptomic, and metagenomic approaches.
 
-More information about my group [(Fungal Informatic)](https://www.leibniz-hki.de/en/fungal-informatics.html), the project, and what we offer can be found here:
+More information about my group [(Fungal Informatic)](https://www.leibniz-hki.de/en/fungal-informatics.html), the project, and what we offer can be found in the video below:
 
 ```{r echo=FALSE}
 blogdown::shortcode('youtube', 'EcfDhdQCV_4')
@@ -31,5 +31,5 @@ SBI is a multidisciplinary group focused on understanding the role of the microb
 
 The student will be fully integrated in the SBI and benefit from shared samples, data, and methods with the other PhD students and postdoctoral researchers of the group.
 
-Applications can be made until June 25,2020. Additional information, including how to apply, at:
+Applications can be made until June 25, 2020. Additional information, including how to apply, at:
 <https://www.microverse-cluster.de/en/jobs.html>
