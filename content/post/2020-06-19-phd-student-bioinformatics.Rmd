@@ -20,7 +20,7 @@ My group at the [**Leibniz Institute for Natural Product Research and Infection 
 More information about my group [(Fungal Informatic)](https://www.leibniz-hki.de/en/fungal-informatics.html), the project, and what we offer can be found in the video below:
 
 ```{r echo=FALSE}
-blogdown::shortcode('youtube', 'EcfDhdQCV_4')
+blogdown::shortcode('tweet', '1268873323385106433')
 ```
 
 The ideal qualifications are a masters degree (or equivalent) in bioinformatics, microbiology, or a related discipline, with experience in analysis of high-throughput sequencing data, and programming.

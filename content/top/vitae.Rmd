@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Curriculum Vitae
 
-*last updated:June 4, 2020*
+*last updated:June 24, 2020*
 
 A pdf version of my complete CV can be found [here](/top/vitae_files/CV.pdf)\
 
