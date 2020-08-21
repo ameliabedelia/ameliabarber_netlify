@@ -1,0 +1,51 @@
+---
+title: 'PhD position in Microbiology & Bioinformatics'
+author: ''
+date: '2020-08-24'
+slug: 2020-08-24-phd-student-microbiology-bioinformatics
+categories: []
+tags:
+  - jobs
+  - microbiology
+  - bioinformatics
+subtitle: ''
+description: 'PhD position investigating how environmental fungi acquire the ability to cause human disease using experimental methods and NGS datasets.'
+image: ''
+showtoc: false
+---
+
+## We're hiring!
+
+My group at the [**Leibniz Institute for Natural Product Research and Infection Biology – Hans Knöll Institute**](https://www.leibniz-hki.de/en/fungal-informatics.html) is recruiting a PhD student in the field of microbiology and bioinformatics to investigate how environmental fungi acquire the ability to cause human disease using experimental methods and NGS datasets.
+
+**The main tasks of the PhD project include:**  
+- Fungal growth and infection assays  
+- Generation and analysis of genomic and transcriptional datasets  
+- Comparative and population genomics  
+
+**The required qualifications are:**  
+- Masters degree (or equivalent) in microbiology, molecular biology, bioinformatics, or a related discipline  
+- Laboratory experience in microbiology and/or molecular biology  
+- Basic knowledge of programming (R, Python) for data analysis  
+- Experience with NGS data would be highly advantageous  
+- Good written and spoken English communication skills  
+
+
+**Applications can be made until September 28, 2020**.  
+Additional information, including how to apply, at:
+<https://jobs.hki-jena.de/jobs/job-offers>
+
+***
+
+**Additional information**
+
+
+Our research group is "incubated" within the [Systems Biology & Bioinformatics Group (SBI)](https://www.leibniz-hki.de/en/systembiologie-und-bioinformatik.html) led by [Assoc. Prof. Gianni Panagiotou](https://www.leibniz-hki.de/en/sbi-staff-details.html?member=865). SBI is a multidisciplinary group focused on understanding the role of the microbiome in metabolic disease, cancer, infection, and environmental microbial communities and is well funded through Horizon 2020, the DFG Cluster of Excellence “Balance of the Microverse”, the Hong Kong Area of Excellence “Institute of Metabolic Diseases”, the DFG Collaborative Research Center/Transregio “FungiNet”, and of the Collaborative Research Fund “MarineGEO Hong Kong”. 
+
+The student will be fully integrated in the SBI and benefit from shared samples, data, and methods with the other PhD students and postdoctoral researchers of the group. Additionally, this position is part of a multi-center collaborative project coordinated by [Prof. Oliver Kurzai](https://www.hygiene.uni-wuerzburg.de/curriculum-vitae/prof-dr-med-oliver-kurzai/) at the University of Würzburg, and including partners at the Leibniz-HKI, Martin Luther University Halle- Wittenberg, and Biotype GmbH.
+
+More information about my group and what we offer in Jena can be found in the video below from a previous PhD posting:
+
+```{r echo=FALSE}
+blogdown::shortcode('tweet', '1268873323385106433')
+```
