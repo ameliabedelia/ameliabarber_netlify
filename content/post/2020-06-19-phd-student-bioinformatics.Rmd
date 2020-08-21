@@ -1,0 +1,35 @@
+---
+title: 'Job opening: PhD student in Bioinformatics'
+author: ''
+date: '2020-06-19'
+slug: phd-student-bioinformatics
+categories: []
+tags:
+    - jobs
+    - bioinformatics
+subtitle: ''
+description: 'Come join us in Jena!'
+image: ''
+showtoc: false
+---
+
+## We're hiring!
+
+My group at the [**Leibniz Institute for Natural Product Research and Infection Biology – Hans Knöll Institute**](https://www.leibniz-hki.de/en/) is recruiting a PhD student in the field of bioinformatics and microbial ecology to investigate how environmental fungi cause human disease using genomic, transcriptomic, and metagenomic approaches.
+
+More information about my group [(Fungal Informatic)](https://www.leibniz-hki.de/en/fungal-informatics.html), the project, and what we offer can be found in the video below:
+
+```{r echo=FALSE}
+blogdown::shortcode('tweet', '1268873323385106433')
+```
+
+The ideal qualifications are a masters degree (or equivalent) in bioinformatics, microbiology, or a related discipline, with experience in analysis of high-throughput sequencing data, and programming.
+
+The successful candidate will be join my research group, which is hosted by [Assoc. Prof. Gianni Panagiotou](https://www.leibniz-hki.de/en/sbi-staff-details.html?member=865) and the Systems Biology & Bioinformatics Group (SBI) at the Leibniz Institute for Natural Product Research and Infection Biology— Hans Knöll Institute in Jena, Germany. 
+
+SBI is a multidisciplinary group focused on understanding the role of the microbiome in metabolic disease, cancer, infection, and environmental microbial communities and is well funded through Horizon 2020, the DFG Cluster of Excellence “Balance of the Microverse”, the Hong Kong Area of Excellence “Institute of Metabolic Diseases”, the DFG Collaborative Research Center/Transregio “FungiNet”, and of the Collaborative Research Fund “MarineGEO Hong Kong”. 
+
+The student will be fully integrated in the SBI and benefit from shared samples, data, and methods with the other PhD students and postdoctoral researchers of the group.
+
+Applications can be made until June 25, 2020. Additional information, including how to apply, at:
+<https://www.microverse-cluster.de/en/jobs.html>
