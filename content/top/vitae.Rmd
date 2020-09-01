@@ -22,7 +22,6 @@ A pdf version of my complete CV can be found [here](/top/vitae_files/CV.pdf)\
 [Publications](#Publications)<br>
 [Academic Teaching Experience](#Teaching)<br>
 [Scientific Outreach](#Outreach)<br>
-[Spoken Languages](#Languages)
 
 
 ### Details
@@ -124,8 +123,3 @@ Ebert AD, Beres AJ, **Barber AE**, Svendsen CN. Human Neural Progenitor Cells Ov
 **2014-15**. Initiative to Bring Science Programs to the Incarcerated (INSPIRE). <br>
 **2014**. University of Utah Educational Outreach Program <br>
 **2013**. Explore Utah Science
-
-## Spoken Languages {#Languages}
-
-**English** (Native proficiency)<br>
-**German** (telc Zertificate B1/limited working proficiency)
