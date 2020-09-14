@@ -18,9 +18,9 @@ home = ["HTML", "RSS", "Algolia"]
 [params]
   header_image = "img/header.jpeg"
   SEOTitle = "barber.science"
-  description = "Website of Amelia E. Barber, PhD"
+  description = "Amelia E. Barber, PhD"
   keyword = "microbial genomics, fungal biology, antifungal resistance, genomics, computational biology"
-  slogan = "Genomics & Resistance of Fungal Pathogens"
+  slogan = "Junior Research Group Leader. Fungal pathogenesis and genomics."
 
   image_404 = "img/me.jpeg"
   title_404 = ""
@@ -40,7 +40,7 @@ home = ["HTML", "RSS", "Algolia"]
   sidebar_about_description = "Junior research group leader, Leibniz-HKI (Jena, Germany). Always up for an adventure or bike ride."
   sidebar_avatar = "img/me.jpeg"      # use absolute URL, seeing it's used in both `/` and `/about/`
 
-  featured_tags = true 
+  featured_tags = false 
   featured_condition_size = 0 
 
   # Baidu Analytics
@@ -55,7 +55,7 @@ home = ["HTML", "RSS", "Algolia"]
   reward = false 
   # reward_guide = "如果这篇文章对你有用,请随意打赏" 
 
-  friends = false
+  friends = true
   bookmarks = false
   about_me = true
 
@@ -73,13 +73,10 @@ home = ["HTML", "RSS", "Algolia"]
 #  medium         = "full profile url in medium"
   #pinterest     = "full profile url in pinterest"
   
-  #[[params.friend_link]]
-  #title = "Linda的博客"
-  #href =  "https://zhaozhihan.com"
+  [[params.friend_link]]
+  title = "Barber Lab"
+  href =  "https://barber-lab.com"
 
-  #[[params.bookmark_link]]
-  #title =  "Martin Fowler"
-  #href =  "https://martinfowler.com"
   #[[params.bookmark_link]]
   #title = "ServiceMesher"
   #href =  "http://www.servicemesher.com"

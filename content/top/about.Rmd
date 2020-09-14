@@ -14,7 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ## About Me
 ![me](/top/about_files/hello-world.jpeg)\
 
-I am a [junior research group leader](https://www.leibniz-hki.de/en/fungal-informatics.html) at the [Leibniz Institute of Natural Product Research and Infection Biology - Hans Knöll Institute](https://www.leibniz-hki.de/en/home.html) in Jena, Germany. We study how ecological interactions shape human pathogenicity in humans using experimental and computational approaches. Our group is incubated within the Systems Biology & Bioinformatics group led by [Gianni Panagiotou](https://www.leibniz-hki.de/en/systembiologie-und-bioinformatik.html) and is financially supported by the [Balance of the Microverse Excellence Cluster](https://www.microverse-cluster.de/en/). 
+I am a [junior research group leader](https://barber-lab.com) at the [Leibniz Institute of Natural Product Research and Infection Biology - Hans Knöll Institute](https://www.leibniz-hki.de/en/home.html) in Jena, Germany. We study how ecological interactions shape human pathogenicity in humans using experimental and computational approaches. Our group is incubated within the Systems Biology & Bioinformatics group led by [Gianni Panagiotou](https://www.leibniz-hki.de/en/systembiologie-und-bioinformatik.html) and is financially supported by the [Balance of the Microverse Excellence Cluster](https://www.microverse-cluster.de/en/). 
 
 I also did my postdoctoral work at the Leibiz-HKI, studying fungal biology, antifungal resistance, and comparative and population genomics of *Aspergillus* and *Candida* spp.<br>
 
