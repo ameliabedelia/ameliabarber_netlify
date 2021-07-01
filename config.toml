@@ -2,9 +2,9 @@ baseurl = "https://barber.science"
 title = "Amelia E. Barber "
 theme = "hugo-theme-cleanwhite"
 languageCode = "en-us"
+googleAnalytics = "UA-144248073-1"
 # Enable comments by entering your Disqus shortname
 disqusShortname = ""
-googleAnalytics = "UA-144248073-1"
 preserveTaxonomyNames = true
 paginate = 5 #frontpage pagination
 hasCJKLanguage = false
