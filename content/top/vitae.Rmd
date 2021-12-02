@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Curriculum Vitae
 
-*last updated: Aug 20, 2021*
+*last updated: December 1, 2021*
 
 My complete CV can be found [here](/top/vitae_files/CV.pdf)\
 
@@ -25,7 +25,7 @@ My complete CV can be found [here](/top/vitae_files/CV.pdf)\
 
 
 ## Amelia E. Barber<br>
-Email: amelia.barber[at]gmail.com<br>
+Email: amelia.barber[at]leibniz-hki.de<br>
 
 
 ### Education {#Education}
@@ -71,6 +71,9 @@ University of Wisconsin-Madison, School of Nursing. Madison, WI.<br>
 
 ### Awards {#Awards}
 
+
+**2021-22**. Leibniz Mentoring Program<br>
+**2021**. Medac Research Prize <br>
 **2018**. International Society for Human and Animal Mycology Attendance Grant <br>
 **2017**. European Confederation of Medical Mycology Young Investigators Travel Award <br>
 **2015**. ASM Richard and Mary Finkelstein Travel Award <br>
@@ -80,11 +83,14 @@ University of Wisconsin-Madison, School of Nursing. Madison, WI.<br>
 
 **Preprints & Submitted Manuscripts**<br>
 
-**Barber AE**, Sae-Ong T, Kang K, Seelbinder B, Li J, Walther G, Panagiotou G, Kurzai O. Pangenome analysis of *Aspergillus fumigatus* identifies genetic variants associated with human infection. In revision.
+*None at present*<br>
 
 **Accepted Manuscripts**<br>
 
-**Barber AE**, Riedel J, Sae-Ong T, Kang K, Brabetz W, Panagiotou G, Deising HB, Kurzai O. Effects of agricultural fungicide use on *Aspergillus fumigatus* abundance, antifungal susceptibility, and population structure. *mBio*<br>
+**Barber AE**, Sae-Ong T, Kang K, Seelbinder B, Li J, Walther G, Panagiotou G, Kurzai O. *Aspergillus fumigatus* pan-genome analysis identifies genetic variants associated with human infection. 2021. *Nature Microbiology*.<br>
+<https://doi.org/10.1038/s41564-021-00993-x>
+
+**Barber AE**, Riedel J, Sae-Ong T, Kang K, Brabetz W, Panagiotou G, Deising HB, Kurzai O. Effects of agricultural fungicide use on *Aspergillus fumigatus* abundance, antifungal susceptibility, and population structure. 2020. *mBio*.<br>
 <https://doi.org/10.1128/mBio.02213-20>
 
 **Barber AE**, Scheufen S, Walther G, Kurzai O, Schmidt V. Low Rate of Azole Resistance in Cases of Avian Aspergillosis in Germany. 2020. *Medical Mycology*.<br> <https://doi.org/10.1093/mmy/myaa045>
