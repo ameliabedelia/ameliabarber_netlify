@@ -25,7 +25,7 @@ My complete CV can be found [here](/top/vitae_files/CV.pdf)\
 
 
 ## Amelia E. Barber<br>
-Email: amelia.barber[at]leibniz-hki.de<br>
+Email: amelia.barber[at]uni-jena.de<br>
 
 
 ### Education {#Education}
@@ -35,11 +35,14 @@ Microbiology and Immunology<br>
 + Advisor: Matthew Mulvey
 
 BS, **University of Wisconin-Madison** (2006)<br>
-Medical Microbiology and Immunology, Women's Studies
+Medical Microbiology & Immunology, Women's Studies
 
 ### Positions
 
-**Junior Group Leader** (September 2020-present)<br>
+**Independent Junior Group Leader** (April 2022-present)<br>
+Friedrich Schiller University. Institute for Microbiology. Jena, Germany.<br>
+
+**Junior Group Leader** (October 2020-April 2022)<br>
 Leibniz Institute for Natural Product Research and Infection Biology -  Hans Knöll Institute. Jena, Germany.<br>
 
 **Postdoctoral Fellow** (2016-2020)<br>
@@ -55,23 +58,17 @@ University of Utah, Department of Pathology. Salt Lake City, UT.<br>
 University of Wisconsin-Madison, Department of Neurology. Madison, WI.<br>
 + Research group of Clive Svendsen
 
-**Undergraduate Laboratory Assistant** (2005-2007)<br>
-University of Wisconsin-Madison, Department of Entomology. Madison, WI.<br>
-+ Research group of Ken Raffa
-
-**Undergraduate Research Assistant** (2004-2005)<br>
-University of Wisconsin-Madison, School of Nursing. Madison, WI.<br>
-+ Research group of Barbara St. Pierre Schneider
 
 
 ### Reseach Support {#Support}
 
-**2020-24**. DfG Excellence Cluster Balance of the Microverse Junior Research Group <br>
+**2020-26**. DfG Excellence Cluster Balance of the Microverse Junior Research Group <br>
 **2012-2014**. NIAID T-32 Microbial Pathogenesis Training Grant <br>
 
 ### Awards {#Awards}
 
 
+**2022**. Publication prize of the German Speaking Mycological Society
 **2021-22**. Leibniz Mentoring Program<br>
 **2021**. Medac Research Prize <br>
 **2018**. International Society for Human and Animal Mycology Attendance Grant <br>
@@ -81,11 +78,12 @@ University of Wisconsin-Madison, School of Nursing. Madison, WI.<br>
 
 ### Publications {#Publications}
 
-**Preprints & Submitted Manuscripts**<br>
+**Preprints**<br>
 
-*None at present*<br>
+Loos D, Pereira APC, **Barber AE**, Panagiotou G. A Global Survey of Host, Aquatic, and Soil Microbiomes Reveals Ecological Properties Shared between Bacterial and Fungal Generalists. 2022. <br>
+<https://doi.org/10.1101/2022.11.15.515575> <br> 
 
-**Accepted Manuscripts**<br>
+**10 Selected Manuscripts**<br>
 
 **Barber AE**, Sae-Ong T, Kang K, Seelbinder B, Li J, Walther G, Panagiotou G, Kurzai O. *Aspergillus fumigatus* pan-genome analysis identifies genetic variants associated with human infection. 2021. *Nature Microbiology*.<br>
 <https://doi.org/10.1038/s41564-021-00993-x>
@@ -114,11 +112,6 @@ Kjelstrüp CK, **Barber AE**, Norton JP, Mulvey MA, L’Abee-Lund TM. Escherichi
 <https://doi.org/10.1093/cid/cit284>
 
 Debnath I., Norton JP, **Barber AE**, Ott EM, Dhakal BK, Kulesus RR, Mulvey MA. The Cpx Stress Response System Potentiates the Fitness and Virulence of Uropathogenic Escherichia coli. 2013. *Infection & Immunity*. May;81(5):1450-9.<br>
-<https://doi.org/10.1128/IAI.01213-12>
+<https://doi.org/10.1128/IAI.01213-12> 
 
-Ebert AD, **Barber AE**, Heins BM, Svendsen CN. Ex vivo Delivery of GDNF Maintains Motor Function and Prevents Neuronal Loss in a Transgenic Mouse Model of Huntington’s disease. 2010. *Experimental Neurology*. Jul;224(1):155-62.<br>
-<https://doi.org/10.1016/j.expneurol.2010.03.005>
-
-Ebert AD, Beres AJ, **Barber AE**, Svendsen CN. Human Neural Progenitor Cells Over-expressing IGF-1 Protect Dopamine Neurons and Restore Function in a Rat Model of Parkinson's Disease. 2008. *Experimental Neurology*. Jan;209(1):213-223.<br>
-<https://doi.org/10.1016/j.expneurol.2007.09.022>
-
+Full publication list available at: *<https://scholar.google.com/citations?user=COgbwJ4AAAAJ>*  
