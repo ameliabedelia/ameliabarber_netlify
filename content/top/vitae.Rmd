@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Curriculum Vitae
 
-*last updated: December 1, 2021*
+*last updated: October 15, 2022*
 
 My complete CV can be found [here](/top/vitae_files/CV.pdf)\
 

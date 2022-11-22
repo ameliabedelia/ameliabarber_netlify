@@ -14,9 +14,9 @@ knitr::opts_chunk$set(echo = TRUE)
 ## About Me
 ![me](/top/about_files/hello-world.jpeg)\
 
-I am a [junior research group leader](https://barber-lab.com) at the [Leibniz Institute of Natural Product Research and Infection Biology - Hans Knöll Institute](https://www.leibniz-hki.de/en/home.html) in Jena, Germany. We study how ecological interactions shape human pathogenicity in humans using experimental and computational approaches. Our group is incubated within the Systems Biology & Bioinformatics group led by [Gianni Panagiotou](https://www.leibniz-hki.de/en/systembiologie-und-bioinformatik.html) and is financially supported by the [Balance of the Microverse Excellence Cluster](https://www.microverse-cluster.de/en/). 
+I am a [junior research group leader](https://barber-lab.com) at the [Institute for Microbiology](https://www.mikrobiologie.uni-jena.de/en/institute) at Friedrich Schiller University in Jena, Germany. We study how environmental fungi cause disease and acquire drug resistance using experimental and computational approaches. Our group is financially supported by the [Balance of the Microverse Excellence Cluster](https://www.microverse-cluster.de/en/). 
 
-I also did my postdoctoral work at the Leibiz-HKI, studying fungal biology, antifungal resistance, and comparative and population genomics of *Aspergillus* and *Candida* spp.<br>
+I did my postdoctoral work at the Leibiz-HKI in the group of Oliver Kurzai studying fungal biology, antifungal resistance, and comparative and population genomics of *Aspergillus* and *Candida* spp.<br>
 
 Prior to that, I was a PhD student at the University of Utah in the group of [Matthew Mulvey](https://www.bioscience.utah.edu/faculty/mulvey/mulvey.php) studying how the vast genetic diversity seen in *Escherichia coli* strains translates to differences in disease progression and host response during sepsis using a novel zebrafish model of disease we developed.<br>
 
